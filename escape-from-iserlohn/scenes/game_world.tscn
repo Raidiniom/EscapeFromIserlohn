@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b1o2q7o108fkd"]
 
 [ext_resource type="PackedScene" uid="uid://b6l3a7h03hcb8" path="res://modules/play_test.tscn" id="1_0biqy"]
-[ext_resource type="PackedScene" uid="uid://b3kuvv7ydew7k" path="res://scenes/ramp_terrain.tscn" id="2_ywgp6"]
-[ext_resource type="PackedScene" uid="uid://xi1jo71gbwii" path="res://scenes/box_terrain.tscn" id="3_0vfqx"]
+[ext_resource type="PackedScene" uid="uid://b3kuvv7ydew7k" path="res://modules/ramp_terrain.tscn" id="2_ywgp6"]
+[ext_resource type="PackedScene" uid="uid://xi1jo71gbwii" path="res://modules/box_terrain.tscn" id="3_0vfqx"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="4_0vfqx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0x2k"]
