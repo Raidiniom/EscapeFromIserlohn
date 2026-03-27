@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cpff52w6lwabv"]
 
-[ext_resource type="Script" uid="uid://bsixthyteat3p" path="res://scenes/scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_l6cm7"]
 
-[node name="Control" type="Control" unique_id=171636684]
+[node name="Control2" type="Control" unique_id=171636684]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
