@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b1o2q7o108fkd"]
+
+[ext_resource type="PackedScene" uid="uid://b6l3a7h03hcb8" path="res://modules/play_test.tscn" id="1_0biqy"]
+[ext_resource type="PackedScene" uid="uid://b3kuvv7ydew7k" path="res://scenes/ramp_terrain.tscn" id="2_ywgp6"]
+[ext_resource type="PackedScene" uid="uid://xi1jo71gbwii" path="res://scenes/box_terrain.tscn" id="3_0vfqx"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="4_0vfqx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0x2k"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_0biqy"]
+sky_material = SubResource("ProceduralSkyMaterial_e0x2k")
+
+[sub_resource type="Environment" id="Environment_47u71"]
+background_mode = 2
+sky = SubResource("Sky_0biqy")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="GameWorld" type="Node3D" unique_id=420947161]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1118995174]
+environment = SubResource("Environment_47u71")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2061994016]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 2.447117, 0)
+shadow_enabled = true
+
+[node name="PlayTest" parent="." unique_id=270922803 instance=ExtResource("1_0biqy")]
+
+[node name="ramp_terrain" parent="." unique_id=1425502764 instance=ExtResource("2_ywgp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.174988, 5.2849515e-07, 2.2087176)
+
+[node name="box_terrain" parent="." unique_id=16083722 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13981104, 0, 2.245009)
+
+[node name="ProtoController" parent="." unique_id=1571946663 instance=ExtResource("4_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8018322, -2.3841858e-07, 3.3891287)
