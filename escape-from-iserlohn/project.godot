@@ -15,6 +15,15 @@ run/main_scene="uid://cpff52w6lwabv"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SettingsManager="*uid://bmpw7bhv0q28k"
+
+[global_group]
+
+Player=""
+Enemy=""
+
 [input]
 
 forward={
