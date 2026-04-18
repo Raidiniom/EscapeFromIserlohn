@@ -1,11 +1,15 @@
-extends Node
+# Attack.gd
+extends State
 
+func enter():
+	# Trigger attack animation
+	# Connect to animation_player's "animation_finished" signal to know when to exit
+	print("Start Attack")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func exit():
+	print("End Attack")
+	# Disconnect from animation signal
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_animation_finished(anim_name: String):
+	if anim_name == "attack":
+		state_machine.change_state("idle")

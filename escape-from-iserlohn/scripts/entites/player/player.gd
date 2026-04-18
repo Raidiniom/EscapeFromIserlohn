@@ -1,29 +1,21 @@
 extends CharacterBody3D
 
-@export var speed : float = 5.0
-@export var gravity : float = 20.0
-@export var jump_velocity : float = 8.0
+@export var gravity: float = 9.8
+@export var mouse_sensitivity: float = 0.002
 
-@export_group("Player Keybinds")
-@export var strafe_left : String;
-@export var strafe_right : String;
-@export var forward : String;
-@export var backward : String;
-@export var interact : String;
+@onready var spring_arm: SpringArm3D = $SpringArm3D
+@onready var camera_3d: Camera3D = $SpringArm3D/Camera3D
 
-var state_machine : Node
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	state_machine = $StateMachine
-	
+func _unhandled_input(event: InputEvent):
+	if event is InputEventMouseMotion:
+		rotate_y(-event.relative.x * mouse_sensitivity)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func _physics_process(delta: float) -> void:
-	pass
-
-func _input(event: InputEvent) -> void:
-	pass
+		spring_arm.rotate_x(-event.relative.y * mouse_sensitivity)
+		spring_arm.rotation.x = clamp(
+			spring_arm.rotation.x,
+			deg_to_rad(-70),
+			deg_to_rad(25)
+		)

@@ -1,25 +1,24 @@
-
-class_name State
+# State.gd
 extends Node
+class_name State
 
-var player : CharacterBody3D
-var state_machine : Node
+# Optional: Reference to the state machine that owns this state
+var state_machine: Node
+# Essential: Reference to the player (CharacterBody3D)
+var player: CharacterBody3D
 
-func _ready() -> void:
-	player.get_parent().get_parent() as CharacterBody3D
-	state_machine = get_parent()
-
-func enter(_msg : Dictionary = {}) -> void:
+# Called when this state is entered
+func enter() -> void:
 	pass
 
+# Called when this state is exited
 func exit() -> void:
 	pass
 
-func physics_update(delta : float) -> void:
+# Called every frame; use for non-physics logic like checking for transitions
+func process(delta: float) -> void:
 	pass
 
-func update(delta : float) -> void:
-	pass
-
-func handle_input(event : InputEvent) -> void:
+# Called every physics step; use for movement and physics calculations
+func physics_process(delta: float) -> void:
 	pass

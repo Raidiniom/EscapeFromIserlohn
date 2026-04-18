@@ -1,11 +1,16 @@
-extends Node
+extends State
 
+var timer := 0.0
+@export var plant_duration := 1.5
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func enter():
+	print("Start Planting")
+	timer = 0.0
 
+func process(delta):
+	timer += delta
+	if timer >= plant_duration:
+		state_machine.change_state("idle")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func exit():
+	print("End Planting")
