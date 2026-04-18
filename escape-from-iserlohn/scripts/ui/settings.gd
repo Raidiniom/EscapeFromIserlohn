@@ -20,7 +20,8 @@ var button_action_map: Dictionary = {}
 var waiting_for_action: String = ""
 
 func _ready():
-	
+	PauseManager.settings_menu = self
+	hide()
 	# Map buttons to their actions
 	button_action_map = {
 		forward_button: "forward",
@@ -135,8 +136,8 @@ func _on_reset_pressed() -> void:
 	print("Settings reset to defaults!")
 
 func _on_back_pressed() -> void:
-	# Cancel any pending keybind input
+	# Cancel keybind input
 	if waiting_for_action != "":
 		cancel_keybind_input()
-	
-	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+
+	PauseManager.back_to_pause()

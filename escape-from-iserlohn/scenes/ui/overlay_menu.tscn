@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://v2liuq4bsx7t"]
+
+[ext_resource type="Script" uid="uid://dyd5m1nitg1lm" path="res://scripts/ui/overlay_menu.gd" id="1_my4ng"]
+
+[node name="OverlayMenu" type="Control" unique_id=1230831713]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_my4ng")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1333661629]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.19607843)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=2009112470]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -16.0
+offset_right = 4.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="ColorRect/VBoxContainer" unique_id=1228727323]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="ColorRect/VBoxContainer" unique_id=661723410]
+layout_mode = 2
+text = "Settings"
+
+[node name="Exit" type="Button" parent="ColorRect/VBoxContainer" unique_id=1847343092]
+layout_mode = 2
+text = "Exit
+"
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
