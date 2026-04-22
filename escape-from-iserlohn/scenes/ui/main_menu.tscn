@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://cpff52w6lwabv"]
 
-[ext_resource type="Script" uid="uid://bsixthyteat3p" path="res://scripts/main_menu.gd" id="1_sl1te"]
+[ext_resource type="Script" uid="uid://bsixthyteat3p" path="res://scripts/ui/main_menu.gd" id="1_sl1te"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sl1te"]
 font_size = 30
 outline_size = 6
 outline_color = Color(0.18431373, 0.2784314, 0.21176471, 1)
 
-[node name="Control2" type="Control" unique_id=171636684]
+[node name="MainMenu" type="Control" unique_id=171636684]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

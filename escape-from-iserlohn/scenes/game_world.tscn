@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://b3kuvv7ydew7k" path="res://modules/ramp_terrain.tscn" id="2_ywgp6"]
 [ext_resource type="PackedScene" uid="uid://xi1jo71gbwii" path="res://modules/box_terrain.tscn" id="3_0vfqx"]
 [ext_resource type="PackedScene" uid="uid://bicc2wa2eqppk" path="res://scenes/entities/player/player.tscn" id="4_0vfqx"]
+[ext_resource type="PackedScene" uid="uid://v2liuq4bsx7t" path="res://scenes/ui/overlay_menu.tscn" id="5_wbbl4"]
+[ext_resource type="PackedScene" uid="uid://bbkyb4dhdfacd" path="res://scenes/ui/settings.tscn" id="6_6c6v5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0x2k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -35,5 +37,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.174988, 5.2849515e-07, 2.20
 [node name="box_terrain" parent="." unique_id=16083722 instance=ExtResource("3_0vfqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13981104, 0, 2.245009)
 
-[node name="Node3D" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
+[node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
 transform = Transform3D(-0.12282197, 0, -0.9924288, 0, 1, 0, 0.9924288, 0, -0.12282197, -4, 1, 2)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1855844815]
+
+[node name="OverlayMenu" parent="UI" unique_id=1230831713 instance=ExtResource("5_wbbl4")]
+
+[node name="Settings" parent="UI" unique_id=618800622 instance=ExtResource("6_6c6v5")]
+process_mode = 3
