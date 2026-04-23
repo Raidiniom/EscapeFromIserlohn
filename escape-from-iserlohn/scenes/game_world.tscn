@@ -16,6 +16,7 @@ sky_material = SubResource("ProceduralSkyMaterial_e0x2k")
 
 [sub_resource type="Environment" id="Environment_47u71"]
 background_mode = 2
+background_energy_multiplier = 1.5
 sky = SubResource("Sky_0biqy")
 tonemap_mode = 2
 glow_enabled = true
@@ -26,7 +27,7 @@ glow_enabled = true
 environment = SubResource("Environment_47u71")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2061994016]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 2.447117, 0)
+transform = Transform3D(-0.59962195, 0.3488515, -0.72024727, -0.61078775, -0.7810146, 0.13021018, -0.51709974, 0.5179951, 0.68138766, 0, 12.668616, 0)
 shadow_enabled = true
 
 [node name="PlayTest" parent="." unique_id=270922803 instance=ExtResource("1_0biqy")]
@@ -46,7 +47,6 @@ transform = Transform3D(-0.12282197, 0, -0.9924288, 0, 1, 0, 0.9924288, 0, -0.12
 
 [node name="Settings" parent="UI" unique_id=618800622 instance=ExtResource("6_6c6v5")]
 process_mode = 3
-visible = false
 
 [node name="ramp_terrain2" parent="." unique_id=1423998986 instance=ExtResource("2_ywgp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.174988, 5.2849515e-07, 1.069615)

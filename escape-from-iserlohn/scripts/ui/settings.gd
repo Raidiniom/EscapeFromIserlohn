@@ -8,13 +8,6 @@ extends Control
 @onready var right_strafe_button = $LabelContainer/Button4
 @onready var interact_button = $LabelContainer/Button5
 
-# References to labels (optional, for showing current key)
-@onready var forward_label = $LabelContainer/Forward
-@onready var backward_label = $LabelContainer/Backward
-@onready var left_strafe_label = $LabelContainer/LeftStrafe
-@onready var right_strafe_label = $LabelContainer/RightStrafe
-@onready var interact_label = $LabelContainer/Interact
-
 # Mapping between buttons and actions
 var button_action_map: Dictionary = {}
 var waiting_for_action: String = ""
