@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://br1cj6b2c2nvu"]
+
+[ext_resource type="Script" uid="uid://comdjaf3s48mu" path="res://scripts/entites/enemy/enemy.gd" id="1_lw7nh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxw06"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lw7nh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1y44r"]
+
+[node name="Enemy" type="Node3D" unique_id=1342002288 groups=["Enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_lw7nh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=696542489]
+material_override = SubResource("StandardMaterial3D_dxw06")
+mesh = SubResource("CapsuleMesh_lw7nh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=562801524]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1684023832]
+shape = SubResource("CapsuleShape3D_1y44r")
+
+[node name="Node" type="Node" parent="." unique_id=792892105]
+
+[node name="Node" type="Node" parent="Node" unique_id=545980162]
+
+[node name="Node2" type="Node" parent="Node" unique_id=1532913620]
+
+[node name="Node3" type="Node" parent="Node" unique_id=636780882]
+
+[node name="Node4" type="Node" parent="Node" unique_id=1150887830]
