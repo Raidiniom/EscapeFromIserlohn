@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://bbkyb4dhdfacd"]
+
+[ext_resource type="Script" uid="uid://bojme8cugmal6" path="res://scripts/ui/settings.gd" id="1_5p8wc"]
+
+[node name="Settings" type="Control" unique_id=618800622]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5p8wc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1479283948]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.27058825, 1, 1, 1)
+
+[node name="Ribbon" type="HBoxContainer" parent="." unique_id=840565510]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+
+[node name="Back" type="Button" parent="Ribbon" unique_id=730481757]
+layout_mode = 2
+text = "<- Back"
+
+[node name="LabelContainer" type="GridContainer" parent="." unique_id=571944130]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = -65.5
+offset_right = 51.5
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Forward" type="Label" parent="LabelContainer" unique_id=1145238630]
+layout_mode = 2
+text = "Forward"
+
+[node name="Button" type="Button" parent="LabelContainer" unique_id=1276770336]
+layout_mode = 2
+
+[node name="Backward" type="Label" parent="LabelContainer" unique_id=765831262]
+layout_mode = 2
+text = "Backward"
+
+[node name="Button2" type="Button" parent="LabelContainer" unique_id=926200699]
+layout_mode = 2
+
+[node name="LeftStrafe" type="Label" parent="LabelContainer" unique_id=36876413]
+layout_mode = 2
+text = "Left Strafe"
+
+[node name="Button3" type="Button" parent="LabelContainer" unique_id=674942390]
+layout_mode = 2
+
+[node name="RightStrafe" type="Label" parent="LabelContainer" unique_id=1034706654]
+layout_mode = 2
+text = "Right Strafe"
+
+[node name="Button4" type="Button" parent="LabelContainer" unique_id=638792885]
+layout_mode = 2
+
+[node name="Interact" type="Label" parent="LabelContainer" unique_id=857600361]
+layout_mode = 2
+text = "Interact"
+
+[node name="Button5" type="Button" parent="LabelContainer" unique_id=388008169]
+layout_mode = 2
+
+[node name="Footer" type="HBoxContainer" parent="." unique_id=2067871002]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Reset" type="Button" parent="Footer" unique_id=1829043431]
+layout_mode = 2
+text = "Reset"
+
+[node name="Confirm" type="Button" parent="Footer" unique_id=1103131485]
+layout_mode = 2
+text = "Confirm"
+
+[connection signal="pressed" from="Ribbon/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="LabelContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="LabelContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="LabelContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="LabelContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="LabelContainer/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="Footer/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="Footer/Confirm" to="." method="_on_confirm_pressed"]
