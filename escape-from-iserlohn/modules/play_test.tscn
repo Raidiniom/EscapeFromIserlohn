@@ -24,7 +24,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_tvpux")
 mesh = SubResource("ArrayMesh_a6mm8")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="CSGBakedMeshInstance3D" unique_id=1945784188]
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGBakedMeshInstance3D" unique_id=1945784188 groups=["plantable_ground"]]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBakedMeshInstance3D/StaticBody3D" unique_id=676740159]
 shape = SubResource("ConcavePolygonShape3D_rmfi5")
