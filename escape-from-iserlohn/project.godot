@@ -24,6 +24,7 @@ PauseManager="*uid://dpj7td68y4k24"
 
 Player=""
 Enemy=""
+plantable_ground=""
 
 [input]
 

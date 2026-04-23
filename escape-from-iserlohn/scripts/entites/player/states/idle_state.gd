@@ -16,6 +16,8 @@ func physics_process(delta):
 	if input_dir != Vector2.ZERO:
 		state_machine.change_state("walk")
 	elif Input.is_action_just_pressed("plant"):
-		state_machine.change_state("planting")
+		print("pressed plant key!")
+		if player.can_plant():
+			state_machine.change_state("planting")
 
 	player.move_and_slide()
