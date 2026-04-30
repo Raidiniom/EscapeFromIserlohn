@@ -13,6 +13,7 @@ func physics_process(delta):
 	var input_dir = Vector2.ZERO
 	input_dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input_dir.y = Input.get_action_strength("backward") - Input.get_action_strength("forward")
+	
 	if input_dir != Vector2.ZERO:
 		state_machine.change_state("walk")
 	elif Input.is_action_just_pressed("plant"):

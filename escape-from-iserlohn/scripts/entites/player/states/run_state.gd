@@ -23,14 +23,10 @@ func physics_process(delta):
 		player.velocity.z = move_toward(player.velocity.z, 0, run_speed)
 
 	# Transition logic
-	if Input.is_action_just_pressed("attack"):
-		state_machine.change_state("attack")
-	elif Input.is_action_just_pressed("plant"):
+	if Input.is_action_just_pressed("plant"):
 		state_machine.change_state("planting")
 	elif direction == Vector3.ZERO:
 		state_machine.change_state("idle")
-	elif !Input.is_action_pressed("sprint") and direction != Vector3.ZERO:
-		pass # Stay in walk
 	# For Run.gd, you would add a transition back to Walk or Idle if sprint is released.
 
 	player.move_and_slide()

@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://b1o2q7o108fkd"]
 
 [ext_resource type="PackedScene" uid="uid://b6l3a7h03hcb8" path="res://modules/play_test.tscn" id="1_0biqy"]
+[ext_resource type="Script" uid="uid://b8l184iv4uh1t" path="res://scripts/gameworld/game_world.gd" id="1_u1jpj"]
 [ext_resource type="PackedScene" uid="uid://b3kuvv7ydew7k" path="res://modules/ramp_terrain.tscn" id="2_ywgp6"]
 [ext_resource type="PackedScene" uid="uid://xi1jo71gbwii" path="res://modules/box_terrain.tscn" id="3_0vfqx"]
 [ext_resource type="PackedScene" uid="uid://bicc2wa2eqppk" path="res://scenes/entities/player/player.tscn" id="4_0vfqx"]
 [ext_resource type="PackedScene" uid="uid://v2liuq4bsx7t" path="res://scenes/ui/overlay_menu.tscn" id="5_wbbl4"]
 [ext_resource type="PackedScene" uid="uid://bbkyb4dhdfacd" path="res://scenes/ui/settings.tscn" id="6_6c6v5"]
+[ext_resource type="PackedScene" uid="uid://br1cj6b2c2nvu" path="res://scenes/entities/enemy/enemy.tscn" id="7_bhwwd"]
+[ext_resource type="Script" uid="uid://ba60x43n004an" path="res://scripts/autoload/game_manager.gd" id="8_pdbwf"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_bhwwd"]
+geometry_parsed_geometry_type = 1
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0x2k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -22,6 +28,11 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="GameWorld" type="Node3D" unique_id=420947161]
+script = ExtResource("1_u1jpj")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=658575419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+navigation_mesh = SubResource("NavigationMesh_bhwwd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1118995174]
 environment = SubResource("Environment_47u71")
@@ -124,3 +135,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
 
 [node name="box_terrain21" parent="." unique_id=310509924 instance=ExtResource("3_0vfqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
+
+[node name="Enemy" parent="." unique_id=851332793 instance=ExtResource("7_bhwwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.811838, 1, -3.6915479)
+
+[node name="Enemy2" parent="." unique_id=1753158001 instance=ExtResource("7_bhwwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5064597, 1, -3.8088725)
+
+[node name="Enemy3" parent="." unique_id=651531680 instance=ExtResource("7_bhwwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4162245, 1.0000002, -1.8710444)
+
+[node name="GameManager" type="Node" parent="." unique_id=1035849082 node_paths=PackedStringArray("spawn_points")]
+script = ExtResource("8_pdbwf")
+enemy_scene = ExtResource("7_bhwwd")
+spawn_points = [NodePath("../Spawn1"), NodePath("../Spawn2"), NodePath("../Spawn3"), NodePath("../Spawn4")]
+
+[node name="Spawn1" type="Node3D" parent="." unique_id=883968712]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -50)
+
+[node name="Spawn2" type="Node3D" parent="." unique_id=450498762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 50)
+
+[node name="Spawn3" type="Node3D" parent="." unique_id=1363361298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 1, 0)
+
+[node name="Spawn4" type="Node3D" parent="." unique_id=1979137609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 1, 0)

@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://br1cj6b2c2nvu"]
 
 [ext_resource type="Script" uid="uid://comdjaf3s48mu" path="res://scripts/entites/enemy/enemy.gd" id="1_lw7nh"]
+[ext_resource type="Script" uid="uid://bmpw7bhv0q28k" path="res://scripts/autoload/settings_manager.gd" id="2_dxsuy"]
+[ext_resource type="Script" uid="uid://dkfockrhikb57" path="res://scripts/entites/enemy/melee/idle_state.gd" id="3_0wdte"]
+[ext_resource type="Script" uid="uid://d1yq71iak6eqb" path="res://scripts/entites/enemy/melee/attack_state.gd" id="4_7gxlw"]
+[ext_resource type="Script" uid="uid://cvc64ltqhd286" path="res://scripts/entites/enemy/melee/chase_state.gd" id="5_ilesx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lw7nh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxw06"]
 albedo_color = Color(1, 0, 0, 1)
@@ -9,25 +15,36 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1y44r"]
 
-[node name="Enemy" type="Node3D" unique_id=1342002288 groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody3D" unique_id=851332793 groups=["Enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_lw7nh")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1203146234]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=160277451]
+shape = SubResource("CapsuleShape3D_lw7nh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=696542489]
 material_override = SubResource("StandardMaterial3D_dxw06")
 mesh = SubResource("CapsuleMesh_lw7nh")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=562801524]
+[node name="Area3D" type="Area3D" parent="." unique_id=142310300]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1684023832]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1684023832]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_1y44r")
 
-[node name="Node" type="Node" parent="." unique_id=792892105]
+[node name="StateMachine" type="Node" parent="." unique_id=792892105]
+script = ExtResource("2_dxsuy")
 
-[node name="Node" type="Node" parent="Node" unique_id=545980162]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=545980162]
+script = ExtResource("3_0wdte")
 
-[node name="Node2" type="Node" parent="Node" unique_id=1532913620]
+[node name="Chase" type="Node" parent="StateMachine" unique_id=1532913620]
+script = ExtResource("5_ilesx")
 
-[node name="Node3" type="Node" parent="Node" unique_id=636780882]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=636780882]
+script = ExtResource("4_7gxlw")
 
-[node name="Node4" type="Node" parent="Node" unique_id=1150887830]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
