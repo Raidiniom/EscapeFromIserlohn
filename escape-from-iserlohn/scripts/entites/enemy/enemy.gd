@@ -14,11 +14,9 @@ var is_dead := false
 @onready var attack_area: Area3D = $Area3D
 @onready var state_machine = $StateMachine
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	player_target = get_tree().get_first_node_in_group("player")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
@@ -39,11 +37,7 @@ func die():
 	queue_free()
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("player"):
 		player_target = body
 		state_machine.change_state("chase")
-
-func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body == player_target:
-		player_target = null
-		state_machine.change_state("idle")
+	

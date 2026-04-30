@@ -5,19 +5,30 @@ func enter():
 
 func physics_process(delta):
 	if player.player_target == null:
-		state_machine.change_state("idle")
 		return
-
-	# Move toward player
+	
 	var target_pos = player.player_target.global_position
 	player.navigation.target_position = target_pos
 	
 	var next_pos = player.navigation.get_next_path_position()
-	var direction = (next_pos - player.global_position).normalized()
+	var velocity_dir = (next_pos - player.global_position)
 	
-	player.velocity = direction * player.speed
+	velocity_dir.y = 0
+	velocity_dir = velocity_dir.normalized()
+	
+	player.velocity = velocity_dir * player.speed
 	player.move_and_slide()
-
-	# If close enough → attack
-	if player.global_position.distance_to(target_pos) < 2.0:
+	
+	if velocity_dir.length() > 0.01:
+		player.look_at(player.global_position + velocity_dir, Vector3.UP)
+	
+	var dist = player.global_position.distance_to(target_pos)
+	
+	if dist < 2.0:
 		state_machine.change_state("attack")
+		return
+	
+	print("Target:", target_pos)
+	print("Next path:", player.navigation.get_next_path_position())
+	print("Enemy forward:", -player.global_transform.basis.z)
+	

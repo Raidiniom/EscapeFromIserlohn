@@ -2,7 +2,7 @@ extends State
 
 func enter():
 	# Play idle animation here
-	print("Entered Idle State")
+	print("Player Idle State")
 
 func physics_process(delta):
 	# Apply gravity even when idle to keep the player on the ground

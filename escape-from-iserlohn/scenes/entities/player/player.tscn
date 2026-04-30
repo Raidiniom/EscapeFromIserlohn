@@ -15,7 +15,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bj7e2"]
 albedo_color = Color(0.16470589, 0.40392157, 0.8784314, 1)
 
-[node name="Player" type="CharacterBody3D" unique_id=2091103986 groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=2091103986 groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_1hmtu")
 attack_speed = 1.0

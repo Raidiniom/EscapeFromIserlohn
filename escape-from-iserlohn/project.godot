@@ -23,9 +23,10 @@ GameManager="*uid://ba60x43n004an"
 
 [global_group]
 
-Player=""
-Enemy=""
 plantable_ground=""
+player=""
+enemy=""
+spawner=""
 
 [input]
 

@@ -4,7 +4,7 @@ extends State
 
 func enter():
 	# Play animation here
-	print("Entered Run State")
+	print("Plyaer Run State")
 
 func physics_process(delta):
 	# Apply gravity
