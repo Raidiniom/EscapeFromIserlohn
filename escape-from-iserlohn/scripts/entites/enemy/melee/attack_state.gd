@@ -1,24 +1,30 @@
 extends State
 
+var attacking := true
+
 func enter():
 	print("Enemy Attack")
+	attacking = true
 	attack_loop()
 
 func attack_loop():
-	while true:
+	while attacking:
 		# If no target → stop
-		if player.player_target == null:
+		if owner.player_target == null:
 			return
 	
-		var dist = player.global_position.distance_to(player.player_target.global_position)
+		var dist = owner.global_position.distance_to(owner.player_target.global_position)
 	
 		# If player escaped → go back to chase
-		if dist > 2.0:
+		if dist > owner.attack_range:
 			state_machine.change_state("chase")
 			return
 	
 		# Deal damage
-		if player.player_target.has_method("take_damage"):
-			player.player_target.take_damage(player.attack_damage)
+		if owner.player_target.has_method("take_damage"):
+			owner.player_target.take_damage(owner.attack_damage)
 	
-		await get_tree().create_timer(1.0 / player.attack_speed).timeout
+		await get_tree().create_timer(1.0 / owner.attack_speed).timeout
+
+func exit():
+	attacking = false

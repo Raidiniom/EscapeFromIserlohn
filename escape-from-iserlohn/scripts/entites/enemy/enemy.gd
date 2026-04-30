@@ -5,6 +5,8 @@ extends CharacterBody3D
 @export var speed : float = 2.5
 @export var attack_damage : float = 2.0
 @export var attack_speed : float = 1.0
+@export var attack_range : float = 2.0
+@export var acceleration : float = 8.0
 
 var player_target: Node3D = null
 var can_attack := true
@@ -17,8 +19,27 @@ var is_dead := false
 func _ready() -> void:
 	player_target = get_tree().get_first_node_in_group("player")
 
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	if is_dead or player_target == null:
+		return
+	
+	navigation.target_position = player_target.global_transform.origin
+	
+	if state_machine.current_state.name == "Chase":
+		move_to_target(delta)
+
+func move_to_target(delta):
+	if navigation.is_navigation_finished():
+		return
+	
+	var next_position = navigation.get_next_path_position()
+	var direction = (next_position - global_transform.origin).normalized()
+	
+	var desired_velocity = direction * speed
+	velocity = velocity.lerp(desired_velocity, acceleration * delta)
+	
+	move_and_slide()
+	
 
 func take_damage(amount: float):
 	health -= amount
@@ -39,5 +60,5 @@ func die():
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_target = body
-		state_machine.change_state("chase")
+		state_machine.change_state("attack")
 	

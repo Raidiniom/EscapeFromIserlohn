@@ -12,11 +12,11 @@ func enter():
 	spawn_plant()
 
 func spawn_plant():
-	if not player.can_plant():
+	if not owner.can_plant():
 		print("Not Plantable ground!")
 		return
 	
-	var pos = player.get_plant_position()
+	var pos = owner.get_plant_position()
 	
 	var plant = plant_model.instantiate()
 	plant.global_position = pos

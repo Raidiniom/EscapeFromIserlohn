@@ -12,7 +12,6 @@ func _ready():
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.state_machine = self
-			child.player = get_parent()
 
 	# Start the FSM
 	if initial_state:

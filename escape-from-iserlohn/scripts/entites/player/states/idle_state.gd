@@ -6,8 +6,8 @@ func enter():
 
 func physics_process(delta):
 	# Apply gravity even when idle to keep the player on the ground
-	if not player.is_on_floor():
-		player.velocity.y -= player.gravity * delta
+	if not owner.is_on_floor():
+		owner.velocity.y -= owner.gravity * delta
 
 	# Check for transition conditions
 	var input_dir = Vector2.ZERO
@@ -18,7 +18,7 @@ func physics_process(delta):
 		state_machine.change_state("walk")
 	elif Input.is_action_just_pressed("plant"):
 		print("pressed plant key!")
-		if player.can_plant():
+		if owner.can_plant():
 			state_machine.change_state("planting")
 
-	player.move_and_slide()
+	owner.move_and_slide()

@@ -13,10 +13,11 @@ extends CharacterBody3D
 @export var mouse_sensitivity: float = 0.002
 
 @export var projectile_scene: PackedScene
-var attack_timer := 0.0
+var attack_timer := 0.2
 
 #Player Body
 @onready var player_body: MeshInstance3D = $CollisionShape3D/MeshInstance3D
+@onready var player_health: Label3D = $Label3D
 
 # Camera
 @onready var spring_arm: SpringArm3D = $SpringArm3D
@@ -24,6 +25,7 @@ var attack_timer := 0.0
 @onready var raycast_3d: RayCast3D = $SpringArm3D/Camera3D/RayCast3D
 
 func _ready():
+	player_health.text = str(health)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
@@ -42,7 +44,7 @@ func _unhandled_input(event: InputEvent):
 
 func take_damage(amount: float):
 	health -= amount
-	print("Player HP:", health)
+	player_health.text = str(health)
 
 func can_plant() -> bool:
 	if raycast_3d.is_colliding():
@@ -68,10 +70,13 @@ func fire_projectile():
 	if projectile_scene == null:
 		return
 	
+	if player_body == null or !player_body.is_inside_tree():
+		return
+	
 	var projectile = projectile_scene.instantiate()
 	
-	var direction = -player_body.global_transform.basis.z
-	var spawn_pos = player_body.global_transform.origin + direction * 1.5
+	var direction = -global_transform.basis.z
+	var spawn_pos = global_transform.origin + direction * 1.5
 	
 	projectile.global_position = spawn_pos
 	projectile.direction = direction.normalized()
