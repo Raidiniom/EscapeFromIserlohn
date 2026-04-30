@@ -1,13 +1,13 @@
 extends Node
 
-@onready var enemy_scene = preload("res://scenes/entities/enemy/enemy.tscn")
+@onready var enemy_melee = preload("res://scenes/entities/enemy/enemy.tscn")
 var spawn_points: Array[Node3D] = []
 
 var current_round := 1
 var enemies_alive := 0
 
 func start_round():
-	await get_tree().process_frame  # wait for scene to load
+	await get_tree().process_frame
 	
 	spawn_points.clear()
 	
@@ -18,18 +18,19 @@ func start_round():
 	var count = current_round * 5
 	enemies_alive = count
 	
+	print("Enemy Count: ", enemies_alive)
+	
 	for i in range(count):
 		spawn_enemy()
+		print("Enemy #", i + 1)
 
 func spawn_enemy():
-	if enemy_scene == null or spawn_points.is_empty():
-		print("Enemy Scene NULL" if enemy_scene else "No Spawn Points")
+	if enemy_melee == null or spawn_points.is_empty():
+		print("Enemy Scene NULL" if enemy_melee else "No Spawn Points")
 		return
 	
-	print("Spawning Enemy")
-	
 	var spawn = spawn_points.pick_random()
-	var enemy = enemy_scene.instantiate()
+	var enemy = enemy_melee.instantiate()
 	
 	get_tree().current_scene.add_child(enemy)
 	
