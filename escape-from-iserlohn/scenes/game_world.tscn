@@ -32,12 +32,6 @@ shadow_enabled = true
 
 [node name="PlayTest" parent="." unique_id=270922803 instance=ExtResource("1_0biqy")]
 
-[node name="ramp_terrain" parent="." unique_id=1425502764 instance=ExtResource("2_ywgp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.174988, 5.2849515e-07, 2.2087176)
-
-[node name="box_terrain" parent="." unique_id=16083722 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13981104, 0, 2.245009)
-
 [node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
 transform = Transform3D(-0.12282197, 0, -0.9924288, 0, 1, 0, 0.9924288, 0, -0.12282197, -4, 1, 2)
 
@@ -48,23 +42,85 @@ transform = Transform3D(-0.12282197, 0, -0.9924288, 0, 1, 0, 0.9924288, 0, -0.12
 [node name="Settings" parent="UI" unique_id=618800622 instance=ExtResource("6_6c6v5")]
 process_mode = 3
 
-[node name="ramp_terrain2" parent="." unique_id=1423998986 instance=ExtResource("2_ywgp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.174988, 5.2849515e-07, 1.069615)
+[node name="ramp_terrain" parent="." unique_id=1425502764 instance=ExtResource("2_ywgp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
-[node name="ramp_terrain3" parent="." unique_id=1311041332 instance=ExtResource("2_ywgp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.174988, 5.2849515e-07, -0.106709)
+[node name="ramp_terrain2" parent="." unique_id=1814765426 instance=ExtResource("2_ywgp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
-[node name="box_terrain2" parent="." unique_id=18770570 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.96210814, 0, 2.245009)
+[node name="ramp_terrain3" parent="." unique_id=2041826678 instance=ExtResource("2_ywgp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
 
-[node name="box_terrain3" parent="." unique_id=1789939699 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13981104, 0, 1.0369945)
+[node name="ramp_terrain4" parent="." unique_id=1486907301 instance=ExtResource("2_ywgp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 
-[node name="box_terrain4" parent="." unique_id=815015055 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13981104, 0, -0.06318331)
+[node name="ramp_terrain5" parent="." unique_id=1952910147 instance=ExtResource("2_ywgp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
 
-[node name="box_terrain5" parent="." unique_id=201287408 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73989975, 0, 0.9115815)
+[node name="ramp_terrain6" parent="." unique_id=1778183132 instance=ExtResource("2_ywgp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
 
-[node name="box_terrain6" parent="." unique_id=1731763932 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.687338, 0, 1.4415452)
+[node name="ramp_terrain7" parent="." unique_id=1174892657 instance=ExtResource("2_ywgp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
+
+[node name="box_terrain" parent="." unique_id=16083722 instance=ExtResource("3_0vfqx")]
+
+[node name="box_terrain2" parent="." unique_id=56182434 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="box_terrain3" parent="." unique_id=2002529378 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="box_terrain4" parent="." unique_id=1424261131 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="box_terrain5" parent="." unique_id=54449474 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="box_terrain6" parent="." unique_id=1406713311 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="box_terrain7" parent="." unique_id=1218816735 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="box_terrain8" parent="." unique_id=498012338 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="box_terrain9" parent="." unique_id=245300300 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="box_terrain10" parent="." unique_id=8544576 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+
+[node name="box_terrain11" parent="." unique_id=1720653154 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+
+[node name="box_terrain12" parent="." unique_id=1994869856 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+
+[node name="box_terrain13" parent="." unique_id=1310794415 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 5)
+
+[node name="box_terrain14" parent="." unique_id=1501940948 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 6)
+
+[node name="box_terrain15" parent="." unique_id=1126935343 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="box_terrain16" parent="." unique_id=463250252 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+
+[node name="box_terrain17" parent="." unique_id=1696634250 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="box_terrain18" parent="." unique_id=762818583 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3)
+
+[node name="box_terrain19" parent="." unique_id=36767427 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+
+[node name="box_terrain20" parent="." unique_id=1948968032 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
+
+[node name="box_terrain21" parent="." unique_id=310509924 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)

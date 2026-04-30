@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 # Player stats
+@export_category("Player Stats")
 @export var health: float = 100.0
 @export var base_damage: float = 15.0
 @export var attack_speed: float = 2.5

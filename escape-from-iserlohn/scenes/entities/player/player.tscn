@@ -20,10 +20,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_1hmtu")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1078200412]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4038796, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6530576, 2)
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1673107312]
-transform = Transform3D(1, 0, 0, 0, 0.9116473, 0.41097343, 0, -0.41097343, 0.9116473, 0, 0.44847202, 0)
+transform = Transform3D(1, 0, 0, 0, 0.94390476, 0.33021784, 0, -0.33021784, 0.94390476, 0, 0.44847202, 0)
 fov = 100.0
 
 [node name="RayCast3D" type="RayCast3D" parent="SpringArm3D/Camera3D" unique_id=745836634]
