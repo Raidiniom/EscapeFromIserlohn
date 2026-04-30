@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://b1o2q7o108fkd"]
 
 [ext_resource type="PackedScene" uid="uid://b6l3a7h03hcb8" path="res://modules/play_test.tscn" id="1_0biqy"]
+[ext_resource type="Script" uid="uid://b8l184iv4uh1t" path="res://scripts/gameworld/game_world.gd" id="1_u1jpj"]
 [ext_resource type="PackedScene" uid="uid://b3kuvv7ydew7k" path="res://modules/ramp_terrain.tscn" id="2_ywgp6"]
 [ext_resource type="PackedScene" uid="uid://xi1jo71gbwii" path="res://modules/box_terrain.tscn" id="3_0vfqx"]
 [ext_resource type="PackedScene" uid="uid://bicc2wa2eqppk" path="res://scenes/entities/player/player.tscn" id="4_0vfqx"]
 [ext_resource type="PackedScene" uid="uid://v2liuq4bsx7t" path="res://scenes/ui/overlay_menu.tscn" id="5_wbbl4"]
 [ext_resource type="PackedScene" uid="uid://bbkyb4dhdfacd" path="res://scenes/ui/settings.tscn" id="6_6c6v5"]
+[ext_resource type="PackedScene" uid="uid://br1cj6b2c2nvu" path="res://scenes/entities/enemy/enemy.tscn" id="7_bhwwd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0x2k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -21,25 +23,20 @@ sky = SubResource("Sky_0biqy")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_bhwwd"]
+vertices = PackedVector3Array(-49.5, -0.5, 1.25, -3, -0.5, 1.25, -3, -0.5, -0.75, -0.75, -0.5, -1, -0.75, -0.5, -49.5, -49.5, -0.5, -49.5, 1.25, -0.5, -1, 1.5, -0.5, -0.5, 49.5, -0.5, -0.5, 49.5, -0.5, -49.5, 49.5, -0.5, 4.5, 1.25, -0.5, 4.25, -2, 0.5, 0, -2, 0.5, 5, 0, 0.5, 5, 0, 0.5, 0, -49.5, -0.5, 4, -3, -0.5, 4, -1, -0.5, 49.5, -1, -0.5, 6.25, -3, -0.5, 6, -49.5, -0.5, 49.5, 0.75, -0.5, 6.25, 1.25, -0.5, 5.75, 49.5, -0.5, 49.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 4), PackedInt32Array(6, 3, 4), PackedInt32Array(7, 8, 11), PackedInt32Array(11, 8, 10), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(0, 1, 16), PackedInt32Array(16, 1, 17), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 21), PackedInt32Array(20, 21, 16), PackedInt32Array(16, 17, 20), PackedInt32Array(18, 19, 22), PackedInt32Array(22, 23, 18), PackedInt32Array(18, 23, 24), PackedInt32Array(24, 23, 10), PackedInt32Array(23, 11, 10)]
+geometry_parsed_geometry_type = 1
+
 [node name="GameWorld" type="Node3D" unique_id=420947161]
+script = ExtResource("1_u1jpj")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1118995174]
 environment = SubResource("Environment_47u71")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2061994016]
-transform = Transform3D(-0.59962195, 0.3488515, -0.72024727, -0.61078775, -0.7810146, 0.13021018, -0.51709974, 0.5179951, 0.68138766, 0, 12.668616, 0)
+transform = Transform3D(-0.5996219, 0.34885147, -0.7202474, -0.6107877, -0.7810145, 0.13021018, -0.5170997, 0.51799506, 0.6813876, 0, 12.668616, 0)
 shadow_enabled = true
-
-[node name="PlayTest" parent="." unique_id=270922803 instance=ExtResource("1_0biqy")]
-
-[node name="ramp_terrain" parent="." unique_id=1425502764 instance=ExtResource("2_ywgp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.174988, 5.2849515e-07, 2.2087176)
-
-[node name="box_terrain" parent="." unique_id=16083722 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13981104, 0, 2.245009)
-
-[node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
-transform = Transform3D(-0.12282197, 0, -0.9924288, 0, 1, 0, 0.9924288, 0, -0.12282197, -4, 1, 2)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1855844815]
 
@@ -48,23 +45,84 @@ transform = Transform3D(-0.12282197, 0, -0.9924288, 0, 1, 0, 0.9924288, 0, -0.12
 [node name="Settings" parent="UI" unique_id=618800622 instance=ExtResource("6_6c6v5")]
 process_mode = 3
 
-[node name="ramp_terrain2" parent="." unique_id=1423998986 instance=ExtResource("2_ywgp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.174988, 5.2849515e-07, 1.069615)
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=658575419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+navigation_mesh = SubResource("NavigationMesh_bhwwd")
 
-[node name="ramp_terrain3" parent="." unique_id=1311041332 instance=ExtResource("2_ywgp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.174988, 5.2849515e-07, -0.106709)
+[node name="PlayTest" parent="NavigationRegion3D" unique_id=270922803 instance=ExtResource("1_0biqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="box_terrain2" parent="." unique_id=18770570 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.96210814, 0, 2.245009)
+[node name="ramp_terrain" parent="NavigationRegion3D" unique_id=1425502764 instance=ExtResource("2_ywgp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
 
-[node name="box_terrain3" parent="." unique_id=1789939699 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13981104, 0, 1.0369945)
+[node name="box_terrain" parent="NavigationRegion3D" unique_id=16083722 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="box_terrain4" parent="." unique_id=815015055 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13981104, 0, -0.06318331)
+[node name="box_terrain2" parent="NavigationRegion3D" unique_id=56182434 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1)
 
-[node name="box_terrain5" parent="." unique_id=201287408 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73989975, 0, 0.9115815)
+[node name="box_terrain3" parent="NavigationRegion3D" unique_id=2002529378 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 2)
 
-[node name="box_terrain6" parent="." unique_id=1731763932 instance=ExtResource("3_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.687338, 0, 1.4415452)
+[node name="box_terrain4" parent="NavigationRegion3D" unique_id=1424261131 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 3)
+
+[node name="box_terrain5" parent="NavigationRegion3D" unique_id=54449474 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 4)
+
+[node name="box_terrain6" parent="NavigationRegion3D" unique_id=1406713311 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 5)
+
+[node name="box_terrain8" parent="NavigationRegion3D" unique_id=498012338 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+
+[node name="box_terrain9" parent="NavigationRegion3D" unique_id=245300300 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 1)
+
+[node name="box_terrain10" parent="NavigationRegion3D" unique_id=8544576 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 2)
+
+[node name="box_terrain11" parent="NavigationRegion3D" unique_id=1720653154 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 3)
+
+[node name="box_terrain12" parent="NavigationRegion3D" unique_id=1994869856 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 4)
+
+[node name="box_terrain13" parent="NavigationRegion3D" unique_id=1310794415 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 5)
+
+[node name="box_terrain15" parent="NavigationRegion3D" unique_id=1126935343 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 0)
+
+[node name="box_terrain16" parent="NavigationRegion3D" unique_id=463250252 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 1)
+
+[node name="box_terrain17" parent="NavigationRegion3D" unique_id=1696634250 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 2)
+
+[node name="box_terrain18" parent="NavigationRegion3D" unique_id=762818583 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 3)
+
+[node name="box_terrain19" parent="NavigationRegion3D" unique_id=36767427 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 4)
+
+[node name="box_terrain20" parent="NavigationRegion3D" unique_id=1948968032 instance=ExtResource("3_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 5)
+
+[node name="Spawn1" type="Node3D" parent="." unique_id=883968712 groups=["spawner"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -40)
+
+[node name="Spawn2" type="Node3D" parent="." unique_id=450498762 groups=["spawner"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 40)
+
+[node name="Spawn3" type="Node3D" parent="." unique_id=1363361298 groups=["spawner"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 1, 0)
+
+[node name="Spawn4" type="Node3D" parent="." unique_id=1979137609 groups=["spawner"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 1, 0)
+
+[node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4198475, 1.000001, 25.22917)
+
+[node name="Enemy" parent="." unique_id=851332793 instance=ExtResource("7_bhwwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.227, 1, 15.742)

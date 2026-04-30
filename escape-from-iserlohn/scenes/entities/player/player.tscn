@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://bv576ghc0nade" path="res://scripts/core/state_machine.gd" id="2_bjvvg"]
 [ext_resource type="Script" uid="uid://dsnevie0ps823" path="res://scripts/entites/player/states/run_state.gd" id="3_8akj5"]
 [ext_resource type="Script" uid="uid://c6c87mw4bvj4k" path="res://scripts/entites/player/states/idle_state.gd" id="3_bj7e2"]
-[ext_resource type="Script" uid="uid://bvhvarg4e6071" path="res://scripts/entites/player/states/attack_state.gd" id="4_bj7e2"]
 [ext_resource type="Script" uid="uid://dwu17w2n63fbt" path="res://scripts/entites/player/states/planting_state.gd" id="5_1murt"]
+[ext_resource type="PackedScene" uid="uid://ckkwqiutfl18x" path="res://scenes/entities/other/light_bullet.tscn" id="6_1murt"]
 [ext_resource type="Script" uid="uid://cs514oniuscw8" path="res://scripts/entites/player/states/walk_state.gd" id="6_8akj5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yel1f"]
@@ -15,20 +15,22 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bj7e2"]
 albedo_color = Color(0.16470589, 0.40392157, 0.8784314, 1)
 
-[node name="Player" type="CharacterBody3D" unique_id=2091103986 groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=2091103986 groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_1hmtu")
+attack_speed = 1.0
+projectile_scene = ExtResource("6_1murt")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1078200412]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4038796, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1673107312]
-transform = Transform3D(1, 0, 0, 0, 0.9116473, 0.41097343, 0, -0.41097343, 0.9116473, 0, 0.44847202, 0)
+transform = Transform3D(1, 0, 0, 0, 0.8634484, 0.50443715, 0, -0.50443715, 0.8634484, 0, 0.44847202, 0)
 fov = 100.0
 
 [node name="RayCast3D" type="RayCast3D" parent="SpringArm3D/Camera3D" unique_id=745836634]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
-target_position = Vector3(0, -10, 0)
+target_position = Vector3(0, -9, 0)
 collision_mask = 2
 debug_shape_custom_color = Color(1, 1, 0, 1)
 
@@ -48,9 +50,6 @@ script = ExtResource("3_bj7e2")
 
 [node name="Run" type="Node" parent="StateMachine" unique_id=1211108329]
 script = ExtResource("3_8akj5")
-
-[node name="Attack" type="Node" parent="StateMachine" unique_id=1280761249]
-script = ExtResource("4_bj7e2")
 
 [node name="Planting" type="Node" parent="StateMachine" unique_id=1544243902]
 script = ExtResource("5_1murt")

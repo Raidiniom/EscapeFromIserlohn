@@ -7,7 +7,7 @@ var timer := 0.0
 
 func enter():
 	timer = 0.0
-	print("Start Planting")
+	print("Player Started Planting")
 	
 	spawn_plant()
 
