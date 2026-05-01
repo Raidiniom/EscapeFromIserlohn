@@ -1,30 +1,44 @@
+# attack_state.gd
 extends State
 
-var attacking := true
+var attack_timer : float = 0.0
 
 func enter():
 	print("Enemy Attack")
-	attacking = true
-	attack_loop()
+	attack_timer = 0
+	
 
-func attack_loop():
-	while attacking:
-		# If no target → stop
-		if owner.player_target == null:
-			return
+func physics_process(delta):
+	var enemy = owner
 	
-		var dist = owner.global_position.distance_to(owner.player_target.global_position)
+	if enemy.player_target == null:
+		state_machine.change_state("chase")
+		return
 	
-		# If player escaped → go back to chase
-		if dist > owner.attack_range:
-			state_machine.change_state("chase")
-			return
+	var distance = enemy.global_transform.origin.distance_to(
+		enemy.player_target.global_transform.origin
+	)
 	
-		# Deal damage
-		if owner.player_target.has_method("take_damage"):
-			owner.player_target.take_damage(owner.attack_damage)
+	# If player leaves range → go back to chase
+	if distance > enemy.attack_range + 0.5:
+		state_machine.change_state("chase")
+		return
 	
-		await get_tree().create_timer(1.0 / owner.attack_speed).timeout
+	# Stop movement
+	enemy.velocity.x = 0
+	enemy.velocity.z = 0
+	
+	attack_timer -= delta
+	
+	if attack_timer <= 0:
+		attack_timer = 1.0 / enemy.attack_speed
+		attack(enemy)
+
+func attack(enemy):
+	if enemy.player_target.has_method("take_damage"):
+		enemy.player_target.take_damage(enemy.attack_damage)
+	
 
 func exit():
-	attacking = false
+	pass
+	

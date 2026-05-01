@@ -36,6 +36,10 @@ func spawn_enemy():
 	
 	enemy.global_position = spawn.global_position
 	
+	var player = get_tree().get_nodes_in_group("player")[0]
+	
+	enemy.player_target = player
+	
 
 func next_round():
 	current_round += 1

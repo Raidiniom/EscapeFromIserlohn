@@ -17,10 +17,12 @@ albedo_color = Color(1, 0, 0, 1)
 [node name="Enemy" type="CharacterBody3D" unique_id=851332793 groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_lw7nh")
-health = 30.0
-speed = 5.5
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1203146234]
+
+[node name="Label3D" type="Label3D" parent="." unique_id=155827032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2050757, 0)
+text = "Placeholder"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=160277451]
 shape = SubResource("CapsuleShape3D_lw7nh")
@@ -29,10 +31,10 @@ shape = SubResource("CapsuleShape3D_lw7nh")
 material_override = SubResource("StandardMaterial3D_dxw06")
 mesh = SubResource("CapsuleMesh_lw7nh")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=142310300]
+[node name="AttackArea" type="Area3D" parent="." unique_id=142310300]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1684023832]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea" unique_id=1684023832]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_1y44r")
 
@@ -46,5 +48,4 @@ script = ExtResource("5_ilesx")
 [node name="Attack" type="Node" parent="StateMachine" unique_id=636780882]
 script = ExtResource("4_7gxlw")
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

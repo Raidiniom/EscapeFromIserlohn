@@ -2,18 +2,18 @@ extends CharacterBody3D
 
 # Player stats
 @export_category("Player Stats")
-@export var health: float = 100.0
-@export var base_damage: float = 15.0
-@export var attack_speed: float = 2.5
-@export var movement_speed: float = 5.0
-@export var luck_stat: float = 2.0
+@export var health : float = 100.0
+@export var base_damage : float = 25.0
+@export var attack_speed : float = 3.0
+@export var movement_speed : float = 6.0
+@export var luck_stat : float = 2.0
 
 # Utilities
 @export var gravity: float = 9.8
 @export var mouse_sensitivity: float = 0.002
-
 @export var projectile_scene: PackedScene
-var attack_timer := 0.2
+var attack_timer : float = 0.2
+var is_dead : bool = false
 
 #Player Body
 @onready var player_body: MeshInstance3D = $CollisionShape3D/MeshInstance3D
@@ -44,7 +44,16 @@ func _unhandled_input(event: InputEvent):
 
 func take_damage(amount: float):
 	health -= amount
+	
 	player_health.text = str(health)
+
+func die():
+	pass
+	
+
+func respawn():
+	pass
+	
 
 func can_plant() -> bool:
 	if raycast_3d.is_colliding():
