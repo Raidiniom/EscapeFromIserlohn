@@ -4,7 +4,7 @@ extends State
 var attack_timer : float = 0.0
 
 func enter():
-	print("Enemy Attack")
+	#print("Enemy Attack")
 	attack_timer = 0
 	
 
@@ -31,7 +31,7 @@ func physics_process(delta):
 	attack_timer -= delta
 	
 	if attack_timer <= 0:
-		attack_timer = 1.0 / enemy.attack_speed
+		attack_timer = 1.0 / max(enemy.attack_speed, 0.1)
 		attack(enemy)
 
 func attack(enemy):

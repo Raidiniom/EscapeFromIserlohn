@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://coixh25hwitmm"]
+
+[ext_resource type="PackedScene" uid="uid://boaba0g3jp7ql" path="res://scenes/entities/plant/plant.tscn" id="1_upx4b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upx4b"]
+albedo_color = Color(0, 1, 1, 1)
+
+[node name="AgilityPlant" unique_id=1333606776 instance=ExtResource("1_upx4b")]
+
+[node name="CSGBakedMeshInstance3D" parent="." index="0" unique_id=141409618]
+material_override = SubResource("StandardMaterial3D_upx4b")

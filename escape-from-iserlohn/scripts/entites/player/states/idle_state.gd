@@ -15,7 +15,10 @@ func physics_process(delta):
 	input_dir.y = Input.get_action_strength("backward") - Input.get_action_strength("forward")
 	
 	if input_dir != Vector2.ZERO:
-		state_machine.change_state("walk")
+		if owner.movement_speed > 12:
+			state_machine.change_state("run")
+		else:
+			state_machine.change_state("walk")
 	elif Input.is_action_just_pressed("plant"):
 		print("pressed plant key!")
 		if owner.can_plant():

@@ -1,18 +1,29 @@
 # enemy.gd
 extends CharacterBody3D
 
-@export_category("Enemy Stats")
-@export var health : float = 100.0
-@export var speed : float = 2.5
-@export var armor : float = 1.0
-@export var attack_damage : float = 2.0
-@export var attack_speed : float = 1.0
-@export var attack_range : float = 1.0
-@export var gravity : float = 9.8
+@export var data: EnemyData
 
+# Enemy Stats
+var health: float
+var speed: float
+var armor: float
+var attack_damage: float
+var attack_speed: float
+var attack_range: float
+var is_dead : bool = false
+
+# Rogue - Dash Ability
+var is_dashing: bool = false
+var can_dash: bool
+var dash_speed_multiplier: float
+var dash_cooldown: float
+var dash_min_range: float
+var dash_max_range: float
+
+# Utilities
+var gravity : float = 9.8
 var player_target: Node3D = null
 var can_attack := true
-var is_dead : bool = false
 var target_offset: Vector3
 
 # Enemy Parts
@@ -22,6 +33,11 @@ var target_offset: Vector3
 @onready var health_display = $Label3D
 
 func _ready() -> void:
+	if data != null:
+		apply_data()
+	else:
+		print("No Enemy Data Assigned")
+	
 	health_display.text = str(health)
 	
 	var radius = 2.0
@@ -31,53 +47,80 @@ func _ready() -> void:
 		randf_range(-radius, radius)
 	)
 	
-	#var player = get_tree().get_nodes_in_group("player")
-	#
-	#if player.size() > 0:
-		#player_target = player[0]
-		#state_machine.change_state("chase")
+
+func apply_data():
+	print("LOADED DATA:", data)
+	
+	health = data.health
+	speed = data.speed
+	armor = data.armor
+	attack_damage = data.attack_damage
+	attack_speed = data.attack_speed
+	attack_range = data.attack_range
+	
+	# Dash Stats
+	can_dash = data.can_dash
+	dash_speed_multiplier = data.dash_speed_multiplier
+	dash_cooldown = data.dash_cooldown
+	dash_min_range = data.dash_min_range
+	dash_max_range = data.dash_max_range
 	
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 	
-	print("GLOBAL POS:", global_position)
-	
 
 func move_to_target(delta):
 	if player_target == null:
 		return
 	
-	var target_pos = player_target.global_position + target_offset
-	var to_target = target_pos - global_position
-	to_target.y = 0
-	
-	var distance = to_target.length()
-	
-	if distance <= attack_range:
-		velocity.x = 0
-		velocity.y = 0
+	if is_dashing:
 		return
 	
-	var direction = to_target.normalized()
+	var direction = Vector3.ZERO
 	
-	var separation = get_separation_force()
+	direction += get_seek_force()
+	direction += get_separation_force() * 1.5
+	direction += get_offset_force()
 	
-	# Blend movement + separation
-	direction += separation * 1.5
+	direction.y = 0
+	
+	if direction.length() < 0.01:
+		return
+	
 	direction = direction.normalized()
 	
+	apply_movement(direction, delta)
+	
+
+func get_seek_force() -> Vector3:
+	var target_pos = player_target.global_position
+	return (target_pos - global_position).normalized()
+
+func get_offset_force() -> Vector3:
+	var target_pos = player_target.global_position + target_offset
+	return (target_pos - global_position).normalized()
+
+func apply_movement(direction: Vector3, delta: float):
+	var distance = global_position.distance_to(player_target.global_position)
+	
+	# Stop at attack range
+	if distance <= attack_range:
+		velocity.x = 0
+		velocity.z = 0
+		return
+	
+	# Smooth slow down
 	var slow_radius = attack_range + 1.5
 	var move_speed = speed
 	
 	if distance < slow_radius:
 		move_speed = speed * (distance / slow_radius)
 	
-	if direction.length() > 0.01:
-		var target_basis = Basis().looking_at(direction, Vector3.UP)
-		transform.basis = transform.basis.slerp(target_basis, 5 * delta)
-	
+	# Smooth rotation
+	var target_basis = Basis().looking_at(direction, Vector3.UP)
+	transform.basis = transform.basis.slerp(target_basis, 5 * delta)
 	
 	velocity.x = direction.x * move_speed
 	velocity.z = direction.z * move_speed
@@ -87,11 +130,7 @@ func move_to_target(delta):
 	else:
 		velocity.y = 0
 	
-	print(player_target)
-	print(velocity)
-	
 	move_and_slide()
-	
 
 func get_separation_force() -> Vector3:
 	var separation_radius = 2.0
@@ -125,7 +164,3 @@ func die():
 		GameManager.next_round()
 	
 	queue_free()
-
-func _on_attack_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		can_attack = true

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://b0efdcl6n5yx8"]
+
+[ext_resource type="Script" uid="uid://b1c0xm5qiq8vb" path="res://scripts/entites/resource/enemydata/enemy_data.gd" id="1_bibfq"]
+
+[resource]
+script = ExtResource("1_bibfq")
+health = 80.0
+speed = 4.5
+armor = 0.5
+attack_damage = 4.0
+attack_speed = 1.0
+attack_range = 6.0
+metadata/_custom_type_script = "uid://b1c0xm5qiq8vb"

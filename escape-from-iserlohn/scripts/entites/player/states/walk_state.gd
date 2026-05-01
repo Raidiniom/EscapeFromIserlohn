@@ -4,7 +4,7 @@ extends State
 
 func enter():
 	# Play animation here
-	print("owner Walk State")
+	pass
 
 func physics_process(delta):
 	# Apply gravity
@@ -18,14 +18,16 @@ func physics_process(delta):
 	var direction = (owner.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
-		owner.velocity.x = direction.x * walk_speed
-		owner.velocity.z = direction.z * walk_speed
+		owner.velocity.x = direction.x * owner.movement_speed
+		owner.velocity.z = direction.z * owner.movement_speed
 	else:
-		owner.velocity.x = move_toward(owner.velocity.x, 0, walk_speed)
-		owner.velocity.z = move_toward(owner.velocity.z, 0, walk_speed)
+		owner.velocity.x = move_toward(owner.velocity.x, 0, owner.movement_speed)
+		owner.velocity.z = move_toward(owner.velocity.z, 0, owner.movement_speed)
 
 	# Transition logic
 	if direction == Vector3.ZERO:
 		state_machine.change_state("idle")
+	elif owner.movement_speed > 12:
+		state_machine.change_state("run")
 	
 	owner.move_and_slide()
