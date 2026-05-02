@@ -21,6 +21,7 @@ SettingsManager="*uid://bmpw7bhv0q28k"
 PauseManager="*uid://dpj7td68y4k24"
 GameManager="*uid://ba60x43n004an"
 TeamManager="*uid://bsppen7exawui"
+GameDataManager="*uid://b0w3wdctevhld"
 
 [global_group]
 

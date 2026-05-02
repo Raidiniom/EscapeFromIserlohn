@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://cp2q8ptwddtwm"]
+
+[ext_resource type="Script" uid="uid://c2w53nfxbsg7l" path="res://scripts/entites/resource/plantdata/plant_data.gd" id="1_2adly"]
+[ext_resource type="PackedScene" uid="uid://1kv47i7v37ml" path="res://scenes/entities/plant/health_plant.tscn" id="1_5ru6q"]
+
+[resource]
+script = ExtResource("1_2adly")
+seed_type = 3
+growth_time = 1.0
+plant_model = ExtResource("1_5ru6q")
+stat_value = 1.0
+metadata/_custom_type_script = "uid://c2w53nfxbsg7l"
