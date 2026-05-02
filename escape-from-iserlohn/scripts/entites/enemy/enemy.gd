@@ -198,12 +198,51 @@ func calculate_damage(amount: float, armor: float) -> float:
 	# Ensure minimum damage of 1
 	return max(1.0, final_damage)
 
+func drop_seed():
+	var player = get_tree().get_first_node_in_group("player")
+
+	var luck := 0.0
+	if player != null:
+		luck = player.luck_stat
+
+	var loot_table = [
+		{"type": SeedTypes.SeedType.DAMAGE, "weight": 50},
+		{"type": SeedTypes.SeedType.MOVEMENT, "weight": 20},
+		{"type": SeedTypes.SeedType.ATTACK_SPEED, "weight": 15},
+		{"type": SeedTypes.SeedType.HEALTH, "weight": 10},
+		{"type": SeedTypes.SeedType.ARMOR, "weight": 4},
+		{"type": SeedTypes.SeedType.LUCK, "weight": 1}
+	]
+
+	var total_weight := 0.0
+
+	# Apply luck (boost rare items more)
+	for item in loot_table:
+		var is_rare: bool = item["weight"] <= 10
+
+		if is_rare:
+			item["weight"] += luck * 2.5  # luck favors rare drops more
+
+		total_weight += item["weight"]
+
+	var roll := randf() * total_weight
+	var current := 0.0
+
+	for item in loot_table:
+		current += item["weight"]
+		if roll <= current:
+			print("[DEBUG] Dropped:", item["type"])
+			GameDataManager.add_seed(item["type"])
+			return
+	
+
 func die():
 	is_dead = true
 	
 	if counts_for_round:
 		GameManager.enemies_alive -= 1
-	
+		drop_seed()
+		
 		if GameManager.enemies_alive <= 0:
 			GameManager.next_round()
 	
