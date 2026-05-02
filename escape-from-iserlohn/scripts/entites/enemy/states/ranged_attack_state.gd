@@ -57,6 +57,7 @@ func shoot(enemy):
 	projectile.speed = 20.0
 	projectile.damage = enemy.attack_damage
 	projectile.lifetime = 2.0
+	projectile.source = enemy.team
 	
 	get_tree().current_scene.add_child(projectile)
 	

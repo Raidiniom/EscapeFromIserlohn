@@ -42,6 +42,7 @@ var player_target: Node3D = null
 var can_attack := true
 var target_offset: Vector3
 var counts_for_round: bool
+var team = TeamManager.Team.ENEMY
 
 # Enemy Parts
 @onready var navigation: NavigationAgent3D = $NavigationAgent3D
