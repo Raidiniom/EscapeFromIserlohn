@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://dwn7qyrc7621h"]
+
+[ext_resource type="Script" uid="uid://c2w53nfxbsg7l" path="res://scripts/entites/resource/plantdata/plant_data.gd" id="1_0w81v"]
+[ext_resource type="PackedScene" uid="uid://dmo2lfepfmb1v" path="res://scenes/entities/plant/strength_plant.tscn" id="1_4ougw"]
+
+[resource]
+script = ExtResource("1_0w81v")
+plant_model = ExtResource("1_4ougw")
+stat_value = 1.0
+metadata/_custom_type_script = "uid://c2w53nfxbsg7l"

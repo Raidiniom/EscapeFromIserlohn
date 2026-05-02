@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://c086sjryqoa78"]
+
+[ext_resource type="Script" uid="uid://c2w53nfxbsg7l" path="res://scripts/entites/resource/plantdata/plant_data.gd" id="1_0wrcx"]
+[ext_resource type="PackedScene" uid="uid://cffnfvdchqj87" path="res://scenes/entities/plant/luck_plant.tscn" id="1_3g37r"]
+
+[resource]
+script = ExtResource("1_0wrcx")
+seed_type = 5
+growth_time = 1.0
+plant_model = ExtResource("1_3g37r")
+stat_value = 1.0
+metadata/_custom_type_script = "uid://c2w53nfxbsg7l"
