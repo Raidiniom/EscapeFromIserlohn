@@ -71,4 +71,3 @@ func exit():
 			enemy.can_dash = true
 	)
 	
-	print("Done Dashing")

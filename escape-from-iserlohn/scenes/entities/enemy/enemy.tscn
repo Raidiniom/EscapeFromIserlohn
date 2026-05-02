@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://comdjaf3s48mu" path="res://scripts/entites/enemy/enemy.gd" id="1_lw7nh"]
 [ext_resource type="Script" uid="uid://bv576ghc0nade" path="res://scripts/core/state_machine.gd" id="2_dxsuy"]
 [ext_resource type="Script" uid="uid://d1yq71iak6eqb" path="res://scripts/entites/enemy/states/attack_state.gd" id="4_7gxlw"]
+[ext_resource type="Script" uid="uid://dxc5244vaurjb" path="res://scripts/entites/enemy/states/ranged_attack_state.gd" id="5_dxsuy"]
 [ext_resource type="Script" uid="uid://cvc64ltqhd286" path="res://scripts/entites/enemy/states/chase_state.gd" id="5_ilesx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lw7nh"]
@@ -38,3 +39,6 @@ script = ExtResource("5_ilesx")
 
 [node name="Attack" type="Node" parent="StateMachine" unique_id=636780882]
 script = ExtResource("4_7gxlw")
+
+[node name="RangeAttack" type="Node" parent="StateMachine" unique_id=701564019]
+script = ExtResource("5_dxsuy")

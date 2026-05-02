@@ -19,7 +19,7 @@ albedo_color = Color(0.16470589, 0.40392157, 0.8784314, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_1hmtu")
 health = 2000.0
-attack_speed = 3.5
+attack_speed = 20.0
 movement_speed = 20.0
 projectile_scene = ExtResource("6_1murt")
 

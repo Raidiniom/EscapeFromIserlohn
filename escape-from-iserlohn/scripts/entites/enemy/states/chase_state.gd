@@ -20,10 +20,22 @@ func physics_process(delta):
 			state_machine.change_state("dash")
 			return
 	
+	if enemy.can_blink:
+		if distance < enemy.attack_range * 0.6:
+			state_machine.change_state("blink")
+			return
+	
+	if enemy.can_summon and enemy.summon_timer <= 0 and !enemy.is_summoning:
+		state_machine.change_state("summoning")
+		return
+	
 	enemy.move_to_target(delta)
 	
 	if distance <= enemy.attack_range:
-		state_machine.change_state("attack")
+		if enemy.attack_type == "ranged":
+			state_machine.change_state("rangeattack")
+		else:
+			state_machine.change_state("attack")
 	
 
 func exit():

@@ -4,7 +4,7 @@ var enemy_scenes = {
 	"melee": preload("res://scenes/entities/enemy/melee_enemy.tscn"),
 	"heavy": preload("res://scenes/entities/enemy/heavy_melee_enemy.tscn"),
 	"rogue": preload("res://scenes/entities/enemy/rogue_enemy.tscn"),
-	"range": preload("res://scenes/entities/enemy/ranged_enemy.tscn"),
+	"range": preload("res://scenes/entities/enemy/ranger_enemy.tscn"),
 	"summoner": preload("res://scenes/entities/enemy/summoner_enemy.tscn")
 }
 
@@ -52,31 +52,31 @@ func update_weights_for_round():
 		1, 2:
 			enemy_weights["melee"] = 0
 			enemy_weights["heavy"] = 0
-			enemy_weights["rogue"] = 100
+			enemy_weights["rogue"] = 0
 			enemy_weights["range"] = 0
-			enemy_weights["summoner"] = 0
+			enemy_weights["summoner"] = 100
 		
 		3, 4:
 			enemy_weights["melee"] = 0
 			enemy_weights["heavy"] = 0
-			enemy_weights["rogue"] = 100
+			enemy_weights["rogue"] = 0
 			enemy_weights["range"] = 0
-			enemy_weights["summoner"] = 0
+			enemy_weights["summoner"] = 100
 		
 		5, 6:
 			enemy_weights["melee"] = 0
 			enemy_weights["heavy"] = 0
-			enemy_weights["rogue"] = 100
+			enemy_weights["rogue"] = 0
 			enemy_weights["range"] = 0
-			enemy_weights["summoner"] = 0
+			enemy_weights["summoner"] = 100
 		
 		_:
 			# Rounds 7+ become increasingly difficult
 			enemy_weights["melee"] = 0
 			enemy_weights["heavy"] = 0
-			enemy_weights["rogue"] = 100
+			enemy_weights["rogue"] = 0
 			enemy_weights["range"] = 0
-			enemy_weights["summoner"] = 0
+			enemy_weights["summoner"] = 100
 
 func spawn_enemy(type):
 	var scene = enemy_scenes[type]

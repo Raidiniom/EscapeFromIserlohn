@@ -10,6 +10,7 @@ var armor: float
 var attack_damage: float
 var attack_speed: float
 var attack_range: float
+var attack_type: String
 var is_dead : bool = false
 
 # Rogue - Dash Ability
@@ -20,15 +21,30 @@ var dash_cooldown: float
 var dash_min_range: float
 var dash_max_range: float
 
+# Ranger - Blink Ability
+var is_blinking: bool = false
+var can_blink: bool
+var blink_distance: float
+var blink_cooldown: float
+
+# Summoner - Summoning Ability
+var is_summoning: bool = false
+var can_summon: bool
+var summon_count: int
+var summon_cooldown: float
+var summon_timer: float
+var summon_range: float
+var summon_scene: PackedScene
+
 # Utilities
 var gravity : float = 9.8
 var player_target: Node3D = null
 var can_attack := true
 var target_offset: Vector3
+var counts_for_round: bool
 
 # Enemy Parts
 @onready var navigation: NavigationAgent3D = $NavigationAgent3D
-@onready var attack_area: Area3D = $AttackArea
 @onready var state_machine = $StateMachine
 @onready var health_display = $Label3D
 
@@ -38,7 +54,7 @@ func _ready() -> void:
 	else:
 		print("No Enemy Data Assigned")
 	
-	health_display.text = str(health)
+	health_display.text = str(floor(health))
 	
 	var radius = 2.0
 	target_offset = Vector3(
@@ -57,6 +73,8 @@ func apply_data():
 	attack_damage = data.attack_damage
 	attack_speed = data.attack_speed
 	attack_range = data.attack_range
+	attack_type = data.attack_type
+	counts_for_round = data.counts_for_round
 	
 	# Dash Stats
 	can_dash = data.can_dash
@@ -65,10 +83,26 @@ func apply_data():
 	dash_min_range = data.dash_min_range
 	dash_max_range = data.dash_max_range
 	
+	# Blink Stats
+	can_blink = data.can_blink
+	blink_distance = data.blink_distance
+	blink_cooldown = data.blink_cooldown
+	
+	# Summoning Stats
+	can_summon = data.can_summon
+	summon_count = data.summon_count
+	summon_cooldown = data.summon_cooldown
+	summon_timer = data.summon_timer
+	summon_range = data.summon_range
+	summon_scene = data.summon_scene
+	
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
+	
+	if can_summon:
+		summon_timer -= delta
 	
 
 func move_to_target(delta):
@@ -149,18 +183,27 @@ func get_separation_force() -> Vector3:
 	return force
 
 func take_damage(amount: float):
-	health -= amount
+	var final_dmg = calculate_damage(amount, armor)
+	health -= final_dmg
 	
-	health_display.text = str(health)
+	health_display.text = str(floor(health))
 	if health <= 0 and !is_dead:
 		die()
+
+func calculate_damage(amount: float, armor: float) -> float:
+	var damage_reduction = armor / (armor + 100)
+	var final_damage = amount * (1 - damage_reduction)
+	
+	# Ensure minimum damage of 1
+	return max(1.0, final_damage)
 
 func die():
 	is_dead = true
 	
-	GameManager.enemies_alive -= 1
+	if counts_for_round:
+		GameManager.enemies_alive -= 1
 	
-	if GameManager.enemies_alive <= 0:
-		GameManager.next_round()
+		if GameManager.enemies_alive <= 0:
+			GameManager.next_round()
 	
 	queue_free()

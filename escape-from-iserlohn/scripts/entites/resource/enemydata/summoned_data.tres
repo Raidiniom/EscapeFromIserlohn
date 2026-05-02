@@ -9,4 +9,6 @@ speed = 4.5
 attack_damage = 1.5
 attack_speed = 2.5
 attack_range = 1.0
+attack_type = "melee"
+counts_for_round = false
 metadata/_custom_type_script = "uid://b1c0xm5qiq8vb"
