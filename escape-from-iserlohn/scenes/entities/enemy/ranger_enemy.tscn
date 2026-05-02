@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bo16ahmcujft4"]
+
+[ext_resource type="PackedScene" uid="uid://br1cj6b2c2nvu" path="res://scenes/entities/enemy/enemy.tscn" id="1_1gogg"]
+[ext_resource type="Resource" uid="uid://crsvdt3resblp" path="res://scripts/entites/resource/enemydata/range_data.tres" id="2_0qy25"]
+[ext_resource type="Script" uid="uid://cjpprbtxelxhu" path="res://scripts/entites/enemy/range/blink.gd" id="3_r3oti"]
+[ext_resource type="PackedScene" uid="uid://bemyathcjhhq2" path="res://scenes/entities/other/ranger_bullet.tscn" id="4_0qy25"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlugj"]
+albedo_color = Color(1, 1, 0, 1)
+
+[node name="RangedEnemy" unique_id=851332793 instance=ExtResource("1_1gogg")]
+data = ExtResource("2_0qy25")
+
+[node name="Label3D" parent="." index="1" unique_id=155827032]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.5, 0)
+
+[node name="MeshInstance3D" parent="." index="3" unique_id=696542489]
+material_override = SubResource("StandardMaterial3D_hlugj")
+
+[node name="Blink" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(792892105) index="2" unique_id=1156012380]
+script = ExtResource("3_r3oti")
+
+[node name="RangeAttack" parent="StateMachine" parent_id_path=PackedInt32Array(792892105) index="3" unique_id=701564019]
+projectile_scene = ExtResource("4_0qy25")

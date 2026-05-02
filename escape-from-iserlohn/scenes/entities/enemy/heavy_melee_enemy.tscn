@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cq4xu6lw4e3e3"]
+
+[ext_resource type="PackedScene" uid="uid://br1cj6b2c2nvu" path="res://scenes/entities/enemy/enemy.tscn" id="1_40yu8"]
+[ext_resource type="Resource" uid="uid://cpicoy0benmxp" path="res://scripts/entites/resource/enemydata/heavymelee_data.tres" id="2_3a6ps"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3a6ps"]
+albedo_color = Color(0.24313726, 0.03529412, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3a6ps"]
+
+[node name="HeavyMeleeEnemy" unique_id=851332793 instance=ExtResource("1_40yu8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+data = ExtResource("2_3a6ps")
+
+[node name="Label3D" parent="." index="1" unique_id=155827032]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.5, 0)
+
+[node name="CollisionShape3D" parent="." index="2" unique_id=160277451]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="MeshInstance3D" parent="." index="3" unique_id=696542489]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3a6ps")
+mesh = SubResource("CapsuleMesh_3a6ps")

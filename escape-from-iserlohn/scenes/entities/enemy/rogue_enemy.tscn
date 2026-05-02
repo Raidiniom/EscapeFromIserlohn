@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://425xxebjkqld"]
+
+[ext_resource type="PackedScene" uid="uid://br1cj6b2c2nvu" path="res://scenes/entities/enemy/enemy.tscn" id="1_k58e0"]
+[ext_resource type="Resource" uid="uid://dbeqjkwmvfuap" path="res://scripts/entites/resource/enemydata/rogue_data.tres" id="2_diva7"]
+[ext_resource type="Script" uid="uid://415t11kg1scf" path="res://scripts/entites/enemy/rogue/dash.gd" id="3_diva7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diva7"]
+albedo_color = Color(0, 0.7058824, 0, 1)
+
+[node name="RogueEnemy" unique_id=851332793 instance=ExtResource("1_k58e0")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+data = ExtResource("2_diva7")
+
+[node name="Label3D" parent="." index="1" unique_id=155827032]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.5, 0)
+
+[node name="MeshInstance3D" parent="." index="3" unique_id=696542489]
+material_override = SubResource("StandardMaterial3D_diva7")
+
+[node name="Dash" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(792892105) index="2" unique_id=1705359409]
+script = ExtResource("3_diva7")
