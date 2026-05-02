@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://comdjaf3s48mu" path="res://scripts/entites/enemy/enemy.gd" id="1_lw7nh"]
 [ext_resource type="Script" uid="uid://bv576ghc0nade" path="res://scripts/core/state_machine.gd" id="2_dxsuy"]
-[ext_resource type="Script" uid="uid://d1yq71iak6eqb" path="res://scripts/entites/enemy/melee/attack_state.gd" id="4_7gxlw"]
-[ext_resource type="Script" uid="uid://cvc64ltqhd286" path="res://scripts/entites/enemy/melee/chase_state.gd" id="5_ilesx"]
+[ext_resource type="Script" uid="uid://d1yq71iak6eqb" path="res://scripts/entites/enemy/states/attack_state.gd" id="4_7gxlw"]
+[ext_resource type="Script" uid="uid://dxc5244vaurjb" path="res://scripts/entites/enemy/states/ranged_attack_state.gd" id="5_dxsuy"]
+[ext_resource type="Script" uid="uid://cvc64ltqhd286" path="res://scripts/entites/enemy/states/chase_state.gd" id="5_ilesx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lw7nh"]
 
@@ -12,15 +13,15 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_lw7nh"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1y44r"]
-
 [node name="Enemy" type="CharacterBody3D" unique_id=851332793 groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_lw7nh")
-health = 30.0
-speed = 5.5
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1203146234]
+
+[node name="Label3D" type="Label3D" parent="." unique_id=155827032]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.2050757, 0)
+text = "Placeholder"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=160277451]
 shape = SubResource("CapsuleShape3D_lw7nh")
@@ -28,13 +29,6 @@ shape = SubResource("CapsuleShape3D_lw7nh")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=696542489]
 material_override = SubResource("StandardMaterial3D_dxw06")
 mesh = SubResource("CapsuleMesh_lw7nh")
-
-[node name="Area3D" type="Area3D" parent="." unique_id=142310300]
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1684023832]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_1y44r")
 
 [node name="StateMachine" type="Node" parent="." unique_id=792892105]
 script = ExtResource("2_dxsuy")
@@ -46,5 +40,5 @@ script = ExtResource("5_ilesx")
 [node name="Attack" type="Node" parent="StateMachine" unique_id=636780882]
 script = ExtResource("4_7gxlw")
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[node name="RangeAttack" type="Node" parent="StateMachine" unique_id=701564019]
+script = ExtResource("5_dxsuy")

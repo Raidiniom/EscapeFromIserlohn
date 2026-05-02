@@ -1,13 +1,12 @@
 extends Area3D
 
-@export var speed: float = 20.0
-@export var damage: float = 10.0
-@export var lifetime: float = 3.0
+var speed: float
+var damage: float
+var lifetime: float
 
 var direction: Vector3
 
 func _ready():
-	# Auto delete after some time
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 

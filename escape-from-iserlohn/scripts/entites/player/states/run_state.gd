@@ -7,26 +7,23 @@ func enter():
 	print("Plyaer Run State")
 
 func physics_process(delta):
-	# Apply gravity
 	if not owner.is_on_floor():
 		owner.velocity.y -= owner.gravity * delta
 
-	# Get movement input
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (owner.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
-		owner.velocity.x = direction.x * run_speed
-		owner.velocity.z = direction.z * run_speed
+		owner.velocity.x = direction.x * owner.movement_speed
+		owner.velocity.z = direction.z * owner.movement_speed
 	else:
-		owner.velocity.x = move_toward(owner.velocity.x, 0, run_speed)
-		owner.velocity.z = move_toward(owner.velocity.z, 0, run_speed)
+		owner.velocity.x = move_toward(owner.velocity.x, 0, owner.movement_speed)
+		owner.velocity.z = move_toward(owner.velocity.z, 0, owner.movement_speed)
 
 	# Transition logic
-	if Input.is_action_just_pressed("plant"):
-		state_machine.change_state("planting")
-	elif direction == Vector3.ZERO:
+	if direction == Vector3.ZERO:
 		state_machine.change_state("idle")
-	# For Run.gd, you would add a transition back to Walk or Idle if sprint is released.
+	elif owner.movement_speed <= 12:
+		state_machine.change_state("walk")
 
 	owner.move_and_slide()

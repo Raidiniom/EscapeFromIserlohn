@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://1kv47i7v37ml"]
+
+[ext_resource type="PackedScene" uid="uid://boaba0g3jp7ql" path="res://scenes/entities/plant/plant.tscn" id="1_mfl2i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfl2i"]
+albedo_color = Color(0, 0.48235294, 0, 1)
+
+[node name="HealthPlant" unique_id=1333606776 instance=ExtResource("1_mfl2i")]
+
+[node name="CSGBakedMeshInstance3D" parent="." index="0" unique_id=141409618]
+material_override = SubResource("StandardMaterial3D_mfl2i")

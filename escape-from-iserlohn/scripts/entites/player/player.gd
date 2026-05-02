@@ -2,18 +2,19 @@ extends CharacterBody3D
 
 # Player stats
 @export_category("Player Stats")
-@export var health: float = 100.0
-@export var base_damage: float = 15.0
-@export var attack_speed: float = 2.5
-@export var movement_speed: float = 5.0
-@export var luck_stat: float = 2.0
+@export var health : float = 100.0
+@export var base_damage : float = 25.0
+@export var armor : float = 1.0
+@export var attack_speed : float = 3.0
+@export var movement_speed : float = 6.0
+@export var luck_stat : float = 2.0
 
 # Utilities
 @export var gravity: float = 9.8
 @export var mouse_sensitivity: float = 0.002
-
 @export var projectile_scene: PackedScene
-var attack_timer := 0.2
+var attack_timer : float = 0.2
+var is_dead : bool = false
 
 #Player Body
 @onready var player_body: MeshInstance3D = $CollisionShape3D/MeshInstance3D
@@ -25,7 +26,7 @@ var attack_timer := 0.2
 @onready var raycast_3d: RayCast3D = $SpringArm3D/Camera3D/RayCast3D
 
 func _ready():
-	player_health.text = str(health)
+	player_health.text = str(floorf(health))
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
@@ -43,14 +44,36 @@ func _unhandled_input(event: InputEvent):
 		)
 
 func take_damage(amount: float):
-	health -= amount
-	player_health.text = str(health)
+	var final_dmg = calculate_damage(amount, armor)
+	
+	health -= final_dmg
+	
+	player_health.text = str(floorf(health))
+	
+	if health <= 0:
+		die()
+
+func calculate_damage(damage: float, armor: float) -> float:
+	var reduced_damage = armor / (armor + 100)
+	var calculated_dmg = damage * (1 - reduced_damage)
+	
+	return max(1.0, calculated_dmg)
+
+func die():
+	if is_dead:
+		return
+	
+	is_dead = true
+	print("[DEBUG] Player Died!!!")
+	
+
+func respawn():
+	pass
+	
 
 func can_plant() -> bool:
 	if raycast_3d.is_colliding():
 		var collider = raycast_3d.get_collider()
-		
-		print("Hit: ", collider)
 		
 		return collider.is_in_group("plantable_ground")
 	
@@ -70,7 +93,7 @@ func fire_projectile():
 	if projectile_scene == null:
 		return
 	
-	if player_body == null or !player_body.is_inside_tree():
+	if !is_inside_tree():
 		return
 	
 	var projectile = projectile_scene.instantiate()
@@ -80,6 +103,8 @@ func fire_projectile():
 	
 	projectile.global_position = spawn_pos
 	projectile.direction = direction.normalized()
+	projectile.speed = 25.0
 	projectile.damage = base_damage
+	projectile.lifetime = 2.0
 	
 	get_tree().current_scene.add_child(projectile)

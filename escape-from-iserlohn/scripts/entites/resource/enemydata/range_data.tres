@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://crsvdt3resblp"]
+
+[ext_resource type="Script" uid="uid://b1c0xm5qiq8vb" path="res://scripts/entites/resource/enemydata/enemy_data.gd" id="1_wjpw1"]
+
+[resource]
+script = ExtResource("1_wjpw1")
+health = 150.0
+speed = 4.5
+armor = 1.5
+attack_damage = 6.0
+attack_speed = 4.5
+attack_range = 20.0
+attack_type = "ranged"
+can_blink = true
+blink_distance = 22.0
+blink_cooldown = 5.0
+metadata/_custom_type_script = "uid://b1c0xm5qiq8vb"
