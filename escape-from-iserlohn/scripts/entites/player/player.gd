@@ -15,6 +15,7 @@ extends CharacterBody3D
 @export var projectile_scene: PackedScene
 var attack_timer : float = 0.2
 var is_dead : bool = false
+var team = TeamManager.Team.PLAYER
 
 #Player Body
 @onready var player_body: MeshInstance3D = $CollisionShape3D/MeshInstance3D
@@ -106,5 +107,6 @@ func fire_projectile():
 	projectile.speed = 25.0
 	projectile.damage = base_damage
 	projectile.lifetime = 2.0
+	projectile.source = team
 	
 	get_tree().current_scene.add_child(projectile)
