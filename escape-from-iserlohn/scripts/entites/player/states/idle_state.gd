@@ -1,3 +1,4 @@
+# idle.gd
 extends State
 
 func enter():
@@ -20,8 +21,10 @@ func physics_process(delta):
 		else:
 			state_machine.change_state("walk")
 	elif Input.is_action_just_pressed("plant"):
-		print("pressed plant key!")
-		if owner.can_plant():
+		print("Pressed E")
+		print("Can plant:", owner.can_plant())
+		print("Seeds:", GameDataManager.seeds[owner.selected_seed])
+		if owner.can_plant() and GameDataManager.seeds[owner.selected_seed] > 0:
 			state_machine.change_state("planting")
 
 	owner.move_and_slide()

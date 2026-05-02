@@ -1,3 +1,4 @@
+# walk_state.gd
 extends State
 
 @export var walk_speed: float = 5.0

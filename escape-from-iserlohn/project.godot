@@ -45,6 +45,7 @@ SettingsManager="*uid://ctf05soha4m52"
 PauseManager="*uid://dpj7td68y4k24"
 GameManager="*uid://ba60x43n004an"
 TeamManager="*uid://bsppen7exawui"
+GameDataManager="*uid://b0w3wdctevhld"
 
 [editor_plugins]
 

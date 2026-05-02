@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://boaba0g3jp7ql"]
 
+[ext_resource type="Script" uid="uid://i5hlkjanher6" path="res://scripts/entites/plant/plant.gd" id="1_15dcp"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4nqw"]
 albedo_color = Color(0.7490196, 0.9098039, 0.21568628, 1)
 
@@ -15,6 +17,7 @@ _surfaces = [{
 }]
 
 [node name="Plant" type="Node3D" unique_id=1333606776]
+script = ExtResource("1_15dcp")
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." unique_id=141409618]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
