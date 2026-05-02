@@ -19,16 +19,6 @@ var attack_timer : float = 0.2
 var is_dead : bool = false
 var team = TeamManager.Team.PLAYER
 
-# Player Inventory
-var seeds := {
-	SeedTypes.SeedType.DAMAGE: 0,
-	SeedTypes.SeedType.MOVEMENT: 0,
-	SeedTypes.SeedType.ATTACK_SPEED: 0,
-	SeedTypes.SeedType.HEALTH: 0,
-	SeedTypes.SeedType.ARMOR: 0,
-	SeedTypes.SeedType.LUCK: 0
-}
-
 var selected_seed : int = SeedTypes.SeedType.DAMAGE
 
 #Player Body
@@ -93,12 +83,12 @@ func update_stats_display():
 	display_text += "Move Speed: " + str(movement_speed) + "\n"
 	display_text += "Luck: " + str(luck_stat) + "\n"
 	display_text += "\n=== INVENTORY ===\n"
-	display_text += "[1] DMG Seeds: " + str(seeds[SeedTypes.SeedType.DAMAGE]) + "\n"
-	display_text += "[2] MOV Seeds: " + str(seeds[SeedTypes.SeedType.MOVEMENT]) + "\n"
-	display_text += "[3] ATK Seeds: " + str(seeds[SeedTypes.SeedType.ATTACK_SPEED]) + "\n"
-	display_text += "[4] HP Seeds: " + str(seeds[SeedTypes.SeedType.HEALTH]) + "\n"
-	display_text += "[5] ARM Seeds: " + str(seeds[SeedTypes.SeedType.ARMOR]) + "\n"
-	display_text += "[6] LUCK Seeds: " + str(seeds[SeedTypes.SeedType.LUCK]) + "\n"
+	display_text += "[1] DMG Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.DAMAGE]) + "\n"
+	display_text += "[2] MOV Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.MOVEMENT]) + "\n"
+	display_text += "[3] ATK Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.ATTACK_SPEED]) + "\n"
+	display_text += "[4] HP Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.HEALTH]) + "\n"
+	display_text += "[5] ARM Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.ARMOR]) + "\n"
+	display_text += "[6] LUCK Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.LUCK]) + "\n"
 	display_text += "\nSelected: "
 	
 	match selected_seed:
