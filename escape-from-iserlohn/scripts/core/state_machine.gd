@@ -8,12 +8,10 @@ var current_state: State
 var states: Dictionary = {}
 
 func _ready():
-	# Cache references to all state child nodes
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.state_machine = self
-			child.player = get_parent() # Assumes player is the parent of StateMachine
 
 	# Start the FSM
 	if initial_state:

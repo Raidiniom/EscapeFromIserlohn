@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bicc2wa2eqppk" path="res://scenes/entities/player/player.tscn" id="4_0vfqx"]
 [ext_resource type="PackedScene" uid="uid://v2liuq4bsx7t" path="res://scenes/ui/overlay_menu.tscn" id="5_wbbl4"]
 [ext_resource type="PackedScene" uid="uid://bbkyb4dhdfacd" path="res://scenes/ui/settings.tscn" id="6_6c6v5"]
+[ext_resource type="PackedScene" uid="uid://425xxebjkqld" path="res://scenes/entities/enemy/rogue_enemy.tscn" id="6_bhwwd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0x2k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -61,4 +62,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 1, 0)
 
 [node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 floor_stop_on_slope = false
+
+[node name="RogueEnemy" parent="." unique_id=851332793 instance=ExtResource("6_bhwwd")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -18.695766, 0.5, 8.56069)

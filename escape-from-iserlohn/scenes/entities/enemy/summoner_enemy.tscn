@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d4dtf24yr40ev"]
+
+[ext_resource type="PackedScene" uid="uid://br1cj6b2c2nvu" path="res://scenes/entities/enemy/enemy.tscn" id="1_hyrew"]
+[ext_resource type="Resource" uid="uid://b0efdcl6n5yx8" path="res://scripts/entites/resource/enemydata/summoner_data.tres" id="2_iu5fv"]
+[ext_resource type="Script" uid="uid://bf6c88gggdo5r" path="res://scripts/entites/enemy/summoner/summoning.gd" id="3_gnrye"]
+[ext_resource type="PackedScene" uid="uid://bn7at12mxiq4l" path="res://scenes/entities/other/summoner_bullet.tscn" id="3_vmbe5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iu5fv"]
+albedo_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+
+[node name="SummonerEnemy" unique_id=851332793 instance=ExtResource("1_hyrew")]
+data = ExtResource("2_iu5fv")
+
+[node name="Label3D" parent="." index="1" unique_id=155827032]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.5, 0)
+
+[node name="MeshInstance3D" parent="." index="3" unique_id=696542489]
+material_override = SubResource("StandardMaterial3D_iu5fv")
+
+[node name="RangeAttack" parent="StateMachine" parent_id_path=PackedInt32Array(792892105) index="2" unique_id=701564019]
+projectile_scene = ExtResource("3_vmbe5")
+
+[node name="Summoning" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(792892105) index="3" unique_id=544527044]
+script = ExtResource("3_gnrye")

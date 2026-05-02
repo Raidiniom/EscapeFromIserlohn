@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://db0vrxcr8mfwa"]
+
+[ext_resource type="PackedScene" uid="uid://br1cj6b2c2nvu" path="res://scenes/entities/enemy/enemy.tscn" id="1_w8hlk"]
+[ext_resource type="Resource" uid="uid://baifkg8aw75lk" path="res://scripts/entites/resource/enemydata/summoned_data.tres" id="2_om3va"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_om3va"]
+
+[node name="SummonedEnemy" unique_id=851332793 instance=ExtResource("1_w8hlk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+data = ExtResource("2_om3va")
+
+[node name="CollisionShape3D" parent="." index="2" unique_id=160277451]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="MeshInstance3D" parent="." index="3" unique_id=696542489]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_om3va")
