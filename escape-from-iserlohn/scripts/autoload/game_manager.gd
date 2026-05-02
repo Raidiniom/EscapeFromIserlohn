@@ -12,7 +12,7 @@ var enemy_scenes = {
 var enemy_weights = {
 	"melee": 0,
 	"heavy": 0,
-	"rogue": 100,
+	"rogue": 0,
 	"range": 0,
 	"summoner": 0
 }
@@ -47,36 +47,21 @@ func start_round():
 	print_round_summary()
 
 func update_weights_for_round():
-	# Make later rounds more challenging by adjusting weights
-	match current_round:
-		1, 2:
-			enemy_weights["melee"] = 0
-			enemy_weights["heavy"] = 0
-			enemy_weights["rogue"] = 0
-			enemy_weights["range"] = 0
-			enemy_weights["summoner"] = 100
-		
-		3, 4:
-			enemy_weights["melee"] = 0
-			enemy_weights["heavy"] = 0
-			enemy_weights["rogue"] = 0
-			enemy_weights["range"] = 0
-			enemy_weights["summoner"] = 100
-		
-		5, 6:
-			enemy_weights["melee"] = 0
-			enemy_weights["heavy"] = 0
-			enemy_weights["rogue"] = 0
-			enemy_weights["range"] = 0
-			enemy_weights["summoner"] = 100
-		
-		_:
-			# Rounds 7+ become increasingly difficult
-			enemy_weights["melee"] = 0
-			enemy_weights["heavy"] = 0
-			enemy_weights["rogue"] = 0
-			enemy_weights["range"] = 0
-			enemy_weights["summoner"] = 100
+	var r = current_round
+	
+	set_weights({
+		"melee": clamp(80 - r * 5, 20, 80),
+		"rogue": clamp(r * 3, 0, 30),
+		"range": clamp((r - 2) * 3, 0, 25),
+		"heavy": clamp((r - 4) * 3, 0, 25),
+		"summoner": clamp((r - 5) * 2, 0, 20)
+	})
+	
+
+func set_weights(new_weights: Dictionary):
+	for type in enemy_weights.keys():
+		enemy_weights[type] = new_weights.get(type, 0)
+	
 
 func spawn_enemy(type):
 	var scene = enemy_scenes[type]
