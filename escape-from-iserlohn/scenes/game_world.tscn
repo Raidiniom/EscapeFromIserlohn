@@ -54,7 +54,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 1, 0)
 [node name="Spawn4" type="Node3D" parent="." unique_id=1979137609 groups=["spawner"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 1, 0)
 
-[node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
-floor_stop_on_slope = false
-
 [node name="Map1" parent="." unique_id=1860341615 instance=ExtResource("5_6c6v5")]
+
+[node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]

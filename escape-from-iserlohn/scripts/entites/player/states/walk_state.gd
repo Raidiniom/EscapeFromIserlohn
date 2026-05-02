@@ -1,34 +1,39 @@
-# walk_state.gd
 extends State
 
-@export var walk_speed: float = 5.0
+@export var stop_speed: float = 20.0
 
 func enter():
-	# Play animation here
-	pass
+	owner.is_sprinting = false
+	# play walk animation if needed
 
-func physics_process(delta):
-	# Apply gravity
+func physics_process(delta: float) -> void:
+	# Gravity
 	if not owner.is_on_floor():
 		owner.velocity.y -= owner.gravity * delta
 
-	# Get movement input
-	var input_dir = Vector2.ZERO
-	input_dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	input_dir.y = Input.get_action_strength("backward") - Input.get_action_strength("forward")
-	var direction = (owner.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	# Input
+	var input_dir_2d: Vector2 = Input.get_vector("left", "right", "forward", "backward")
+	var input_dir: Vector3 = Vector3(input_dir_2d.x, 0.0, input_dir_2d.y)
+	var direction: Vector3 = (owner.global_transform.basis * input_dir).normalized()
 
-	if direction:
-		owner.velocity.x = direction.x * owner.movement_speed
-		owner.velocity.z = direction.z * owner.movement_speed
+	var walk_speed: float = owner.movement_speed
+
+	if direction != Vector3.ZERO:
+		owner.velocity.x = direction.x * walk_speed
+		owner.velocity.z = direction.z * walk_speed
 	else:
-		owner.velocity.x = move_toward(owner.velocity.x, 0, owner.movement_speed)
-		owner.velocity.z = move_toward(owner.velocity.z, 0, owner.movement_speed)
+		# No input → stop horizontal movement
+		owner.velocity.x = 0.0
+		owner.velocity.z = 0.0
 
-	# Transition logic
+	# Jump
+	if Input.is_action_just_pressed("jump") and owner.is_on_floor():
+		owner.velocity.y = owner.jump_impulse
+
+	# Transitions
 	if direction == Vector3.ZERO:
 		state_machine.change_state("idle")
-	elif owner.movement_speed > 12:
+	elif Input.is_action_pressed("sprint"):
 		state_machine.change_state("run")
-	
+
 	owner.move_and_slide()
