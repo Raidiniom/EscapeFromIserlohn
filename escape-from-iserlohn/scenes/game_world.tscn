@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b1o2q7o108fkd"]
 
-[ext_resource type="PackedScene" uid="uid://b6l3a7h03hcb8" path="res://modules/play_test.tscn" id="1_0biqy"]
 [ext_resource type="Script" uid="uid://b8l184iv4uh1t" path="res://scripts/gameworld/game_world.gd" id="1_u1jpj"]
 [ext_resource type="PackedScene" uid="uid://bicc2wa2eqppk" path="res://scenes/entities/player/player.tscn" id="4_0vfqx"]
+[ext_resource type="PackedScene" uid="uid://wrh7djuaqlly" path="res://scenes/maps/map1.tscn" id="5_6c6v5"]
 [ext_resource type="PackedScene" uid="uid://v2liuq4bsx7t" path="res://scenes/ui/overlay_menu.tscn" id="5_wbbl4"]
 [ext_resource type="PackedScene" uid="uid://bbkyb4dhdfacd" path="res://scenes/ui/settings.tscn" id="6_6c6v5"]
 
@@ -15,14 +15,13 @@ sky_material = SubResource("ProceduralSkyMaterial_e0x2k")
 
 [sub_resource type="Environment" id="Environment_47u71"]
 background_mode = 2
-background_energy_multiplier = 1.5
 sky = SubResource("Sky_0biqy")
 tonemap_mode = 2
+sdfgi_enabled = true
 glow_enabled = true
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_bhwwd"]
-vertices = PackedVector3Array(-49.5, -0.5, -49.5, -49.5, -0.5, 49.5, 49.5, -0.5, 49.5, 49.5, -0.5, -49.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.40392157, 0.24705882, 0.21568628, 1)
+volumetric_fog_emission = Color(0.27450982, 0.15686275, 0.22745098, 1)
 
 [node name="GameWorld" type="Node3D" unique_id=420947161]
 script = ExtResource("1_u1jpj")
@@ -31,7 +30,9 @@ script = ExtResource("1_u1jpj")
 environment = SubResource("Environment_47u71")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2061994016]
-transform = Transform3D(-0.5996219, 0.34885147, -0.7202474, -0.6107877, -0.7810145, 0.13021018, -0.5170997, 0.51799506, 0.6813876, 0, 12.668616, 0)
+transform = Transform3D(-0.66464657, -0.29978415, 0.6843788, 0.14752632, 0.8452877, 0.5135413, -0.7324485, 0.44228733, -0.51759154, 0, 12.668616, 0)
+light_color = Color(0.75686276, 0.79607844, 1, 1)
+light_energy = 0.7
 shadow_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1855844815]
@@ -40,13 +41,6 @@ shadow_enabled = true
 
 [node name="Settings" parent="UI" unique_id=618800622 instance=ExtResource("6_6c6v5")]
 process_mode = 3
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=658575419]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-navigation_mesh = SubResource("NavigationMesh_bhwwd")
-
-[node name="PlayTest" parent="NavigationRegion3D" unique_id=270922803 instance=ExtResource("1_0biqy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Spawn1" type="Node3D" parent="." unique_id=883968712 groups=["spawner"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 40)
@@ -60,5 +54,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 1, 0)
 [node name="Spawn4" type="Node3D" parent="." unique_id=1979137609 groups=["spawner"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 1, 0)
 
+[node name="Map1" parent="." unique_id=1860341615 instance=ExtResource("5_6c6v5")]
+
 [node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
-floor_stop_on_slope = false
