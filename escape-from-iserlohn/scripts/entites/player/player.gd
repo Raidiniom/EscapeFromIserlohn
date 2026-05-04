@@ -24,6 +24,7 @@ extends CharacterBody3D
 var attack_timer : float = 0.2
 var is_dead : bool = false
 var team = TeamManager.Team.PLAYER
+
 var selected_seed : int = SeedTypes.SeedType.DAMAGE
 var is_sprinting: bool = false
 

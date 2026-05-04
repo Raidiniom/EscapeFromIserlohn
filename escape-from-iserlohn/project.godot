@@ -41,6 +41,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+SettingsManager="*uid://ctf05soha4m52"
 PauseManager="*uid://dpj7td68y4k24"
 GameManager="*uid://ba60x43n004an"
 TeamManager="*uid://bsppen7exawui"

@@ -32,6 +32,7 @@ func _ready():
 	interact_button.pressed.connect(_on_keybind_button_pressed.bind(interact_button, "interact"))
 	
 	# Update all button labels with current keybinds
+	await get_tree().process_frame
 	update_all_button_labels()
 
 func update_all_button_labels():
