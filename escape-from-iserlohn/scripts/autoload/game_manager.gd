@@ -117,11 +117,7 @@ func get_total_weight() -> int:
 		total += weight
 	return total
 
-# Optional: Add manual weight adjustment function
-func set_enemy_weight(type: String, weight: int):
-	if enemy_weights.has(type):
-		enemy_weights[type] = weight
-
-# Optional: Add ranged enemy spawn (was missing from your original picker)
-func has_ranged_enemy() -> bool:
-	return "range" in enemy_scenes and enemy_weights["range"] > 0
+func reset_run():
+	current_round = 1
+	enemies_alive = 0
+	

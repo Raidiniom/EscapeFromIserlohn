@@ -43,6 +43,7 @@ var can_attack := true
 var target_offset: Vector3
 var counts_for_round: bool
 var team = TeamManager.Team.ENEMY
+var exp_reward: float = 10
 
 # Enemy Parts
 @onready var navigation: NavigationAgent3D = $NavigationAgent3D
@@ -67,6 +68,9 @@ func _ready() -> void:
 
 func apply_data():
 	print("LOADED DATA:", data)
+	
+	var round = GameManager.current_round
+	exp_reward *= (1 + round * 0.2)
 	
 	health = data.health
 	speed = data.speed
@@ -96,6 +100,13 @@ func apply_data():
 	summon_timer = data.summon_timer
 	summon_range = data.summon_range
 	summon_scene = data.summon_scene
+	
+	var scale = 1.0 + (round * 0.15)
+	
+	health *= scale
+	attack_damage *= scale
+	armor *= scale * 0.5
+	speed *= 1.0 + (round * 0.02)
 	
 
 func _physics_process(delta: float) -> void:
@@ -221,7 +232,7 @@ func drop_seed():
 		var is_rare: bool = item["weight"] <= 10
 
 		if is_rare:
-			item["weight"] += luck * 2.5  # luck favors rare drops more
+			item["weight"] += luck * 2.5
 
 		total_weight += item["weight"]
 
@@ -238,6 +249,10 @@ func drop_seed():
 
 func die():
 	is_dead = true
+	
+	var player = get_tree().get_first_node_in_group("player")
+	if player != null:
+		player.gain_exp(exp_reward)
 	
 	if counts_for_round:
 		GameManager.enemies_alive -= 1

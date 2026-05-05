@@ -46,11 +46,7 @@ PauseManager="*uid://dpj7td68y4k24"
 GameManager="*uid://ba60x43n004an"
 TeamManager="*uid://bsppen7exawui"
 GameDataManager="*uid://b0w3wdctevhld"
-SettingsManager="*uid://ctf05soha4m52"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/simplegrasstextured/plugin.cfg")
+DeathManager="*uid://c1u5x466ci3dl"
 
 [global_group]
 
@@ -58,6 +54,7 @@ plantable_ground=""
 player=""
 enemy=""
 spawner=""
+plant=""
 
 [input]
 
