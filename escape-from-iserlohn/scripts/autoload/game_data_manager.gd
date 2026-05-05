@@ -29,3 +29,8 @@ func consume_seed(type: int) -> bool:
 		seeds[type] -= 1
 		return true
 	return false
+
+func reset_seeds():
+	for key in seeds.keys():
+		seeds[key] = 0
+	

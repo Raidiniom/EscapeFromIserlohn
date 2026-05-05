@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b6l3a7h03hcb8" path="res://modules/play_test.tscn" id="1_0biqy"]
 [ext_resource type="Script" uid="uid://b8l184iv4uh1t" path="res://scripts/gameworld/game_world.gd" id="1_u1jpj"]
 [ext_resource type="PackedScene" uid="uid://bicc2wa2eqppk" path="res://scenes/entities/player/player.tscn" id="4_0vfqx"]
+[ext_resource type="PackedScene" uid="uid://dy52egbo7hyqq" path="res://scenes/ui/death_scene.tscn" id="4_6c6v5"]
 [ext_resource type="PackedScene" uid="uid://v2liuq4bsx7t" path="res://scenes/ui/overlay_menu.tscn" id="5_wbbl4"]
 [ext_resource type="PackedScene" uid="uid://bbkyb4dhdfacd" path="res://scenes/ui/settings.tscn" id="6_6c6v5"]
 
@@ -40,6 +41,8 @@ shadow_enabled = true
 
 [node name="Settings" parent="UI" unique_id=618800622 instance=ExtResource("6_6c6v5")]
 process_mode = 3
+
+[node name="DeathScene" parent="UI" unique_id=670044418 instance=ExtResource("4_6c6v5")]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=658575419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

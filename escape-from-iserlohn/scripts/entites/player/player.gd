@@ -4,11 +4,15 @@ extends CharacterBody3D
 # Player stats
 @export_category("Player Stats")
 @export var health : float = 100.0
+@export var max_health : float = 100.0
 @export var base_damage : float = 25.0
 @export var armor : float = 1.0
 @export var attack_speed : float = 3.0
 @export var movement_speed : float = 6.0
 @export var luck_stat : float = 2.0
+var level : int = 1
+var exp : float = 0.0
+var exp_to_next : float = 100
 
 # Utilities
 @export_subgroup("Utilities")
@@ -18,12 +22,13 @@ extends CharacterBody3D
 var attack_timer : float = 0.2
 var is_dead : bool = false
 var team = TeamManager.Team.PLAYER
+signal stats_changed
 
 var selected_seed : int = SeedTypes.SeedType.DAMAGE
 
 #Player Body
 @onready var player_body: MeshInstance3D = $CollisionShape3D/MeshInstance3D
-@onready var player_health: Label3D = $Label3D
+#@onready var player_health: Label3D = $Label3D
 
 # Camera
 @onready var spring_arm: SpringArm3D = $SpringArm3D
@@ -57,11 +62,24 @@ func _unhandled_input(event: InputEvent):
 			KEY_5: selected_seed = SeedTypes.SeedType.ARMOR
 			KEY_6: selected_seed = SeedTypes.SeedType.LUCK
 		update_stats_display()
+	
+
+func regen_health():
+	pass
+	
+
+func increase_max_health(amount):
+	max_health += amount
+	health = clamp(health, 0, max_health)
+	
+	emit_signal("stats_changed")
+	
 
 func take_damage(amount: float):
 	var final_dmg = calculate_damage(amount, armor)
 	
 	health -= final_dmg
+	health = clamp(health, 0, max_health)
 	
 	update_stats_display()
 	
@@ -74,32 +92,33 @@ func calculate_damage(damage: float, armor: float) -> float:
 	
 	return max(1.0, calculated_dmg)
 
-func update_stats_display():
-	var display_text = "=== PLAYER STATS ===\n"
-	display_text += "HP: " + str(floorf(health)) + "/100\n"
-	display_text += "DMG: " + str(base_damage) + "\n"
-	display_text += "Armor: " + str(armor) + "\n"
-	display_text += "ATK Speed: " + str(attack_speed) + "\n"
-	display_text += "Move Speed: " + str(movement_speed) + "\n"
-	display_text += "Luck: " + str(luck_stat) + "\n"
-	display_text += "\n=== INVENTORY ===\n"
-	display_text += "[1] DMG Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.DAMAGE]) + "\n"
-	display_text += "[2] MOV Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.MOVEMENT]) + "\n"
-	display_text += "[3] ATK Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.ATTACK_SPEED]) + "\n"
-	display_text += "[4] HP Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.HEALTH]) + "\n"
-	display_text += "[5] ARM Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.ARMOR]) + "\n"
-	display_text += "[6] LUCK Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.LUCK]) + "\n"
-	display_text += "\nSelected: "
+func gain_exp(amount: float):
+	exp += amount
 	
-	match selected_seed:
-		SeedTypes.SeedType.DAMAGE: display_text += "DMG"
-		SeedTypes.SeedType.MOVEMENT: display_text += "MOV"
-		SeedTypes.SeedType.ATTACK_SPEED: display_text += "ATK"
-		SeedTypes.SeedType.HEALTH: display_text += "HP"
-		SeedTypes.SeedType.ARMOR: display_text += "ARM"
-		SeedTypes.SeedType.LUCK: display_text += "LUCK"
+	while exp >= exp_to_next:
+		exp -= exp_to_next
+		increase_level()
 	
-	player_health.text = display_text
+
+func increase_level():
+	level += 1
+	
+	exp_to_next *= 1.25
+	
+	increase_base_stats()
+	update_stats_display()
+	
+
+func increase_base_stats():
+	max_health += 10
+	base_damage += 3
+	armor += 0.5
+	attack_speed += 0.1
+	movement_speed += 0.1
+	
+	# Heal a bit on level up
+	health = max_health
+	
 
 func die():
 	if is_dead:
@@ -108,10 +127,33 @@ func die():
 	is_dead = true
 	print("[DEBUG] Player Died!!!")
 	
+	await get_tree().create_timer(1.0).timeout
+	DeathManager.show_death()
+	
 
 func respawn():
-	pass
+	is_dead = false
 	
+	#health = 
+	
+	global_position = Vector3(0, 1, 0)
+	reset_stats()
+	update_stats_display()
+	
+
+func reset_stats():
+	level = 1
+	exp = 0
+	exp_to_next = 100
+	
+	health = max_health
+	
+	# reset base stats (you need to store originals!)
+	base_damage = 25
+	armor = 1.0
+	attack_speed = 3.0
+	movement_speed = 6.0
+	luck_stat = 2.0
 
 func can_plant() -> bool:
 	if raycast_3d.is_colliding():
@@ -151,3 +193,33 @@ func fire_projectile():
 	projectile.source = team
 	
 	get_tree().current_scene.add_child(projectile)
+
+func update_stats_display():
+	var display_text = "=== PLAYER STATS ===\n"
+	display_text += "HP: " + str(floorf(health)) + "/100\n"
+	display_text += "DMG: " + str(base_damage) + "\n"
+	display_text += "Armor: " + str(armor) + "\n"
+	display_text += "ATK Speed: " + str(attack_speed) + "\n"
+	display_text += "Move Speed: " + str(movement_speed) + "\n"
+	display_text += "Luck: " + str(luck_stat) + "\n"
+	display_text += "\n=== INVENTORY ===\n"
+	display_text += "[1] DMG Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.DAMAGE]) + "\n"
+	display_text += "[2] MOV Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.MOVEMENT]) + "\n"
+	display_text += "[3] ATK Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.ATTACK_SPEED]) + "\n"
+	display_text += "[4] HP Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.HEALTH]) + "\n"
+	display_text += "[5] ARM Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.ARMOR]) + "\n"
+	display_text += "[6] LUCK Seeds: " + str(GameDataManager.seeds[SeedTypes.SeedType.LUCK]) + "\n"
+	display_text += "\nSelected: "
+	
+	match selected_seed:
+		SeedTypes.SeedType.DAMAGE: display_text += "DMG"
+		SeedTypes.SeedType.MOVEMENT: display_text += "MOV"
+		SeedTypes.SeedType.ATTACK_SPEED: display_text += "ATK"
+		SeedTypes.SeedType.HEALTH: display_text += "HP"
+		SeedTypes.SeedType.ARMOR: display_text += "ARM"
+		SeedTypes.SeedType.LUCK: display_text += "LUCK"
+	
+	#player_health.text = display_text
+	
+	emit_signal("stats_changed")
+	

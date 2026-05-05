@@ -13,6 +13,9 @@ func _input(event):
 		toggle_pause()
 
 func toggle_pause():
+	if DeathManager.death_ui and DeathManager.death_ui.visible:
+		return
+	
 	is_paused = !is_paused
 	
 	get_tree().paused = is_paused
