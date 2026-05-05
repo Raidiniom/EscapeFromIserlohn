@@ -1,22 +1,26 @@
-# idle.gd
 extends State
 
-func enter():
-	# Play idle animation here
-	print("Player Idle State")
+@export var stop_speed: float = 30.0
 
-func physics_process(delta):
-	# Apply gravity even when idle to keep the player on the ground
+func enter():
+	owner.is_sprinting = false
+	print("Player Idle State")
+	# Play idle animation here
+
+func physics_process(delta: float) -> void:
+	# Gravity
 	if not owner.is_on_floor():
 		owner.velocity.y -= owner.gravity * delta
 
-	# Check for transition conditions
-	var input_dir = Vector2.ZERO
-	input_dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	input_dir.y = Input.get_action_strength("backward") - Input.get_action_strength("forward")
-	
-	if input_dir != Vector2.ZERO:
-		if owner.movement_speed > 12:
+	# Hard stop horizontally
+	owner.velocity.x = 0.0
+	owner.velocity.z = 0.0
+
+	# Input for transitions
+	var input_dir_2d: Vector2 = Input.get_vector("left", "right", "forward", "backward")
+
+	if input_dir_2d != Vector2.ZERO:
+		if Input.is_action_pressed("sprint"):
 			state_machine.change_state("run")
 		else:
 			state_machine.change_state("walk")
