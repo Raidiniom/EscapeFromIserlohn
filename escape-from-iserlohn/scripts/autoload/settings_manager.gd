@@ -18,6 +18,7 @@ signal keybinds_changed
 func _ready():
 	load_settings()
 	apply_keybinds_to_input_map()
+	
 
 func load_settings():
 	var config = ConfigFile.new()
