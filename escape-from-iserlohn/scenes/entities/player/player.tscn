@@ -24,6 +24,11 @@ attack_speed = 6.0
 movement_speed = 20.0
 projectile_scene = ExtResource("6_1murt")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1818712207]
+follow_viewport_enabled = true
+
+[node name="PlayerHUD" parent="CanvasLayer" unique_id=663095002 instance=ExtResource("8_1murt")]
+
 [node name="Label3D" type="Label3D" parent="." unique_id=2042894162]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 0)
 visible = false
@@ -65,8 +70,3 @@ script = ExtResource("5_1murt")
 [node name="Walk" type="Node" parent="StateMachine" unique_id=720868409]
 script = ExtResource("6_8akj5")
 walk_speed = 50.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1818712207]
-follow_viewport_enabled = true
-
-[node name="PlayerHUD" parent="CanvasLayer" unique_id=663095002 instance=ExtResource("8_1murt")]
