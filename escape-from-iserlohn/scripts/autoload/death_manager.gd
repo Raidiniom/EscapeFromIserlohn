@@ -23,6 +23,7 @@ func respawn():
 	player.respawn()
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	GameManager.start_round()
 
 func exit_to_menu(scene_path: String):
 	get_tree().paused = false

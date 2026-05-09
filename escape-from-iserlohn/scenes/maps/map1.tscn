@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://wrh7djuaqlly"]
+[gd_scene format=3 uid="uid://bem16tjja4aw3"]
 
 [ext_resource type="Texture2D" uid="uid://ydb3roelgadi" path="res://assets/textures/997013_696.jpg" id="1_4xfga"]
 [ext_resource type="PackedScene" uid="uid://d4j453p1ylphu" path="res://assets/assetScenes/Stone_Wall.tscn" id="1_83j65"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://o8fad0v70syk" path="res://assets/models/BrickWall/brick_wall_end.tscn" id="22_18v5k"]
 [ext_resource type="PackedScene" uid="uid://tccjai38v8g1" path="res://assets/models/Decorations/bench_dec.tscn" id="22_y2ir2"]
 [ext_resource type="PackedScene" uid="uid://diuekj54lvc3w" path="res://assets/models/Graves/GravestoneCross.tscn" id="23_5u2yt"]
-[ext_resource type="PackedScene" uid="uid://dojf40ut75jr4" path="res://modules/PlantableArea.tscn" id="23_gjbps"]
+[ext_resource type="PackedScene" path="res://modules/PlantableArea.tscn" id="23_gjbps"]
 [ext_resource type="PackedScene" uid="uid://bluy4ycljr8h5" path="res://assets/models/Decorations/pumpkin_carved_dec.tscn" id="24_y2ir2"]
 [ext_resource type="PackedScene" uid="uid://djowmhlo7cedd" path="res://assets/assetScenes/Road.tscn" id="24_yiqu4"]
 [ext_resource type="PackedScene" uid="uid://d38gkxotva0ay" path="res://assets/models/Decorations/shovel_dirt_dec.tscn" id="25_5u2yt"]
