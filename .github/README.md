@@ -2,6 +2,9 @@
 ## Elevator Pitch / Hook 
 In Escape From Iserlohn, a 3D third-person roguelike, you battle through escalating waves inside the Iserlohn Fortress, collect seeds from fallen enemies, then grow those seeds between runs to gain powerful buffs. Each failed escape makes your home base farm stronger, turning long‑term planning and crop choices into the key to finally breaking out.	
 
+## Gameplay Progress Preview
+[Watch the Pre-Alpha 1.0 Gameplay Video](https://youtu.be/J-z6GhZVbvA)
+
 ## Game Overview & Concept
 Genre: 3D third-person roguelike with survival-wave combat and light farming meta-progression.
 Target Audience: Teens and adults who enjoy action roguelikes and comfy farming/meta systems; playable by most ages, with minimal graphic violence.
