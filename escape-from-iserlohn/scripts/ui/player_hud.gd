@@ -2,58 +2,70 @@ extends Control
 
 @onready var player = get_parent().get_parent()
 
-@onready var health_bar = $TopLeft/HealthBar
-@onready var exp_bar = $TopLeft/ProgressBar
-@onready var stats_label = $TopLeft/StatsLabel
-@onready var inventory_label = $BottomLeft/Inventory
+@onready var health_bar    = $TopLeft/HealthBar
+@onready var exp_bar       = $TopLeft/ProgressBar
+@onready var stats_label   = $TopLeft/StatsLabel
 
-func _ready():
+# seed buttons — order matches SeedTypes.SeedType enum (0–5)
+@onready var seed_buttons: Array = [
+	$SeedBar/SeedBtn0,
+	$SeedBar/SeedBtn1,
+	$SeedBar/SeedBtn2,
+	$SeedBar/SeedBtn3,
+	$SeedBar/SeedBtn4,
+	$SeedBar/SeedBtn5,
+]
+
+func _ready() -> void:
 	player.connect("stats_changed", update_hud)
+	for i in seed_buttons.size():
+		var idx := i
+		seed_buttons[i].pressed.connect(func():
+			player.selected_seed = idx
+			player.update_stats_display()
+			_highlight_seed(idx)
+		)
 	update_hud()
 
-func _process(delta):
+func _process(_delta: float) -> void:
 	if player == null:
 		return
-	
 	update_hud()
 
-func update_hud():
-	# Health
+func update_hud() -> void:
 	health_bar.max_value = player.max_health
-	health_bar.value = player.health
-	
-	exp_bar.max_value = player.exp_to_next
-	exp_bar.value = player.exp
+	health_bar.value     = player.health
+	exp_bar.max_value    = player.exp_to_next
+	exp_bar.value        = player.exp
 
-	# Stats
-	stats_label.text = "HP: %d/%d | LVL: %d | DMG: %d | ARM: %.1f | ATK: %.1f | SPD: %.1f | LUCK: %.1f" % [
-		player.health,
-		player.max_health,
-		player.level,
-		player.base_damage,
-		player.armor,
-		player.attack_speed,
-		player.movement_speed,
-		player.luck_stat
+	stats_label.text = "HP %d/%d  LVL %d  DMG %d  ARM %.1f  ATK %.1f  SPD %.1f" % [
+		player.health, player.max_health, player.level,
+		player.base_damage, player.armor, player.attack_speed, player.movement_speed,
 	]
 
-	# Inventory (your seed system)
-	inventory_label.text = "[1] Damage - %d\n[2] Speed - %d\n[3] Attac Speed - %d\n[4] Health - %d\n[5] Armor - %d\n[6] Luck - %d\nSelected: %s" % [
-		GameDataManager.seeds[SeedTypes.SeedType.DAMAGE],
-		GameDataManager.seeds[SeedTypes.SeedType.MOVEMENT],
-		GameDataManager.seeds[SeedTypes.SeedType.ATTACK_SPEED],
-		GameDataManager.seeds[SeedTypes.SeedType.HEALTH],
-		GameDataManager.seeds[SeedTypes.SeedType.ARMOR],
-		GameDataManager.seeds[SeedTypes.SeedType.LUCK],
-		get_selected_name(player.selected_seed)
-	]
+	_highlight_seed(player.selected_seed)
 
-func get_selected_name(seed):
+	# update seed button text to show counts
+	var types = [
+		SeedTypes.SeedType.DAMAGE, SeedTypes.SeedType.MOVEMENT,
+		SeedTypes.SeedType.ATTACK_SPEED, SeedTypes.SeedType.HEALTH,
+		SeedTypes.SeedType.ARMOR, SeedTypes.SeedType.LUCK,
+	]
+	var names = ["DMG","MOV","ATK","HP","ARM","LUCK"]
+	for i in seed_buttons.size():
+		var count = GameDataManager.seeds[types[i]]
+		seed_buttons[i].text = "%s\n%d" % [names[i], count]
+
+func _highlight_seed(idx: int) -> void:
+	for i in seed_buttons.size():
+		seed_buttons[i].flat = (i != idx)
+
+func get_selected_name(seed) -> String:
 	match seed:
-		SeedTypes.SeedType.DAMAGE: return "DMG"
-		SeedTypes.SeedType.MOVEMENT: return "MOV"
+		SeedTypes.SeedType.DAMAGE:       return "DMG"
+		SeedTypes.SeedType.MOVEMENT:     return "MOV"
 		SeedTypes.SeedType.ATTACK_SPEED: return "ATK"
-		SeedTypes.SeedType.HEALTH: return "HP"
-		SeedTypes.SeedType.ARMOR: return "ARM"
-		SeedTypes.SeedType.LUCK: return "LUCK"
+		SeedTypes.SeedType.HEALTH:       return "HP"
+		SeedTypes.SeedType.ARMOR:        return "ARM"
+		SeedTypes.SeedType.LUCK:         return "LUCK"
 	return "?"

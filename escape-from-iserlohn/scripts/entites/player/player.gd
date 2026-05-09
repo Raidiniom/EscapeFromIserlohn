@@ -1,5 +1,4 @@
 extends CharacterBody3D
-
 # Player stats
 @export_category("Player Stats")
 @export var health : float = 100.0
@@ -48,7 +47,13 @@ var pitch_input: float = 0.0
 
 func _ready():
 	update_stats_display()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	#if OS.has_feature("mobile"):
+		#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#else:
+		#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 
 func _physics_process(delta: float) -> void:
 	handle_auto_attack(delta)
@@ -64,7 +69,7 @@ func _physics_process(delta: float) -> void:
 		deg_to_rad(-45),
 		deg_to_rad(45)
 	)
-
+	
 	# reset mouse deltas
 	yaw_input = 0.0
 	pitch_input = 0.0
@@ -96,9 +101,10 @@ func increase_max_health(amount):
 	
 	emit_signal("stats_changed")
 	
-
+	
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 
 func take_damage(amount: float) -> void:
 	var final_dmg = calculate_damage(amount, armor)
@@ -145,8 +151,10 @@ func increase_base_stats():
 func die() -> void:
 	if is_dead:
 		return
+	
 	is_dead = true
-	print("[DEBUG] Player Died!!!")
+	
+	set_physics_process(false)
 	
 	await get_tree().create_timer(1.0).timeout
 	DeathManager.show_death()
@@ -155,9 +163,11 @@ func die() -> void:
 func respawn():
 	is_dead = false
 	
+	set_physics_process(true)
 	#health = 
 	
 	global_position = Vector3(0, 1, 0)
+	
 	reset_stats()
 	update_stats_display()
 	
@@ -186,10 +196,18 @@ func get_plant_position() -> Vector3:
 	return raycast_3d.get_collision_point()
 
 func handle_auto_attack(delta: float) -> void:
+	if is_dead:
+		return
+	
+	if not is_inside_tree():
+		return
+	
 	attack_timer -= delta
+	
 	if attack_timer <= 0.0:
 		fire_projectile()
 		attack_timer = 1.0 / attack_speed
+	
 
 func fire_projectile() -> void:
 	if projectile_scene == null:
@@ -199,17 +217,25 @@ func fire_projectile() -> void:
 	if not is_inside_tree():
 		return
 	
+	var player_pos := global_transform
+	
 	var projectile = projectile_scene.instantiate()
 	
-	var direction: Vector3 = -global_transform.basis.z
-	var spawn_pos: Vector3 = global_transform.origin + direction * 1.5
+	var direction: Vector3 = -player_pos.basis.z.normalized()
+	var spawn_pos: Vector3 = player_pos.origin + direction * 1.5
 	
 	projectile.global_position = spawn_pos
 	projectile.direction = direction.normalized()
 	projectile.speed = 25.0
 	projectile.damage = base_damage
-	projectile.lifetime = 2.0
+	projectile.lifetime = 1.0
 	projectile.source = team
+	
+	if get_tree() == null:
+		return
+	
+	if get_tree().current_scene == null:
+		return
 	
 	get_tree().current_scene.add_child(projectile)
 
