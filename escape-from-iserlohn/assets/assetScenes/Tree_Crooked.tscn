@@ -13,8 +13,10 @@ points = PackedVector3Array(0.047853526, 0.4522001, 0.68790716, -0.019004777, 0.
 [node name="pine-crooked2" unique_id=1828405855 instance=ExtResource("1_e8u87")]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
 
-[node name="pine-crooked" parent="." index="0" unique_id=1641434448]
+[node name="pine-crooked" parent="." index="0" unique_id=600549283]
 material_override = SubResource("StandardMaterial3D_6icdh")
+lod_bias = 0.1
+ignore_occlusion_culling = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="pine-crooked" index="0" unique_id=680205609]
 
