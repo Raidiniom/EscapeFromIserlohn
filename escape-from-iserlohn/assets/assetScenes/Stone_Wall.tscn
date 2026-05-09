@@ -13,8 +13,9 @@ points = PackedVector3Array(-0.47175163, 0.018707534, -0.5, 0.48233303, 0.719305
 [node name="Stone Wall" unique_id=1893371213 instance=ExtResource("1_plkuc")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
-[node name="stone-wall" parent="." index="0" unique_id=2069778344]
+[node name="stone-wall" parent="." index="0" unique_id=831689390]
 material_override = SubResource("StandardMaterial3D_fadys")
+lod_bias = 0.001
 
 [node name="StaticBody3D" type="StaticBody3D" parent="stone-wall" index="0" unique_id=1694956511]
 
