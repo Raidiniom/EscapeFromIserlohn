@@ -47,6 +47,11 @@ GameManager="*uid://ba60x43n004an"
 TeamManager="*uid://bsppen7exawui"
 GameDataManager="*uid://b0w3wdctevhld"
 DeathManager="*uid://c1u5x466ci3dl"
+SimpleGrass="*uid://bfq0snth8sj3h"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/simplegrasstextured/plugin.cfg")
 
 [global_group]
 
@@ -110,6 +115,7 @@ sprint={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_etc2_astc=true
 
 [shader_globals]
 

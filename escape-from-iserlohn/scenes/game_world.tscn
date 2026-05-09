@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dy52egbo7hyqq" path="res://scenes/ui/death_scene.tscn" id="4_6c6v5"]
 [ext_resource type="PackedScene" uid="uid://v2liuq4bsx7t" path="res://scenes/ui/overlay_menu.tscn" id="5_wbbl4"]
 [ext_resource type="PackedScene" uid="uid://bbkyb4dhdfacd" path="res://scenes/ui/settings.tscn" id="6_6c6v5"]
+[ext_resource type="PackedScene" uid="uid://bem16tjja4aw3" path="res://scenes/maps/map1.tscn" id="6_bhwwd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0x2k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,11 +18,11 @@ sky_material = SubResource("ProceduralSkyMaterial_e0x2k")
 background_mode = 2
 sky = SubResource("Sky_0biqy")
 tonemap_mode = 2
-sdfgi_enabled = true
-glow_enabled = true
-volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0.40392157, 0.24705882, 0.21568628, 1)
 volumetric_fog_emission = Color(0.27450982, 0.15686275, 0.22745098, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6c6v5"]
+size = Vector3(27.833008, 1, 12.802185)
 
 [node name="GameWorld" type="Node3D" unique_id=420947161]
 script = ExtResource("1_u1jpj")
@@ -33,7 +34,6 @@ environment = SubResource("Environment_47u71")
 transform = Transform3D(-0.66464657, -0.29978415, 0.6843788, 0.14752632, 0.8452877, 0.5135413, -0.7324485, 0.44228733, -0.51759154, 0, 12.668616, 0)
 light_color = Color(0.75686276, 0.79607844, 1, 1)
 light_energy = 0.7
-shadow_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1855844815]
 
@@ -43,13 +43,6 @@ shadow_enabled = true
 process_mode = 3
 
 [node name="DeathScene" parent="UI" unique_id=670044418 instance=ExtResource("4_6c6v5")]
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=658575419]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-navigation_mesh = SubResource("NavigationMesh_bhwwd")
-
-[node name="PlayTest" parent="NavigationRegion3D" unique_id=270922803 instance=ExtResource("1_0biqy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Spawn1" type="Node3D" parent="." unique_id=883968712 groups=["spawner"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 40)
@@ -61,8 +54,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -40)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 1, 0)
 
 [node name="Spawn4" type="Node3D" parent="." unique_id=1979137609 groups=["spawner"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 1, 0)
-
-[node name="Map1" parent="." unique_id=1860341615 instance=ExtResource("5_6c6v5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 1, -16)
 
 [node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
+
+[node name="Map1" parent="." unique_id=1860341615 instance=ExtResource("6_bhwwd")]
+
+[node name="PlantingArea" type="StaticBody3D" parent="." unique_id=1576946418 groups=["plantable_ground"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, -0.455, -10)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlantingArea" unique_id=1914332502]
+shape = SubResource("BoxShape3D_6c6v5")

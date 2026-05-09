@@ -2,6 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dyd5m1nitg1lm" path="res://scripts/ui/overlay_menu.gd" id="1_my4ng"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.12, 0.12, 0.12, 0.92)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+content_margin_left = 24.0
+content_margin_right = 24.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+
 [node name="OverlayMenu" type="Control" unique_id=1230831713]
 process_mode = 3
 layout_mode = 3
@@ -19,35 +30,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0.19607843)
+color = Color(0.0, 0.0, 0.0, 0.65)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=2009112470]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2009112470]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -16.0
-offset_right = 4.0
-offset_bottom = 16.0
+offset_left = -180.0
+offset_top = -140.0
+offset_right = 180.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 24
 
-[node name="Resume" type="Button" parent="ColorRect/VBoxContainer" unique_id=1228727323]
+[node name="Resume" type="Button" parent="VBoxContainer" unique_id=1228727323]
 layout_mode = 2
+custom_minimum_size = Vector2(360, 72)
 text = "Resume"
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
-[node name="Settings" type="Button" parent="ColorRect/VBoxContainer" unique_id=661723410]
+[node name="Settings" type="Button" parent="VBoxContainer" unique_id=661723410]
 layout_mode = 2
+custom_minimum_size = Vector2(360, 72)
 text = "Settings"
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
-[node name="Exit" type="Button" parent="ColorRect/VBoxContainer" unique_id=1847343092]
+[node name="Exit" type="Button" parent="VBoxContainer" unique_id=1847343092]
 layout_mode = 2
-text = "Exit
-"
+custom_minimum_size = Vector2(360, 72)
+text = "Exit"
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
-[connection signal="pressed" from="ColorRect/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

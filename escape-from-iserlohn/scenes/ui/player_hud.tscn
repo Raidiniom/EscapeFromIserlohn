@@ -1,6 +1,29 @@
 [gd_scene format=3 uid="uid://bgska6xnusp24"]
 
 [ext_resource type="Script" uid="uid://e3hh2ss0awxo" path="res://scripts/ui/player_hud.gd" id="1_e6e0b"]
+[ext_resource type="Script" uid="uid://bi2qvyvlbvxqq" path="res://scripts/ui/mobile/mobile_controls.gd" id="2_31ty4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seed_btn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.15, 0.15, 0.15, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_action_btn"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1, 0.1, 0.1, 0.75)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="PlayerHUD" type="Control" unique_id=663095002]
 layout_mode = 3
@@ -12,46 +35,193 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_e6e0b")
 
+[node name="MobileControls" type="Node" parent="." unique_id=1295610779]
+script = ExtResource("2_31ty4")
+
 [node name="TopLeft" type="VBoxContainer" parent="." unique_id=191375257]
 layout_mode = 1
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 64.0
+offset_left = 11.0
+offset_top = 76.0
+offset_right = 315.0
+offset_bottom = 170.0
+theme_override_constants/separation = 6
 
 [node name="HealthBar" type="ProgressBar" parent="TopLeft" unique_id=1774294842]
+custom_minimum_size = Vector2(300, 20)
 layout_mode = 2
 show_percentage = false
 
 [node name="ProgressBar" type="ProgressBar" parent="TopLeft" unique_id=1173276169]
+custom_minimum_size = Vector2(300, 20)
 layout_mode = 2
 show_percentage = false
 
 [node name="StatsLabel" type="Label" parent="TopLeft" unique_id=1641828635]
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 
 [node name="TopRight" type="VBoxContainer" parent="." unique_id=1668879557]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -52.0
-offset_top = 10.0
-offset_right = -12.0
-offset_bottom = 50.0
+offset_left = -205.0
+offset_top = 76.0
+offset_right = -21.0
+offset_bottom = 120.0
 grow_horizontal = 0
 
 [node name="DebugMessages" type="Label" parent="TopRight" unique_id=40491501]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 
-[node name="BottomLeft" type="VBoxContainer" parent="." unique_id=1289885131]
+[node name="SeedBar" type="HBoxContainer" parent="." unique_id=9910001]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -221.0
+offset_top = -157.0
+offset_right = 223.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="SeedBtn0" type="Button" parent="SeedBar" unique_id=9910010]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_seed_btn")
+text = "DMG"
+
+[node name="SeedBtn1" type="Button" parent="SeedBar" unique_id=9910011]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_seed_btn")
+text = "MOV"
+
+[node name="SeedBtn2" type="Button" parent="SeedBar" unique_id=9910012]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_seed_btn")
+text = "ATK"
+
+[node name="SeedBtn3" type="Button" parent="SeedBar" unique_id=9910013]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_seed_btn")
+text = "HP"
+
+[node name="SeedBtn4" type="Button" parent="SeedBar" unique_id=9910014]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_seed_btn")
+text = "ARM"
+
+[node name="SeedBtn5" type="Button" parent="SeedBar" unique_id=9910015]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_seed_btn")
+text = "LUCK"
+
+[node name="MoveJoystick" type="Control" parent="." unique_id=9920001]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -48.0
-offset_right = 50.0
+offset_left = 100.0
+offset_top = -348.0
+offset_right = 380.0
+offset_bottom = -68.0
+grow_vertical = 0
+
+[node name="JoystickBase" type="ColorRect" parent="MoveJoystick" unique_id=9920002]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.07)
+
+[node name="JoystickThumb" type="ColorRect" parent="MoveJoystick" unique_id=9920003]
+layout_mode = 1
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 180.0
+offset_bottom = 180.0
+color = Color(0.2, 0.54, 0.87, 0.6)
+
+[node name="LookZone" type="Control" parent="." unique_id=9930001]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="JumpButton" type="Button" parent="." unique_id=9940001]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -360.0
+offset_right = -137.0
+offset_bottom = -232.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_action_btn")
+text = "JUMP"
+
+[node name="SprintButton" type="Button" parent="." unique_id=9940002]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -392.0
+offset_top = -213.0
+offset_right = -264.0
+offset_bottom = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_action_btn")
+text = "RUN"
+
+[node name="PlantButton" type="Button" parent="." unique_id=9940003]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -413.0
+offset_top = -357.0
+offset_right = -285.0
+offset_bottom = -229.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_action_btn")
+text = "PLANT"
+
+[node name="BottomLeft" type="VBoxContainer" parent="." unique_id=1289885131]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -56.0
+offset_right = 80.0
 offset_bottom = -8.0
 grow_vertical = 0
 

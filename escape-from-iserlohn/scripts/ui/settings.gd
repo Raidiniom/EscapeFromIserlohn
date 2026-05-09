@@ -2,11 +2,11 @@
 extends Control
 
 # References to the buttons in ButtonContainer
-@onready var forward_button = $LabelContainer/Button
-@onready var backward_button = $LabelContainer/Button2
-@onready var left_strafe_button = $LabelContainer/Button3
-@onready var right_strafe_button = $LabelContainer/Button4
-@onready var interact_button = $LabelContainer/Button5
+@onready var forward_button = $LabelContainer/ForwardBtn
+@onready var backward_button = $LabelContainer/BackwardBtn
+@onready var left_strafe_button = $LabelContainer/LeftStrafeBtn
+@onready var right_strafe_button = $LabelContainer/RightStrafeBtn
+@onready var interact_button = $LabelContainer/InteractBtn
 
 # Mapping between buttons and actions
 var button_action_map: Dictionary = {}

@@ -2,7 +2,33 @@
 
 [ext_resource type="Script" uid="uid://bojme8cugmal6" path="res://scripts/ui/settings.gd" id="1_5p8wc"]
 
-[node name="Settings" type="Control" unique_id=618800622]
+[sub_resource type="LabelSettings" id="LabelSettings_shared"]
+font_color = Color(0, 0, 0, 1)
+font_size = 28
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.18431373, 0.2784314, 0.21176471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_footer_btn"]
+bg_color = Color(0.18431373, 0.2784314, 0.21176471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+content_margin_left = 28.0
+content_margin_right = 28.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+
+[node name="Settings" type="Control" unique_id=866935246]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,99 +37,142 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p8wc")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1479283948]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1355542297]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.27058825, 1, 1, 1)
+color = Color(0.27, 1, 1, 1)
 
-[node name="Ribbon" type="HBoxContainer" parent="." unique_id=840565510]
+[node name="Title" type="Label" parent="." unique_id=111111111]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 5
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
-offset_bottom = 31.0
+anchor_bottom = 0.0
+offset_top = 48.0
+offset_bottom = 100.0
 grow_horizontal = 2
+text = "Key Bindings"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Back" type="Button" parent="Ribbon" unique_id=730481757]
-layout_mode = 2
-text = "<- Back"
-
-[node name="LabelContainer" type="GridContainer" parent="." unique_id=571944130]
+[node name="LabelContainer" type="GridContainer" parent="." unique_id=335017496]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -51.5
-offset_top = -65.5
-offset_right = 51.5
-offset_bottom = 65.5
+offset_left = -240.0
+offset_top = -220.0
+offset_right = 240.0
+offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 20
 
-[node name="Forward" type="Label" parent="LabelContainer" unique_id=1145238630]
+[node name="ForwardLabel" type="Label" parent="LabelContainer" unique_id=1438592036]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
 text = "Forward"
+label_settings = SubResource("LabelSettings_shared")
+vertical_alignment = 1
 
-[node name="Button" type="Button" parent="LabelContainer" unique_id=1276770336]
+[node name="ForwardBtn" type="Button" parent="LabelContainer" unique_id=1076161075]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
-[node name="Backward" type="Label" parent="LabelContainer" unique_id=765831262]
+[node name="BackwardLabel" type="Label" parent="LabelContainer" unique_id=562985013]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
 text = "Backward"
+label_settings = SubResource("LabelSettings_shared")
+vertical_alignment = 1
 
-[node name="Button2" type="Button" parent="LabelContainer" unique_id=926200699]
+[node name="BackwardBtn" type="Button" parent="LabelContainer" unique_id=1210359206]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
-[node name="LeftStrafe" type="Label" parent="LabelContainer" unique_id=36876413]
+[node name="LeftStrafeLabel" type="Label" parent="LabelContainer" unique_id=726005567]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
 text = "Left Strafe"
+label_settings = SubResource("LabelSettings_shared")
+vertical_alignment = 1
 
-[node name="Button3" type="Button" parent="LabelContainer" unique_id=674942390]
+[node name="LeftStrafeBtn" type="Button" parent="LabelContainer" unique_id=168782734]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
-[node name="RightStrafe" type="Label" parent="LabelContainer" unique_id=1034706654]
+[node name="RightStrafeLabel" type="Label" parent="LabelContainer" unique_id=156900881]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
 text = "Right Strafe"
+label_settings = SubResource("LabelSettings_shared")
+vertical_alignment = 1
 
-[node name="Button4" type="Button" parent="LabelContainer" unique_id=638792885]
+[node name="RightStrafeBtn" type="Button" parent="LabelContainer" unique_id=184844410]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
-[node name="Interact" type="Label" parent="LabelContainer" unique_id=857600361]
+[node name="InteractLabel" type="Label" parent="LabelContainer" unique_id=1674657846]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
 text = "Interact"
+label_settings = SubResource("LabelSettings_shared")
+vertical_alignment = 1
 
-[node name="Button5" type="Button" parent="LabelContainer" unique_id=388008169]
+[node name="InteractBtn" type="Button" parent="LabelContainer" unique_id=321610446]
 layout_mode = 2
+custom_minimum_size = Vector2(180, 64)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
-[node name="Footer" type="HBoxContainer" parent="." unique_id=2067871002]
+[node name="Footer" type="HBoxContainer" parent="." unique_id=1855717382]
 layout_mode = 1
-anchors_preset = 12
+anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -31.0
+offset_top = -120.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
+alignment = 1
+theme_override_constants/separation = 24
 
-[node name="Reset" type="Button" parent="Footer" unique_id=1829043431]
+[node name="Back" type="Button" parent="Footer" unique_id=2030766263]
 layout_mode = 2
+custom_minimum_size = Vector2(160, 72)
+text = "Back"
+theme_override_styles/normal = SubResource("StyleBoxFlat_footer_btn")
+
+[node name="Reset" type="Button" parent="Footer" unique_id=682914976]
+layout_mode = 2
+custom_minimum_size = Vector2(160, 72)
 text = "Reset"
+theme_override_styles/normal = SubResource("StyleBoxFlat_footer_btn")
 
-[node name="Confirm" type="Button" parent="Footer" unique_id=1103131485]
+[node name="Confirm" type="Button" parent="Footer" unique_id=2029391725]
 layout_mode = 2
+custom_minimum_size = Vector2(160, 72)
 text = "Confirm"
+theme_override_styles/normal = SubResource("StyleBoxFlat_footer_btn")
 
-[connection signal="pressed" from="Ribbon/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="LabelContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="LabelContainer/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="LabelContainer/Button3" to="." method="_on_button_3_pressed"]
-[connection signal="pressed" from="LabelContainer/Button4" to="." method="_on_button_4_pressed"]
-[connection signal="pressed" from="LabelContainer/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="LabelContainer/ForwardBtn" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="LabelContainer/BackwardBtn" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="LabelContainer/LeftStrafeBtn" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="LabelContainer/RightStrafeBtn" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="LabelContainer/InteractBtn" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="Footer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Footer/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="Footer/Confirm" to="." method="_on_confirm_pressed"]
