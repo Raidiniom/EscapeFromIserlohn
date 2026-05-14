@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BossData" format=3 uid="uid://bvq1yxqxkmdmg"]
+
+[ext_resource type="Script" uid="uid://c4gtvbjc4c5x1" path="res://scripts/entites/resource/enemydata/boss_data.gd" id="1_u8kt4"]
+
+[resource]
+script = ExtResource("1_u8kt4")
+can_harden = true
+health = 1000.0
+speed = 3.0
+armor = 10.0
+attack_damage = 3.0
+attack_speed = 1.0
+attack_range = 3.0
+attack_type = "melee"
+metadata/_custom_type_script = "uid://c4gtvbjc4c5x1"

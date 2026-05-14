@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cj0s5qv5plne"]
+
+[ext_resource type="Script" uid="uid://4a2ohgy6bfx4" path="res://scripts/entites/enemy/boss_enemy.gd" id="1_bayy0"]
+[ext_resource type="Script" uid="uid://bv576ghc0nade" path="res://scripts/core/state_machine.gd" id="1_q7fnx"]
+[ext_resource type="Script" uid="uid://cvc64ltqhd286" path="res://scripts/entites/enemy/states/chase_state.gd" id="4_6wsbs"]
+[ext_resource type="Script" uid="uid://d1yq71iak6eqb" path="res://scripts/entites/enemy/states/attack_state.gd" id="5_0xb0o"]
+[ext_resource type="Script" uid="uid://dxc5244vaurjb" path="res://scripts/entites/enemy/states/ranged_attack_state.gd" id="6_w1flj"]
+[ext_resource type="PackedScene" uid="uid://bn7at12mxiq4l" path="res://scenes/entities/other/summoner_bullet.tscn" id="7_7sd62"]
+[ext_resource type="Script" uid="uid://bc37sfjxbumd0" path="res://scripts/entites/enemy/boss/phase_transition.gd" id="8_n43ye"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h2g7i"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dwffc"]
+
+[node name="BossEnemy" type="CharacterBody3D" unique_id=626612808]
+transform = Transform3D(3.8, 0, 0, 0, 3.8, 0, 0, 0, 3.8, 0, 3.8, 0)
+script = ExtResource("1_bayy0")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1163176550]
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1833955019]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.5, 0)
+text = "Boss Name"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1976656781]
+mesh = SubResource("CapsuleMesh_h2g7i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=152918703]
+shape = SubResource("CapsuleShape3D_dwffc")
+
+[node name="HealthBar" type="Node3D" parent="." unique_id=1355236864]
+
+[node name="StateMachine" type="Node" parent="." unique_id=1232592126]
+script = ExtResource("1_q7fnx")
+initial_state = NodePath("Chase")
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=338285497]
+script = ExtResource("4_6wsbs")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=749520636]
+script = ExtResource("5_0xb0o")
+
+[node name="RangeAttack" type="Node" parent="StateMachine" unique_id=24028508]
+script = ExtResource("6_w1flj")
+projectile_scene = ExtResource("7_7sd62")
+
+[node name="PhaseTransition" type="Node" parent="StateMachine" unique_id=661197616]
+script = ExtResource("8_n43ye")
