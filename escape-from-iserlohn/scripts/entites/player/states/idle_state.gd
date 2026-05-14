@@ -1,3 +1,4 @@
+# idle_state.gd
 extends State
 
 func enter():
@@ -22,8 +23,20 @@ func physics_process(delta: float) -> void:
 			state_machine.change_state("run")
 		else:
 			state_machine.change_state("walk")
-	elif Input.is_action_just_pressed("plant"):
+	
+	var wants_plant : bool = Input.is_action_just_pressed("plant") or owner.plant_buffered
+	owner.plant_buffered = false
+	if wants_plant:
 		if owner.can_plant() and GameDataManager.seeds[owner.selected_seed] > 0:
 			state_machine.change_state("planting")
+	
+	#if Input.is_action_just_pressed("jump") and owner.is_on_floor():
+		#owner.velocity.y = owner.jump_impulse
+	
+	var wants_jump : bool = Input.is_action_just_pressed("jump") or owner.jump_buffered
+	owner.jump_buffered = false  # always clear it, whether we jumped or not
+
+	if wants_jump and owner.is_on_floor():
+		owner.velocity.y = owner.jump_impulse
 	
 	owner.move_and_slide()

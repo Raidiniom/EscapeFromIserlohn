@@ -1,3 +1,4 @@
+# player.gd
 extends CharacterBody3D
 # Player stats
 @export_category("Player Stats")
@@ -18,6 +19,8 @@ var exp_to_next : float = 100
 @export var gravity: float = 27.6
 @export var jump_impulse : float = 14.0
 @export var stop_speed : float = 20.0
+var jump_buffered : bool = false
+var plant_buffered : bool = false
 
 # Utilities
 @export_subgroup("Utilities")
@@ -47,12 +50,16 @@ var pitch_input: float = 0.0
 
 func _ready():
 	update_stats_display()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	InputManager.scheme_changed.connect(_on_scheme_changed)
 	
-	#if OS.has_feature("mobile"):
-		#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	#else:
-		#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	_on_scheme_changed(InputManager.current_scheme)
+
+func _on_scheme_changed(scheme) -> void:
+	if scheme == InputManager.ControlScheme.MOBILE:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		# disable mouse-look, enable joystick/touch logic
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 
 func _physics_process(delta: float) -> void:
@@ -75,20 +82,23 @@ func _physics_process(delta: float) -> void:
 	pitch_input = 0.0
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		# Camera is the "look"; player model rotates with it
-		yaw_input = -event.relative.x * mouse_sensitivity
-		pitch_input = -event.relative.y * mouse_sensitivity
-
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_1: selected_seed = SeedTypes.SeedType.DAMAGE
-			KEY_2: selected_seed = SeedTypes.SeedType.MOVEMENT
-			KEY_3: selected_seed = SeedTypes.SeedType.ATTACK_SPEED
-			KEY_4: selected_seed = SeedTypes.SeedType.HEALTH
-			KEY_5: selected_seed = SeedTypes.SeedType.ARMOR
-			KEY_6: selected_seed = SeedTypes.SeedType.LUCK
-		update_stats_display()
+	if not InputManager.is_mobile():
+		if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			# Camera is the "look"; player model rotates with it
+			yaw_input = -event.relative.x * mouse_sensitivity
+			pitch_input = -event.relative.y * mouse_sensitivity
+			
+		if event is InputEventKey and event.pressed:
+			match event.keycode:
+				KEY_1: selected_seed = SeedTypes.SeedType.DAMAGE
+				KEY_2: selected_seed = SeedTypes.SeedType.MOVEMENT
+				KEY_3: selected_seed = SeedTypes.SeedType.ATTACK_SPEED
+				KEY_4: selected_seed = SeedTypes.SeedType.HEALTH
+				KEY_5: selected_seed = SeedTypes.SeedType.ARMOR
+				KEY_6: selected_seed = SeedTypes.SeedType.LUCK
+			update_stats_display()
+	
+	update_stats_display()
 	
 
 func regen_health():

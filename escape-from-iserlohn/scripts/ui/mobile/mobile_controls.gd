@@ -1,3 +1,4 @@
+# mobile_controls.gd
 extends Node
 
 # ── tunables ──────────────────────────────────────────────────────────
@@ -20,6 +21,7 @@ const LOOK_SENSITIVITY : float = 0.004
 	hud.get_node("SeedBar/SeedBtn4"),
 	hud.get_node("SeedBar/SeedBtn5"),
 ]
+@onready var debug_display : Control = hud.get_node("TopRight/DebugMessages")
 
 # ── joystick state ────────────────────────────────────────────────────
 var joy_touch  : int     = -1
@@ -57,6 +59,8 @@ func _set_passthrough(ctrl: Control) -> void:
 
 # ── push virtual actions every frame ─────────────────────────────────
 func _process(_delta: float) -> void:
+	if not InputManager.is_mobile():
+		return
 	# Movement
 	var t := 0.15
 	if joy_vec.x < -t:
@@ -79,24 +83,26 @@ func _process(_delta: float) -> void:
 	else:
 		Input.action_release("sprint")
 
-	# Jump: fire as a synthetic event so is_action_just_pressed() works in physics
 	if jump_touched:
 		jump_touched = false
-		var ev := InputEventAction.new()
-		ev.action  = "jump"
-		ev.pressed = true
-		Input.parse_input_event(ev)
+		jump_touch = -1
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			player.jump_buffered = true
+			
 
-	# Plant: same pattern
 	if plant_touched:
 		plant_touched = false
-		var ev := InputEventAction.new()
-		ev.action  = "plant"
-		ev.pressed = true
-		Input.parse_input_event(ev)
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			player.plant_buffered = true
+	
 
 # ── raw touch input ────────────────────────────────────────────────────
 func _input(event: InputEvent) -> void:
+	if not InputManager.is_mobile():
+		return
+	
 	if event is InputEventScreenTouch:
 		_handle_touch(event)
 	elif event is InputEventScreenDrag:
@@ -108,18 +114,22 @@ func _handle_touch(e: InputEventScreenTouch) -> void:
 		if _hit(joystick, e.position) and joy_touch == -1:
 			joy_touch  = e.index
 			joy_origin = e.position
+			debug_display.text = "Moving"
 
 		elif _hit(jump_btn, e.position):
 			jump_touch   = e.index
 			jump_touched = true          # physics will read this next frame
+			debug_display.text = "Pressed Jump"
 
 		elif _hit(sprint_btn, e.position):
 			sprint_touch = e.index
 			sprint_held  = true
+			debug_display.text = "Pressed Sprint"
 
 		elif _hit(plant_btn, e.position):
 			plant_touch   = e.index
 			plant_touched = true
+			debug_display.text = "Pressed Plant"
 
 		else:
 			# check seed bar
