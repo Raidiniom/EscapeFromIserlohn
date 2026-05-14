@@ -1,5 +1,6 @@
 # enemy.gd
 extends CharacterBody3D
+class_name Enemy
 
 @export var data: EnemyData
 
@@ -166,7 +167,7 @@ func apply_movement(direction: Vector3, delta: float):
 	
 	# Smooth rotation
 	var target_basis = Basis().looking_at(direction, Vector3.UP)
-	transform.basis = transform.basis.slerp(target_basis, 5 * delta)
+	transform.basis = transform.basis.slerp(target_basis, 5 * delta).orthonormalized()
 	
 	velocity.x = direction.x * move_speed
 	velocity.z = direction.z * move_speed

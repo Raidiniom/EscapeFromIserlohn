@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BossData" format=3 uid="uid://te6m26cndxu2"]
+
+[ext_resource type="Script" uid="uid://c4gtvbjc4c5x1" path="res://scripts/entites/resource/enemydata/boss_data.gd" id="1_y0db3"]
+
+[resource]
+script = ExtResource("1_y0db3")
+can_mass_summon = true
+mass_summon_count = 10
+health = 1000.0
+speed = 5.0
+armor = 2.0
+attack_damage = 4.0
+attack_speed = 3.0
+attack_range = 12.0
+attack_type = "ranged"
+metadata/_custom_type_script = "uid://c4gtvbjc4c5x1"

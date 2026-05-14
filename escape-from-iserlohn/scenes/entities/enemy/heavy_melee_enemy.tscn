@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://cpicoy0benmxp" path="res://scripts/entites/resource/enemydata/heavymelee_data.tres" id="2_3a6ps"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3a6ps"]
-albedo_color = Color(0.24313726, 0.03529412, 0, 1)
+albedo_color = Color(0.24705882, 0.19607843, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3a6ps"]
 

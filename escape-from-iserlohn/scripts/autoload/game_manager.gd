@@ -5,7 +5,13 @@ var enemy_scenes = {
 	"heavy": preload("res://scenes/entities/enemy/heavy_melee_enemy.tscn"),
 	"rogue": preload("res://scenes/entities/enemy/rogue_enemy.tscn"),
 	"range": preload("res://scenes/entities/enemy/ranger_enemy.tscn"),
-	"summoner": preload("res://scenes/entities/enemy/summoner_enemy.tscn")
+	"summoner": preload("res://scenes/entities/enemy/summoner_enemy.tscn"),
+	
+	# Bosses
+	"melee_boss": preload("res://scenes/entities/enemy/melee_boss.tscn"),
+	"heavymelee_boss": preload("res://scenes/entities/enemy/heavy_melee_boss.tscn"),
+	"range_boss": preload("res://scenes/entities/enemy/range_boss.tscn"),
+	"summoner_boss": preload("res://scenes/entities/enemy/summoner_boss.tscn"),
 }
 
 # Enemy type weights - higher number = higher chance to spawn
@@ -17,6 +23,13 @@ var enemy_weights = {
 	"summoner": 0
 }
 
+var boss_schedule = {
+	5: "melee_boss",
+	#5: "heavymelee_boss",
+	#5: "range_boss",
+	#5: "summoner_boss",
+}
+
 var spawn_points: Array[Node3D] = []
 
 var current_round := 1
@@ -26,35 +39,47 @@ func start_round():
 	await get_tree().process_frame
 	
 	spawn_points.clear()
-	
 	for node in get_tree().get_nodes_in_group("spawner"):
 		if node is Node3D:
 			spawn_points.append(node)
 	
-	# Adjust weights based on round number
+	 #Adjust weights based on round number
 	update_weights_for_round()
 	
-	var count = current_round * 5
+	var count = get_enemy_count_for_round()
 	enemies_alive = count
 	
 	display(current_round, count)
+	
+	if boss_schedule.has(current_round):
+		spawn_boss(boss_schedule[current_round])
 	
 	for i in range(count):
 		var type = pick_enemy_type()
 		spawn_enemy(type)
 	
 	# Optional: Debug print of spawned enemy types this round
-	print_round_summary()
+	#print_round_summary()
+
+func get_enemy_count_for_round() -> int:
+	# Round 5 gets extra enemies to go with the boss
+	if current_round == 5:
+		return current_round * 5 + 5  # 30 enemies on round 5
+	return current_round * 5
+	
 
 func update_weights_for_round():
 	var r = current_round
 	
+	var range_bonus = 15 if r >= 5 else 0
+	var summoner_bonus = 10 if r >= 5 else 0
+	
 	set_weights({
 		"melee": clamp(80 - r * 5, 20, 80),
 		"rogue": clamp(r * 3, 0, 30),
-		"range": clamp((r - 2) * 3, 0, 25),
+		"range": clamp((r - 2) * 3 + range_bonus, 0, 45),
 		"heavy": clamp((r - 4) * 3, 0, 25),
-		"summoner": clamp((r - 5) * 2, 0, 20)
+		"summoner": clamp((r - 5) * 2 + summoner_bonus, 0, 35)
 	})
 	
 
@@ -69,11 +94,23 @@ func spawn_enemy(type):
 	var enemy = scene.instantiate()
 	
 	get_tree().current_scene.add_child(enemy)
-	
 	enemy.global_position = spawn.global_position
 	
 	var player = get_tree().get_nodes_in_group("player")[0]
 	enemy.player_target = player
+
+func spawn_boss(type: String):
+	var scene = enemy_scenes[type]
+	var spawn = spawn_points[0]
+	var boss = scene.instantiate()
+	
+	get_tree().current_scene.add_child(boss)
+	boss.global_position = spawn.global_position
+	
+	var player = get_tree().get_nodes_in_group("player")[0]
+	boss.player_target = player
+	enemies_alive += 1
+	
 
 func pick_enemy_type():
 	# Calculate total weight
@@ -98,18 +135,28 @@ func next_round():
 	
 	await get_tree().create_timer(2.0).timeout
 	start_round()
+	
 
 func display(round_num, enemy_count):
 	print("!!!=== Round #",round_num," ===!!!")
 	print("Enemy Count: ", enemy_count)
+	if boss_schedule.has(round_num):
+		print("BOSS ROUND! Spawning: ", boss_schedule[round_num])
+	
 
 func print_round_summary():
 	print("--- Round Summary ---")
+	var total = get_total_weight()
+	if total == 0:
+		print("No enemies this round.")
+		return
 	for type in enemy_weights:
 		var weight = enemy_weights[type]
-		var percentage = (float(weight) / get_total_weight()) * 100
-		print(type.capitalize() + ": " + str(percentage).pad_decimals(1) + "% chance")
+		if weight > 0:
+			var percentage = (float(weight) / total) * 100
+			print(type.capitalize() + ": " + str(percentage).pad_decimals(1) + "%")
 	print("--------------------")
+	
 
 func get_total_weight() -> int:
 	var total = 0
