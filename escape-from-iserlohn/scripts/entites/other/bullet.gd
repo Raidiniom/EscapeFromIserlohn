@@ -15,7 +15,7 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if not body.has_method("take_damage"):
-		print("Entity has no take_damage function!")
+		queue_free()
 		return
 	
 	if "team" in body:

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bffcq2excmoa1"]
+
+[ext_resource type="PackedScene" uid="uid://cj0s5qv5plne" path="res://scenes/entities/enemy/boss_enemy.tscn" id="1_bb0n8"]
+[ext_resource type="Resource" uid="uid://cm7t20qxnlt7l" path="res://scripts/entites/resource/enemydata/range_boss.tres" id="2_ac64m"]
+[ext_resource type="Script" uid="uid://cn1epmkvtb1m2" path="res://scripts/entites/enemy/boss/range/rapid_fire.gd" id="3_jmfs7"]
+[ext_resource type="PackedScene" uid="uid://bemyathcjhhq2" path="res://scenes/entities/other/ranger_bullet.tscn" id="4_okt22"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bb0n8"]
+albedo_color = Color(1, 1, 0.49803922, 1)
+
+[node name="RangeBoss" unique_id=626612808 groups=["enemy"] instance=ExtResource("1_bb0n8")]
+boss_data = ExtResource("2_ac64m")
+data = ExtResource("2_ac64m")
+
+[node name="MeshInstance3D" parent="." index="2" unique_id=1976656781]
+material_override = SubResource("StandardMaterial3D_bb0n8")
+
+[node name="RapidFire" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1232592126) index="4" unique_id=1605025177]
+script = ExtResource("3_jmfs7")
+projectile_scene = ExtResource("4_okt22")

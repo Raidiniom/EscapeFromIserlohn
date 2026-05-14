@@ -35,6 +35,14 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_e6e0b")
 
+[node name="LookZone" type="Control" parent="." unique_id=9930001]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="MobileControls" type="Node" parent="." unique_id=1295610779]
 script = ExtResource("2_31ty4")
 
@@ -154,67 +162,58 @@ offset_right = 180.0
 offset_bottom = 180.0
 color = Color(0.2, 0.54, 0.87, 0.6)
 
-[node name="LookZone" type="Control" parent="." unique_id=9930001]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="JumpButton" type="Button" parent="." unique_id=9940001]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 6
 anchor_left = 1.0
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -265.0
-offset_top = -360.0
-offset_right = -137.0
-offset_bottom = -232.0
+anchor_bottom = 0.5
+offset_left = -564.0
+offset_top = 64.0
+offset_right = -436.0
+offset_bottom = 192.0
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_action_btn")
 text = "JUMP"
 
 [node name="SprintButton" type="Button" parent="." unique_id=9940002]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 6
 anchor_left = 1.0
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -392.0
-offset_top = -213.0
-offset_right = -264.0
-offset_bottom = -85.0
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = -207.0
+offset_right = -188.0
+offset_bottom = -79.0
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_action_btn")
 text = "RUN"
 
 [node name="PlantButton" type="Button" parent="." unique_id=9940003]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 6
 anchor_left = 1.0
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -413.0
-offset_top = -357.0
-offset_right = -285.0
-offset_bottom = -229.0
+anchor_bottom = 0.5
+offset_left = -459.0
+offset_top = -72.0
+offset_right = -331.0
+offset_bottom = 56.0
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_action_btn")
 text = "PLANT"
 
 [node name="BottomLeft" type="VBoxContainer" parent="." unique_id=1289885131]
-visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
