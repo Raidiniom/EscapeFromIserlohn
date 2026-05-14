@@ -24,7 +24,7 @@ func spawn_plant():
 	var data : PlantData = GameDataManager.plant_data_map.get(owner.selected_seed)
 	
 	if data == null:
-		print("No PlanData for seed: ", owner.selected_seed)
+		print("No PlantData for seed: ", owner.selected_seed)
 		return
 	
 	if data.plant_model == null:

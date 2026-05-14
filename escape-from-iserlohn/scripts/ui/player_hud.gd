@@ -1,3 +1,4 @@
+# player_hud.gd
 extends Control
 
 @onready var player = get_parent().get_parent()
@@ -18,6 +19,10 @@ extends Control
 
 func _ready() -> void:
 	player.connect("stats_changed", update_hud)
+	
+	InputManager.scheme_changed.connect(_on_scheme_changed)
+	_on_scheme_changed(InputManager.current_scheme)
+	
 	for i in seed_buttons.size():
 		var idx := i
 		seed_buttons[i].pressed.connect(func():
@@ -26,6 +31,10 @@ func _ready() -> void:
 			_highlight_seed(idx)
 		)
 	update_hud()
+
+func _on_scheme_changed(scheme) -> void:
+	var is_mobile = scheme == InputManager.ControlScheme.MOBILE
+	
 
 func _process(_delta: float) -> void:
 	if player == null:

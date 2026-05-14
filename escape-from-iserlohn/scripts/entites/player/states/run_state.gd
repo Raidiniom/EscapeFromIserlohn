@@ -1,3 +1,4 @@
+# run_state.gd
 extends State
 
 @export var sprint_multiplier: float = 2.0
@@ -28,11 +29,22 @@ func physics_process(delta: float) -> void:
 		# No input or sprint released → stop horizontal movement
 		owner.velocity.x = 0.0
 		owner.velocity.z = 0.0
-
+	
 	# Jump
-	if Input.is_action_just_pressed("jump") and owner.is_on_floor():
+	#if Input.is_action_just_pressed("jump") and owner.is_on_floor():
+		#owner.velocity.y = owner.jump_impulse
+	
+	var wants_jump : bool = Input.is_action_just_pressed("jump") or owner.jump_buffered
+	owner.jump_buffered = false  # always clear it, whether we jumped or not
+	if wants_jump and owner.is_on_floor():
 		owner.velocity.y = owner.jump_impulse
-
+	
+	var wants_plant : bool = Input.is_action_just_pressed("plant") or owner.plant_buffered
+	owner.plant_buffered = false
+	if wants_plant:
+		if owner.can_plant() and GameDataManager.seeds[owner.selected_seed] > 0:
+			state_machine.change_state("planting")
+	
 	# Transitions
 	if direction == Vector3.ZERO:
 		state_machine.change_state("idle")
