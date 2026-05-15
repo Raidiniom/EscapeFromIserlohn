@@ -5,6 +5,7 @@ var attack_timer : float = 0.0
 
 func enter():
 	attack_timer = 0
+	owner.play_anim("Attack")
 	
 
 func physics_process(delta):

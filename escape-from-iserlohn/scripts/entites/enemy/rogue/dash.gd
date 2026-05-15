@@ -23,7 +23,7 @@ func enter():
 	
 	# stop at attack range (safe engage distance)
 	stop_distance = enemy.attack_range
-	
+	owner.play_anim("Attack")
 
 
 func physics_process(delta):
