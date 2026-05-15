@@ -6,8 +6,8 @@ var charge_timer: float = 0.0
 var windup_timer: float = 0.0
 var is_winding_up: bool = true
 
-const WINDUP_DURATION: float = 0.6
-const CHARGE_DURATION: float = 6.6
+const WINDUP_DURATION: float = 1.0
+const CHARGE_DURATION: float = 1.5
 
 func enter():
 	var enemy = owner
@@ -65,7 +65,7 @@ func exit():
 	# Start cooldown
 	var timer = get_tree().create_timer(enemy.charge_cooldown)
 	timer.timeout.connect(func():
-		if is_instance_id_valid(enemy):
+		if is_instance_valid(enemy):
 			enemy.charge_ready = true
 	)
 	

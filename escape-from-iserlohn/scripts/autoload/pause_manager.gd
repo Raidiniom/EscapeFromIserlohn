@@ -57,6 +57,9 @@ func go_to_menu(scene_path: String):
 	is_paused = false
 	get_tree().paused = false
 	
+	GameManager.reset_run()
+	GameDataManager.reset_seeds()
+	
 	hide_all()
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

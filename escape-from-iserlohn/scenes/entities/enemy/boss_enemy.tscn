@@ -28,8 +28,6 @@ mesh = SubResource("CapsuleMesh_h2g7i")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=152918703]
 shape = SubResource("CapsuleShape3D_dwffc")
 
-[node name="HealthBar" type="Node3D" parent="." unique_id=1355236864]
-
 [node name="StateMachine" type="Node" parent="." unique_id=1232592126]
 script = ExtResource("1_q7fnx")
 initial_state = NodePath("Chase")

@@ -2,6 +2,7 @@
 extends Node3D
 
 @export var data: PlantData
+@export var model: PackedScene
 
 # Plant Data
 var seed_type: int
@@ -10,6 +11,10 @@ var timer: float = 0.0
 var is_grown: bool
 
 func _ready() -> void:
+	if model:
+		var mesh_instance = model.instantiate()
+		add_child(mesh_instance)
+	
 	if data != null:
 		apply_data()
 	else:
