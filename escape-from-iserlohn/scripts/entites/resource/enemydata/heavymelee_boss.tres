@@ -5,10 +5,13 @@
 [resource]
 script = ExtResource("1_u8kt4")
 can_harden = true
-health = 1000.0
+harden_armor_bonus = 40.0
+harden_duration = 5.0
+harden_cooldown = 14.0
+health = 800.0
 speed = 3.0
-armor = 10.0
-attack_damage = 3.0
+armor = 30.0
+attack_damage = 15.0
 attack_speed = 1.0
 attack_range = 3.0
 attack_type = "melee"

@@ -8,5 +8,5 @@ script = ExtResource("1_7yedq")
 seed_type = 2
 growth_time = 1.0
 plant_model = ExtResource("1_6jv1y")
-stat_value = 1.0
+stat_value = 0.5
 metadata/_custom_type_script = "uid://c2w53nfxbsg7l"

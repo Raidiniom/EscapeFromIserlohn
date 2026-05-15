@@ -78,8 +78,6 @@ func play_anim(anim_name: String) -> void:
 	anim_playback.travel(anim_name)
 
 func apply_data():
-	print("LOADED DATA:", data)
-	
 	var round = GameManager.current_round
 	exp_reward *= (1 + round * 0.2)
 	
@@ -111,13 +109,6 @@ func apply_data():
 	summon_timer = data.summon_timer
 	summon_range = data.summon_range
 	summon_scene = data.summon_scene
-	
-	var scale = 1.0 + (round * 0.15)
-	
-	health *= scale
-	attack_damage *= scale
-	armor *= scale * 0.5
-	speed *= 1.0 + (round * 0.02)
 	
 
 func _physics_process(delta: float) -> void:
@@ -206,6 +197,9 @@ func get_separation_force() -> Vector3:
 	return force
 
 func take_damage(amount: float):
+	if is_dead:
+		return
+	
 	var final_dmg = calculate_damage(amount, armor)
 	health -= final_dmg
 	play_anim("Hit")
@@ -253,7 +247,6 @@ func drop_seed():
 	for item in loot_table:
 		current += item["weight"]
 		if roll <= current:
-			print("[DEBUG] Dropped:", item["type"])
 			GameDataManager.add_seed(item["type"])
 			return
 	
@@ -261,6 +254,9 @@ func _on_death_done(_anim_name):
 	queue_free()
 	
 func die():
+	if is_dead:
+		return
+	
 	is_dead = true
 	play_anim("Death")
 	anim_tree.animation_finished.connect(_on_death_done, CONNECT_ONE_SHOT)

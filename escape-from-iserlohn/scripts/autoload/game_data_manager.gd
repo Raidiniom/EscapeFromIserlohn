@@ -1,3 +1,4 @@
+# game_data_manager
 extends Node
 
 var seeds := {

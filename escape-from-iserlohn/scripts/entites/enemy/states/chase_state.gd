@@ -37,8 +37,13 @@ func physics_process(delta):
 			return
 	
 	if enemy.get("can_harden") and enemy.can_harden and enemy.harden_ready:
-		state_machine.change_state("harden")
-		return
+		var dist = enemy.global_position.distance_to(
+			enemy.player_target.global_position
+		)
+		if dist <= 14.0:
+			state_machine.change_state("harden")
+			return
+		
 	
 	if enemy.get("can_rapid_fire") and enemy.can_rapid_fire and enemy.rapid_fire_ready:
 		if distance <= enemy.attack_range:

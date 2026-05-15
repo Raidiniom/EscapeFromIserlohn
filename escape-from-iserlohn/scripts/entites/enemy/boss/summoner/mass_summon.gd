@@ -3,8 +3,8 @@ extends State
 
 var summon_timer: float = 0.0
 var summoning: bool = false
-const SUMMON_DELAY: float = 0.3  # delay between each spawn for dramatic effect
-const NORMAL_ENEMY_POOL = ["melee", "heavy", "rogue", "range", "summoner"]
+const SUMMON_DELAY: float = 0.2  # delay between each spawn for dramatic effect
+const NORMAL_ENEMY_POOL = ["melee", "rogue", "range"]
 
 func get_enemy():
 	return state_machine.get_parent()
@@ -59,7 +59,6 @@ func spawn_enemy(enemy):
 	if summoned.get("counts_for_round") != null:
 		summoned.counts_for_round = false
 	
-	GameManager.enemies_alive += 1
 	print("Summoned: " + type)
 	
 

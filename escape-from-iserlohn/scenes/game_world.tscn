@@ -45,24 +45,24 @@ process_mode = 3
 [node name="DeathScene" parent="UI" unique_id=670044418 instance=ExtResource("4_6c6v5")]
 
 [node name="Spawn1" type="Node3D" parent="." unique_id=883968712 groups=["spawner"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 40)
 
 [node name="Spawn2" type="Node3D" parent="." unique_id=450498762 groups=["spawner"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -40)
 
 [node name="Spawn3" type="Node3D" parent="." unique_id=1363361298 groups=["spawner"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 4.5, 0)
 
 [node name="Spawn4" type="Node3D" parent="." unique_id=1979137609 groups=["spawner"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 2, -16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 4.5, -16)
 
 [node name="Player" parent="." unique_id=2091103986 instance=ExtResource("4_0vfqx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Map1" parent="." unique_id=1860341615 instance=ExtResource("6_bhwwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="PlantingArea" type="StaticBody3D" parent="." unique_id=1576946418 groups=["plantable_ground"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, -0.44, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, -0.88, -10)
 collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlantingArea" unique_id=1914332502]

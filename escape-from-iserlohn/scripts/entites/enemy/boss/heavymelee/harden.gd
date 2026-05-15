@@ -41,7 +41,8 @@ func physics_process(delta):
 	enemy.velocity.z = 0
 	
 	harden_timer -= delta
-	state_machine.change_state("chase")
+	if harden_timer <= 0:
+		state_machine.change_state("chase")
 	
 
 func exit():

@@ -28,6 +28,9 @@ func respawn():
 func exit_to_menu(scene_path: String):
 	get_tree().paused = false
 	
+	GameManager.reset_run()
+	GameDataManager.reset_seeds()
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	await get_tree().process_frame

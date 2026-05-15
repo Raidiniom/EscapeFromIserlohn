@@ -2,13 +2,13 @@
 extends CharacterBody3D
 # Player stats
 @export_category("Player Stats")
-@export var health : float = 100.0
+@export var health : float = 200.0
 @export var max_health : float = 100.0
-@export var base_damage : float = 25.0
-@export var armor : float = 1.0
-@export var attack_speed : float = 3.0
-@export var movement_speed : float = 6.0
-@export var sprint_speed : float = 10.0
+@export var base_damage : float = 250.0
+@export var armor : float = 10.0
+@export var attack_speed : float = 20.0
+@export var movement_speed : float = 16.0
+@export var sprint_speed : float = 20.0
 @export var luck_stat : float = 2.0
 var level : int = 1
 var exp : float = 0.0
@@ -66,7 +66,6 @@ func _on_scheme_changed(scheme) -> void:
 
 func _physics_process(delta: float) -> void:
 	handle_auto_attack(delta)
-
 	# === CAMERA LOOK ===
 	# yaw: rotate player (so model faces where we look)
 	rotate_y(yaw_input)
@@ -112,7 +111,6 @@ func increase_max_health(amount):
 	health = clamp(health, 0, max_health)
 	
 	emit_signal("stats_changed")
-	
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

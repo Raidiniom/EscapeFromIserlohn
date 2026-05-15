@@ -8,13 +8,11 @@ var plant_model: PackedScene
 
 func enter():
 	timer = 0.0
-	print("Player Started Planting")
 	
 	spawn_plant()
 
 func spawn_plant():
 	if not owner.can_plant():
-		print("Not Plantable ground!")
 		return
 	
 	if not GameDataManager.consume_seed(owner.selected_seed):
@@ -38,11 +36,7 @@ func spawn_plant():
 	
 	plant.data = data
 	
-	print("[DEBUG] Seed Being Planted")
-	
 	get_tree().current_scene.add_child(plant)
-	
-	print("[DEBUG] Spawned plant with data:", data)
 	
 
 func process(delta):
@@ -51,4 +45,4 @@ func process(delta):
 		state_machine.change_state("idle")
 
 func exit():
-	print("Done Planting")
+	pass

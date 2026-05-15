@@ -3,7 +3,7 @@ extends State
 
 var rapid_fire_timer: float = 0.0
 var attack_timer: float = 0.0
-const RAPID_FIRE_ATTACK_SPEED: float = 22.0  # shots per second during rapid fire
+const RAPID_FIRE_ATTACK_SPEED: float = 6.0  # shots per second during rapid fire
 
 @export var projectile_scene: PackedScene  # assign same projectile as RangeAttack node
 
@@ -16,7 +16,7 @@ func enter():
 	enemy.rapid_fire_ready = false
 	rapid_fire_timer = enemy.rapid_fire_duration
 	attack_timer = 0.0
-	print(enemy.name + " — RAPID FIRE")
+	
 
 func physics_process(delta):
 	var enemy = get_enemy()
