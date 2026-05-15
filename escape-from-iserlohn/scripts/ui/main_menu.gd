@@ -6,6 +6,7 @@ func _ready() -> void:
 	
 
 func _on_play_pressed() -> void:
+	GameManager.reset_run()
 	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	

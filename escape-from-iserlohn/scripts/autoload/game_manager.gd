@@ -6,8 +6,6 @@ var enemy_scenes = {
 	"rogue": preload("res://scenes/entities/enemy/rogue_enemy.tscn"),
 	"range": preload("res://scenes/entities/enemy/ranger_enemy.tscn"),
 	"summoner": preload("res://scenes/entities/enemy/summoner_enemy.tscn"),
-	
-	# Bosses
 	"melee_boss": preload("res://scenes/entities/enemy/melee_boss.tscn"),
 	"heavymelee_boss": preload("res://scenes/entities/enemy/heavy_melee_boss.tscn"),
 	"range_boss": preload("res://scenes/entities/enemy/range_boss.tscn"),
@@ -24,17 +22,17 @@ var enemy_weights = {
 }
 
 var boss_schedule = {
-	5: "melee_boss",
-	10: "heavymelee_boss",
-	15: "range_boss",
-	25: "summoner_boss",
+	5: ["summoner_boss"],
+	10: ["heavymelee_boss"],
+	15: ["range_boss"],
+	25: ["summoner_boss"],
 	30: ["melee_boss", "heavymelee_boss"],
 	35: ["melee_boss", "range_boss"],
 	40: ["melee_boss", "summoner_boss"],
 	45: ["heavymelee_boss", "range_boss"],
 	50: ["heavymelee_boss", "summoner_boss"],
 	55: ["melee_boss", "heavymelee_boss", "range_boss"],
-	60: ["melee_boss", "heavymelee_boss", "rsummoner_boss"],
+	60: ["melee_boss", "heavymelee_boss", "summoner_boss"],
 	65: ["melee_boss", "heavymelee_boss", "range_boss", "range_boss"],
 	100: ["melee_boss", "heavymelee_boss", "range_boss", "melee_boss", "heavymelee_boss", "range_boss", "summoner_boss", "summoner_boss"],
 }
@@ -43,6 +41,19 @@ var spawn_points: Array[Node3D] = []
 
 var current_round := 1
 var enemies_alive := 0
+
+var round_timeout_timer = 0.0
+var round_timeout_limit = 60.0
+
+#func _process(delta: float) -> void:
+	#if enemies_alive > 0:
+		#round_timeout_timer += delta
+		#if round_timeout_timer >= round_timeout_limit:
+			#print("[TIMEOUT] Forcing next round — ", enemies_alive, " enemies never died")
+			#enemies_alive = 0
+			#next_round()
+	#else:
+		#round_timeout_timer = 0.0
 
 func start_round():
 	await get_tree().process_frame
@@ -56,7 +67,6 @@ func start_round():
 	update_weights_for_round()
 	
 	var count = get_enemy_count_for_round()
-	enemies_alive = count
 	
 	display(current_round, count)
 	
@@ -68,8 +78,10 @@ func start_round():
 		var type = pick_enemy_type()
 		spawn_enemy(type)
 	
+	enemies_alive = count
+	
 	# Optional: Debug print of spawned enemy types this round
-	#print_round_summary()
+	print_round_summary()
 
 func get_enemy_count_for_round() -> int:
 	# Round 5 gets extra enemies to go with the boss
@@ -122,7 +134,6 @@ func spawn_boss(type: String):
 	var player = get_tree().get_nodes_in_group("player")[0]
 	boss.player_target = player
 	boss.counts_for_round = false
-	enemies_alive += 1
 	
 
 func pick_enemy_type():
@@ -151,10 +162,8 @@ func next_round():
 	
 
 func display(round_num, enemy_count):
-	print("!!!=== Round #",round_num," ===!!!")
+	print("!!!=== Round #", round_num, " ===!!!")
 	print("Enemy Count: ", enemy_count)
-	if boss_schedule.has(round_num):
-		print("BOSS ROUND! Spawning: ", ", ".join(boss_schedule[round_num]))
 	
 
 func print_round_summary():
@@ -180,4 +189,9 @@ func get_total_weight() -> int:
 func reset_run():
 	current_round = 1
 	enemies_alive = 0
+	
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		enemy.queue_free()
+	
+	spawn_points.clear()
 	

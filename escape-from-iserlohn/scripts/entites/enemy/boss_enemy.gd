@@ -45,7 +45,7 @@ func _ready() -> void:
 		apply_boss_data()
 	else:
 		push_error(name + ": No BossData assigned")
-	max_health = health
+	
 
 func apply_boss_data():
 	# Charge
@@ -68,22 +68,29 @@ func apply_boss_data():
 	 # Boss core
 	phase_threshold = boss_data.phase_threshold
 	
-	# Round Scaling
+	# Clean single-pass boss scaling
 	var round = GameManager.current_round
-	var scale = 1.0 + (round * 0.15)
+	var scale = 1.0 + (round * 0.20)
 	health *= scale
-	attack_damage *= scale
-	armor *= scale * 0.5
-	speed *= 1.0 + (round * 0.02)
+	attack_damage *= (1.0 + (round * 0.15))
+	armor *= (1.0 + (round * 0.10))
+	speed *= (1.0 + (round * 0.02))
+
 	max_health = health
+	print("Boss spawned — HP: ", health, " threshold HP: ", max_health * phase_threshold)
 	
 
 func take_damage(amount: float) -> void:
 	super.take_damage(amount)  # existing armor calc, die(), drop_seed() all intact
+	if is_dead:
+		return
 	check_phase_transition()
 
 func check_phase_transition() -> void:
 	if boss_data == null or max_health <= 0:
+		return
+	
+	if health >= max_health:
 		return
 	
 	if current_phase == 1 and health <= max_health * phase_threshold:

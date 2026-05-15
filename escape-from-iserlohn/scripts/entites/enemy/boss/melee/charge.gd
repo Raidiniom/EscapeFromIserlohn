@@ -65,7 +65,7 @@ func exit():
 	# Start cooldown
 	var timer = get_tree().create_timer(enemy.charge_cooldown)
 	timer.timeout.connect(func():
-		if is_instance_id_valid(enemy):
+		if is_instance_valid(enemy):
 			enemy.charge_ready = true
 	)
 	

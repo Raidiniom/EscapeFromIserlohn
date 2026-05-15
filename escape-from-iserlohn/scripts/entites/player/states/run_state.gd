@@ -6,7 +6,6 @@ extends State
 
 func enter():
 	owner.is_sprinting = true
-	print("Player Run State")
 	# play run animation if needed
 
 func physics_process(delta: float) -> void:

@@ -3,7 +3,6 @@ extends State
 
 func enter():
 	owner.is_sprinting = false
-	print("Player Idle State")
 	# Play idle animation here
 
 func physics_process(delta: float) -> void:
