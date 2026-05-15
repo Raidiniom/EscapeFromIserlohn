@@ -6,8 +6,8 @@ var charge_timer: float = 0.0
 var windup_timer: float = 0.0
 var is_winding_up: bool = true
 
-const WINDUP_DURATION: float = 0.6
-const CHARGE_DURATION: float = 6.6
+const WINDUP_DURATION: float = 1.0
+const CHARGE_DURATION: float = 1.5
 
 func enter():
 	var enemy = owner

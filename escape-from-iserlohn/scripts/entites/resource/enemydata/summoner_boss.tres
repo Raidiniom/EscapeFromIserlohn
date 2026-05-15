@@ -5,12 +5,13 @@
 [resource]
 script = ExtResource("1_y0db3")
 can_mass_summon = true
-mass_summon_count = 10
-health = 1000.0
+mass_summon_count = 6
+mass_summon_cooldown = 20.0
+health = 600.0
 speed = 5.0
-armor = 2.0
-attack_damage = 4.0
-attack_speed = 3.0
+armor = 15.0
+attack_damage = 12.0
+attack_speed = 2.0
 attack_range = 12.0
 attack_type = "ranged"
 metadata/_custom_type_script = "uid://c4gtvbjc4c5x1"

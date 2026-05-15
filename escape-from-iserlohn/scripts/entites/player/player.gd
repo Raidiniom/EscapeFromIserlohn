@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var health : float = 100.0
 @export var max_health : float = 100.0
 @export var base_damage : float = 25.0
-@export var armor : float = 1.0
+@export var armor : float = 10.0
 @export var attack_speed : float = 3.0
 @export var movement_speed : float = 6.0
 @export var sprint_speed : float = 10.0

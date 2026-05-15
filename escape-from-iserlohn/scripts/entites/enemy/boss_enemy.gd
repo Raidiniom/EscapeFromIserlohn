@@ -68,6 +68,15 @@ func apply_boss_data():
 	 # Boss core
 	phase_threshold = boss_data.phase_threshold
 	
+	# Round Scaling
+	var round = GameManager.current_round
+	var scale = 1.0 + (round * 0.15)
+	health *= scale
+	attack_damage *= scale
+	armor *= scale * 0.5
+	speed *= 1.0 + (round * 0.02)
+	max_health = health
+	
 
 func take_damage(amount: float) -> void:
 	super.take_damage(amount)  # existing armor calc, die(), drop_seed() all intact

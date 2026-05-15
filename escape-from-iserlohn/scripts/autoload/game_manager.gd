@@ -25,9 +25,18 @@ var enemy_weights = {
 
 var boss_schedule = {
 	5: "melee_boss",
-	#5: "heavymelee_boss",
-	#5: "range_boss",
-	#5: "summoner_boss",
+	10: "heavymelee_boss",
+	15: "range_boss",
+	25: "summoner_boss",
+	30: ["melee_boss", "heavymelee_boss"],
+	35: ["melee_boss", "range_boss"],
+	40: ["melee_boss", "summoner_boss"],
+	45: ["heavymelee_boss", "range_boss"],
+	50: ["heavymelee_boss", "summoner_boss"],
+	55: ["melee_boss", "heavymelee_boss", "range_boss"],
+	60: ["melee_boss", "heavymelee_boss", "rsummoner_boss"],
+	65: ["melee_boss", "heavymelee_boss", "range_boss", "range_boss"],
+	100: ["melee_boss", "heavymelee_boss", "range_boss", "melee_boss", "heavymelee_boss", "range_boss", "summoner_boss", "summoner_boss"],
 }
 
 var spawn_points: Array[Node3D] = []
@@ -52,7 +61,8 @@ func start_round():
 	display(current_round, count)
 	
 	if boss_schedule.has(current_round):
-		spawn_boss(boss_schedule[current_round])
+		for boss_type in boss_schedule[current_round]:
+			spawn_boss(boss_type)
 	
 	for i in range(count):
 		var type = pick_enemy_type()
@@ -63,9 +73,11 @@ func start_round():
 
 func get_enemy_count_for_round() -> int:
 	# Round 5 gets extra enemies to go with the boss
-	if current_round == 5:
-		return current_round * 5 + 5  # 30 enemies on round 5
-	return current_round * 5
+	var base = current_round * 5
+	if boss_schedule.has(current_round):
+		return base + 10
+	
+	return base
 	
 
 func update_weights_for_round():
@@ -109,6 +121,7 @@ func spawn_boss(type: String):
 	
 	var player = get_tree().get_nodes_in_group("player")[0]
 	boss.player_target = player
+	boss.counts_for_round = false
 	enemies_alive += 1
 	
 
@@ -141,7 +154,7 @@ func display(round_num, enemy_count):
 	print("!!!=== Round #",round_num," ===!!!")
 	print("Enemy Count: ", enemy_count)
 	if boss_schedule.has(round_num):
-		print("BOSS ROUND! Spawning: ", boss_schedule[round_num])
+		print("BOSS ROUND! Spawning: ", ", ".join(boss_schedule[round_num]))
 	
 
 func print_round_summary():
