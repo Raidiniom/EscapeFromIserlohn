@@ -51,12 +51,16 @@ var exp_reward: float = 10
 @onready var state_machine = $StateMachine
 @onready var health_display = $Label3D
 
+# Animation Tree
+@onready var anim_tree: AnimationTree = $AnimationTree
+@onready var anim_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
+
 func _ready() -> void:
+	anim_tree.active = true
 	if data != null:
 		apply_data()
 	else:
 		print("No Enemy Data Assigned")
-	
 	health_display.text = str(floor(health))
 	
 	var radius = 2.0
@@ -66,6 +70,12 @@ func _ready() -> void:
 		randf_range(-radius, radius)
 	)
 	
+	# Start FSM last, after all @onready vars are ready
+	state_machine.start()
+	play_anim("Spawn")
+	
+func play_anim(anim_name: String) -> void:
+	anim_playback.travel(anim_name)
 
 func apply_data():
 	print("LOADED DATA:", data)
@@ -198,7 +208,7 @@ func get_separation_force() -> Vector3:
 func take_damage(amount: float):
 	var final_dmg = calculate_damage(amount, armor)
 	health -= final_dmg
-	
+	play_anim("Hit")
 	health_display.text = str(floor(health))
 	if health <= 0 and !is_dead:
 		die()
@@ -247,10 +257,13 @@ func drop_seed():
 			GameDataManager.add_seed(item["type"])
 			return
 	
-
+func _on_death_done(_anim_name):
+	queue_free()
+	
 func die():
 	is_dead = true
-	
+	play_anim("Death")
+	anim_tree.animation_finished.connect(_on_death_done, CONNECT_ONE_SHOT)
 	var player = get_tree().get_first_node_in_group("player")
 	if player != null:
 		player.gain_exp(exp_reward)
@@ -261,5 +274,3 @@ func die():
 		
 		if GameManager.enemies_alive <= 0:
 			GameManager.next_round()
-	
-	queue_free()

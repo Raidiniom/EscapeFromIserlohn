@@ -2,7 +2,7 @@
 extends State
 
 func enter():
-	pass
+	owner.play_anim("Chase")
 
 func physics_process(delta):
 	var enemy = owner

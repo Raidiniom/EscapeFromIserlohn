@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b3dx88dbl3jbv"]
+
+[ext_resource type="Texture2D" uid="uid://bry4kkaqsc31b" path="res://assets/textures/Skeleton_Mage_skeleton_texture.png" id="1_v2vd2"]
+
+[resource]
+resource_name = "skeleton"
+cull_mode = 2
+albedo_texture = ExtResource("1_v2vd2")
+roughness = 0.5

@@ -47,12 +47,14 @@ var pitch_input: float = 0.0
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var camera_3d: Camera3D = $SpringArm3D/Camera3D
 @onready var raycast_3d: RayCast3D = $SpringArm3D/Camera3D/RayCast3D
+@onready var state_machine = $StateMachine
 
 func _ready():
 	update_stats_display()
 	InputManager.scheme_changed.connect(_on_scheme_changed)
 	
 	_on_scheme_changed(InputManager.current_scheme)
+	state_machine.start()
 
 func _on_scheme_changed(scheme) -> void:
 	if scheme == InputManager.ControlScheme.MOBILE:

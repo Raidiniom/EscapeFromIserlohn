@@ -12,6 +12,7 @@ func enter():
 	# Trigger enrage if HP is low enough
 	if enemy.health <= enemy.max_health * 0.2:
 		enemy.trigger_enrage()
+		owner.play_anim("Spawn")
 	print(enemy.name + " entering phase 2")
 
 func physics_process(delta):

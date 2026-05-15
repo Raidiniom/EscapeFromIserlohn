@@ -7,19 +7,30 @@ class_name StateMachine
 var current_state: State
 var states: Dictionary = {}
 
+#func _ready():
+	#for child in get_children():
+		#if child is State:
+			#states[child.name.to_lower()] = child
+			#child.state_machine = self
+#
+	## Start the FSM
+	#if initial_state:
+		#current_state = get_node(initial_state)
+		#current_state.enter()
+	#else:
+		#push_error("Initial state not set for StateMachine!")
 func _ready():
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.state_machine = self
 
-	# Start the FSM
+func start():
 	if initial_state:
 		current_state = get_node(initial_state)
 		current_state.enter()
 	else:
 		push_error("Initial state not set for StateMachine!")
-
 func _process(delta):
 	if current_state:
 		current_state.process(delta)
