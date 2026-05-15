@@ -14,11 +14,8 @@ func enter():
 	finished = false
 	
 	enemy.velocity = Vector3.ZERO
-	
-	await get_tree().create_timer(1.2).timeout
-	
+	await get_tree().create_timer(enemy.summon_timer).timeout
 	summonning(enemy)
-	
 	enemy.summon_timer = enemy.summon_cooldown
 	
 
@@ -58,3 +55,4 @@ func summonning(enemy):
 
 func exit():
 	owner.is_summoning = false
+	

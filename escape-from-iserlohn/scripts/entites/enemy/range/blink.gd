@@ -28,6 +28,7 @@ func blink(enemy):
 	var blink_dist = enemy.blink_distance
 	
 	var target_pos = enemy.global_position + direction * blink_dist
+	target_pos.y = 0
 	
 	enemy.global_position = target_pos
 	
