@@ -190,10 +190,10 @@ func die() -> void:
 
 func respawn():
 	is_dead = false
-	
+	state_machine.start()
 	set_physics_process(true)
 	
-	global_position = Vector3(0, 1, 0)
+	global_position = Vector3(0, 0, 0)
 	
 	reset_stats()
 	update_stats_display()
