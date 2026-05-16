@@ -5,7 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dy52egbo7hyqq" path="res://scenes/ui/death_scene.tscn" id="4_6c6v5"]
 [ext_resource type="PackedScene" uid="uid://v2liuq4bsx7t" path="res://scenes/ui/overlay_menu.tscn" id="5_wbbl4"]
 [ext_resource type="PackedScene" uid="uid://bbkyb4dhdfacd" path="res://scenes/ui/settings.tscn" id="6_6c6v5"]
-[ext_resource type="PackedScene" uid="uid://wrh7djuaqlly" path="res://scenes/maps/map1.tscn" id="6_bhwwd"]
+[ext_resource type="PackedScene" uid="uid://bem16tjja4aw3" path="res://scenes/maps/map1.tscn" id="6_bhwwd"]
+[ext_resource type="AudioStream" uid="uid://b35tc4aa66lyl" path="res://assets/sounds/Battle Music.mp3" id="7_bhwwd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0x2k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,6 +19,7 @@ sky_material = SubResource("ProceduralSkyMaterial_e0x2k")
 background_mode = 2
 sky = SubResource("Sky_0biqy")
 tonemap_mode = 2
+volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0.40392157, 0.24705882, 0.21568628, 1)
 volumetric_fog_emission = Color(0.27450982, 0.15686275, 0.22745098, 1)
 
@@ -67,3 +69,7 @@ collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlantingArea" unique_id=1914332502]
 shape = SubResource("BoxShape3D_6c6v5")
+
+[node name="Battle" type="AudioStreamPlayer" parent="." unique_id=1672561752]
+stream = ExtResource("7_bhwwd")
+autoplay = true

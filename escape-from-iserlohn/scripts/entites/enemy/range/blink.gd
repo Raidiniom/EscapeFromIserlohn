@@ -15,6 +15,7 @@ func enter():
 	enemy.is_blinking = true
 	enemy.can_blink = false
 	
+	enemy.blink_sound.play()
 	blink(enemy)
 	
 

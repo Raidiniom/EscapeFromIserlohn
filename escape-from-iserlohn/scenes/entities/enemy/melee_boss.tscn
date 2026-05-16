@@ -6,11 +6,12 @@
 [ext_resource type="Material" uid="uid://b3dx88dbl3jbv" path="res://assets/materials/skeleton.tres" id="4_iqek8"]
 [ext_resource type="PackedScene" uid="uid://dyyeh3qlft6u5" path="res://assets/accessories/Skeleton_Axe.gltf" id="5_kues2"]
 [ext_resource type="AnimationLibrary" uid="uid://4hk4wruh3mx2" path="res://assets/animations/Libraries/Enemy.res" id="5_q5j4o"]
+[ext_resource type="PackedScene" uid="uid://depxf8ewlbsrj" path="res://assets/accessories/Skeleton_Shield_Large_A.gltf" id="6_kues2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt4vg"]
 albedo_color = Color(0.74509805, 0, 0.74509805, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_tlnux"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_e3de8"]
 _surfaces = [{
 "aabb": AABB(-0.7553061, 0.037572756, -0.75823385, 1.518559, 1.3369899, 1.4587709),
 "format": 34359742465,
@@ -42,7 +43,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("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I/Z/N7i7TD8l+/m+7ciLvS6WPD+9rQO/JZZ/N5XvVz9TQxi/I/Z/N7i7TD8l+/m+J16LvTtbQz+wBRS/8diLPSBvCD+ZiA6/JZZ/NwDTGT9hBCy/9iaLPSBvCD9hBCy/I/Z/Nz/pGT+YiA6/7ciLvSJvCD+ZiA6/JZZ/NwDTGT9hBCy/I/Z/Nz/pGT+YiA6/+BaLvSJvCD9hBCy/JZZ/N5XvVz9TQxi/J16LvTtbQz+wBRS/9iaLPZbeRz/86h6/JZZ/N1wljz9f0KM++BaLvTF5kj9lroM+61+LPXkdjj+Y63g+Swjko+n/vw7lF5+nCuawCo0XrKcP4+gK9yBanuSWQuLjCfGk6f+oDiMMZE/+/9prxQMJWvj/mxGvIIWe7pXO4BEhU44Ulfe/JSVfmdSSpM+FJOaHf57/vxEhU44Xlfu/vigJgLeo/7+LU8W2////Pyw7ga7///8/Miz3zf///7/ZFYPL////v7EUsNz///+/WjZW2////78wVc7P////P8Vhb7D///8/82XwqP///z81Xpyq////P2bi+dT///+/xclX2////7/D2cLc////v+jTEM7///+/ZuL51P///78564bc////vzbxwNf///+/l/C/phuZHUpC6G6nRJXyTJLvAKePmCdMv/d4oxGdGEBU/JVavKICQOLz0U/Vp/8/j+h3p6WVS07s3yKeJX4IQerbu5h52naJ+dv9kdn/fIpA1wmA/v9blDfa2Yju/3fwTZ6gr////z9Tmqio////Pwma8qj///8/FrGaqv///z/wn+yq////P9S0tav///8/NZ4Xr////z8To8TC////P8XJV9v///+/W7NLuP///z/o0xDO////v5TEuq7///8/NvHA1////79m4vnU////v+T13N3///+/OeuG3P///78f5+71evGHQdfdrv+M//4/4Rj59ev8wjjpysX/nP8BQEaz7//c/wJARrPv/+L/CED/f+v3/v//v3B/AfdF/1nBUX8W12v+bsGnfsnYCf3Ewj2CbsKs/cy92oh+tMj40LdQhDu6qf9AxD14U7Z98UbDrl3E8dj/yloxaGL4NP8ALVFeDfKj/xlbAmhH+G7/cCyqatL5B/9JVapq0vkQ/gpYh1Y29uj/9TBzVtjy0v9+VMBW4fbp/+kxnlbp+ub/MTieVun62/84OPepWByy43Lb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3JEBWZrZxtMYwU8sf8sr2xjBTyxuyw3bGMFPLA3LatoYwU8syMut24RFtEznpbFIhEW0TACmzkiERbRMOKYQSYRFtEyYpVZIe7HdDGyfmU17sd0MQp+jTXux3Qwbn6tNe7HdDImfk005aqmc8OP/vzlqqZzw4/+/OWqpnPDj/7+2q0Q8/v9r7nOyDTIKjGQ8tqtEPP//a+5LupAYF8r5P0O6Yhh1yvk/OUYFHPn/CF9VUdU1CpH/v1VR1TUKkf+//38AAP//HL//fwAA////v/9/AAAKkf8//38AAP//a24KfyNht/77v4xr11HV3SS6Z4FOV/7/B8EIcGFUj+U4vNNzzVC27P6/bnCbYFnr+b/qbwVjL+v6v3tytGhm7/C/WI2NT8PyNsx+h71RofdMxypiiUwryyPBjGvXUSfPacYIcGFU/tEzyH6HvVFI7hKtWI2NT3jygqtnmGtLnP2mqUS3WIz+/5Xeaau1l73+IaWFpbOcGP+pp4SqM5nV/Selb04gl9zCDMGJQP6IZbtuwHpS6pmqxmrAPDqObL2t/7+XAs//+f8aQJ4B///+//8/ngH//////z/b/v//////v5cCz//X/yxAwrV7Ti7/xZP5uH9Uff+hlFy+lF7//zLqP6rxOP7/gpAbWi8TG+99UFdrkArY/E8WaUQ/KP7/xBSzTZERMdQvTYuuOQyl554jR2lVEkf/ngrGQcYSBO3oTxm+dBEm4gs3pbmVk////z+htcmT////PxK6RZr///8/ErpFmv///z8WvFei////P8uRpcr///8/X4soyP///z8XjFrL////P42Zccr///8/FaOJxv///z/LkaXK////P8uRpcr///8/F4xay////z8SukWa////P3y6NK3///8/FrxXov///z/UtLWr////P5TEuq7///8/FrGaqv///z9bs0u4////P67eI8ics20/7Nj+rfeLw0Ls2P6tJDVo8erKcueV1khHacnT6BLYAkSWnT38HIINzZadPfx69xNN7Nj+rWg6dPA2qL29rub4n5adPfxshMfMraY5v6TlVaGt31JEHagZHrfUiGCpdCs7qxA36Ff/+U3nNE3FInbMyec0TcWkzvgZSewLdpe5pvrnNE3FK3bRyX+IL6R5+qi43s7deKjGB/K31IhgZ8Uz8gLjpov///8/q/OHiv///z+S8ECc////v/jqRaX///+/pSTgav///z9sC8Nk////v20KAnP///+/0Q6NX////7/TGQJx////PzNfz2R70BvD6ResaSRDjAe0hbhH6PHkrrSFuEe98Oat6Resaa1KSgg5qUYKle48LjmpRgrd7+QxCI3bSRX1ycsIjdtJcfqKywiN20k7/WrLCI3bSajy5cu4v/UGJ4JxXbi/9QY0gbFduL/1BmWA6F24v/UGzYJGXeQBCSH///+/5AEJIf///7/kAQkh////v+QBCSH///+/SWcqfP///z9JZyp8////P0lnKnz///8/SWcqfP///z/WrtVimujvZ9au1WKa6O9n1q7VYpro72ehzHbIqtrvf6HMdsim2up/ocx2yJfa2n+hzHbIutr+f10zdshYJRSAXTN2yFQlD4BdM3bIRCUAgF0zdshnJSSAME4FvWQXD5gwTgW9ZBcPmDBOBb1kFw+YzrEFvZro72fOsQW9mujvZ86xBb2a6O9nKFHVYmQXD5goUdViZBcPmChR1WJkFw+YgF5CQqHS4qnRTvxRZr6mnRhkqUDD1qCgE0+6UcW7hKYlseZRF8SF4Z2Zgj0Xwh7TLrHuUQevft+Pn15ADtjQ1SW5AlX///8/JbkCVf///z8luQJV////PyW5AlX///8/kDjMlg6nscmQOMyWDqexyZA4zJYOp7HJK0h8TVYmCIArSHxNLiYagCtIfE1g2TeAK0h8TZ0lXoDTt3xNqNn2f9O3fE3P2eR/07d8TWHaoH/Tt3xNnibHf7npCcz///+/0d/AwP///7+Zx3zH////vzLVQ7b///+/k7r81////7/quUy/////P9+qpc////8/TaFOv////z+xoOeq////P5MPK6e867UMHx3ppOz/DQWoEGqnOOdnDB8d6aTr/wwFagBPXv7/sBA5JQyZ7ZIqzwAmqpWok/+/cV4ir////z/0TViq////PwNGob////8/bkX41////79mOHnH////vwNGob////8/Zjh5x////7/MKkO2////vx8gm8D///+/jB3o1P///790JgDd////v8ZeKcD///8/cV4ir////z/n4uCkGIoJQEH2dqTrnP8/5+LgpBeKCkCJ/6te+6AAQLXf9J2sfRVBvtsomJHgRomR21iT2P8Pir3aaYrx/2XxtSNpiWCcAsBo78r/wv8AQGnvyv/B/wBA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")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_tlnux")
+shadow_mesh = SubResource("ArrayMesh_e3de8")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_w1u3m"]
 resource_name = "Skeleton_Warrior_Skeleton_Warrior_ArmLeft"
@@ -375,6 +376,7 @@ states/Chase/node = SubResource("AnimationNodeAnimation_44k8y")
 states/Chase/position = Vector2(365, 100)
 states/Death/node = SubResource("AnimationNodeAnimation_jwifq")
 states/Death/position = Vector2(381.87, 14)
+states/End/position = Vector2(902, 100)
 states/Hit/node = SubResource("AnimationNodeAnimation_cqbjg")
 states/Hit/position = Vector2(308.87, 189)
 states/Spawn/node = SubResource("AnimationNodeAnimation_q5j4o")
@@ -487,7 +489,7 @@ material_override = SubResource("StandardMaterial3D_bt4vg")
 [node name="Charge" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(1232592126) index="4" unique_id=870355006]
 script = ExtResource("3_udyd0")
 
-[node name="Rig_Medium" type="Node3D" parent="." index="6" unique_id=1549128337]
+[node name="Rig_Medium" type="Node3D" parent="." index="5" unique_id=1549128337]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.9049004, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="Rig_Medium" index="0" unique_id=1204198923]
@@ -502,159 +504,159 @@ bones/1/name = "hips"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, -2.3841855e-07, 0, 1, 0, 2.3841855e-07, 0, 1, 0, 0.40566343, 0)
 bones/1/enabled = true
-bones/1/position = Vector3(0, 0.39206383, 0)
-bones/1/rotation = Quaternion(-1.11122625e-10, 0.043157753, 2.5724098e-09, 0.9990683)
+bones/1/position = Vector3(1.05934905e-08, 0.39206383, -0.04443233)
+bones/1/rotation = Quaternion(-0.018304117, 0.009953009, 0.0010820088, 0.9997823)
 bones/1/scale = Vector3(0.99999994, 1, 0.99999994)
 bones/2/name = "spine"
 bones/2/parent = 1
 bones/2/rest = Transform3D(1, 0, 1.4210855e-14, 0, 1, 0, -1.4210855e-14, 0, 1, 0, 0.1919775, 0)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 0.1919775, 0)
-bones/2/rotation = Quaternion(-6.938893e-18, 7.1054274e-15, 4.93038e-32, 1)
+bones/2/rotation = Quaternion(0.05348683, -0.05699959, 0.009288563, 0.99689716)
 bones/2/scale = Vector3(1.0000001, 1, 1.0000001)
 bones/3/name = "chest"
 bones/3/parent = 2
 bones/3/rest = Transform3D(1, 0, -1.6940659e-21, 0, 0.99999994, 0, 1.6940659e-21, 0, 1, 0, 0.37498796, 0)
 bones/3/enabled = true
 bones/3/position = Vector3(0, 0.37498796, 0)
-bones/3/rotation = Quaternion(0.046398327, 1.1071469e-08, 0.004016135, 0.99891496)
+bones/3/rotation = Quaternion(-0.08445776, -0.16042666, -0.04366615, 0.9824579)
 bones/3/scale = Vector3(1, 0.9999999, 1)
 bones/4/name = "upperarm.r"
 bones/4/parent = 3
 bones/4/rest = Transform3D(0.05728419, -0.99835724, 4.4361707e-07, 5.6624367e-07, 4.7683673e-07, 0.99999976, -0.99835724, -0.05728419, 5.9262936e-07, -0.21200737, 0.13413215, 8.402462e-08)
 bones/4/enabled = true
-bones/4/position = Vector3(-0.21200736, 0.13413227, 8.487841e-08)
-bones/4/rotation = Quaternion(-0.62623674, 0.12887873, 0.6789402, 0.36091295)
-bones/4/scale = Vector3(0.99999887, 0.99999875, 0.99999964)
+bones/4/position = Vector3(-0.22744502, 0.12614313, -0.03093347)
+bones/4/rotation = Quaternion(-0.76450837, 0.602206, 0.18467773, 0.13699996)
+bones/4/scale = Vector3(0.99999905, 0.9999985, 0.9999996)
 bones/5/name = "lowerarm.r"
 bones/5/parent = 4
 bones/5/rest = Transform3D(0.99388725, -0.11040192, 1.2453701e-07, 0.110401966, 0.9938869, 3.9025445e-09, -1.2420661e-07, 9.87044e-09, 0.99999994, -7.1219225e-11, 0.24189733, -1.1940561e-07)
 bones/5/enabled = true
 bones/5/position = Vector3(-7.1219225e-11, 0.24189733, -1.1940561e-07)
-bones/5/rotation = Quaternion(3.3321733e-08, 4.6329838e-08, 0.30524194, 0.9522749)
-bones/5/scale = Vector3(1.0000005, 0.9999998, 1.0000002)
+bones/5/rotation = Quaternion(1.3384159e-08, 7.6392226e-08, 0.58268523, 0.812698)
+bones/5/scale = Vector3(1.0000002, 0.9999999, 0.99999994)
 bones/6/name = "wrist.r"
 bones/6/parent = 5
 bones/6/rest = Transform3D(0.99857867, 0.053297248, 6.1252675e-10, -0.053297248, 0.99857867, -1.1873953e-10, -6.1798466e-10, 8.592478e-11, 0.99999994, -7.426282e-09, 0.26004383, 6.127964e-11)
 bones/6/enabled = true
 bones/6/position = Vector3(-7.426282e-09, 0.26004383, 6.127964e-11)
-bones/6/rotation = Quaternion(-3.002606e-08, -9.604189e-09, -0.026658088, 0.99964464)
-bones/6/scale = Vector3(1.0000001, 1.0000001, 1)
+bones/6/rotation = Quaternion(7.300499e-09, -7.3388096e-09, -0.0266581, 0.99964464)
+bones/6/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/7/name = "hand.r"
 bones/7/parent = 6
 bones/7/rest = Transform3D(1, -1.091039e-05, -1.8421935e-07, 1.0910391e-05, 0.99999994, -2.4008373e-09, 1.8421939e-07, 2.3988274e-09, 0.99999994, 3.996803e-15, 0.073825836, -2.220446e-16)
 bones/7/enabled = true
 bones/7/position = Vector3(3.996803e-15, 0.073825836, -2.220446e-16)
-bones/7/rotation = Quaternion(-0.1660994, 0.2390854, -0.07152497, 0.9540091)
-bones/7/scale = Vector3(0.99999964, 1, 1.0000005)
+bones/7/rotation = Quaternion(-0.16016923, 0.37126887, -0.13144611, 0.9051117)
+bones/7/scale = Vector3(1, 0.99999994, 0.99999994)
 bones/8/name = "handslot.r"
 bones/8/parent = 7
 bones/8/rest = Transform3D(-1.1920929e-07, -1, 3.4460874e-16, 0.99999994, -1.192093e-07, -4.7534323e-09, 4.7534323e-09, -2.2204463e-16, 0.99999994, -5.1389204e-10, 0.09612507, -0.057500124)
 bones/8/enabled = true
-bones/8/position = Vector3(-5.138423e-10, 0.096125096, -0.057500005)
-bones/8/rotation = Quaternion(-6.2431266e-10, -3.9854977e-09, 0.7071068, 0.7071067)
-bones/8/scale = Vector3(1, 1.0000001, 1)
+bones/8/position = Vector3(-1.541501e-08, 0.096125126, -0.057499975)
+bones/8/rotation = Quaternion(-0.00095683336, 0.25890425, 0.8144574, 0.51925606)
+bones/8/scale = Vector3(1, 1.0000001, 1.0000001)
 bones/9/name = "upperarm.l"
 bones/9/parent = 3
 bones/9/rest = Transform3D(0.057284202, 0.9983573, -4.5386042e-07, -3.8742996e-07, 4.768369e-07, 0.99999976, 0.9983573, -0.057284202, 4.1410917e-07, 0.21200737, 0.13413215, 8.402462e-08)
 bones/9/enabled = true
-bones/9/position = Vector3(0.21200736, 0.13413227, 8.487841e-08)
-bones/9/rotation = Quaternion(-0.55467385, -0.19844319, -0.73473555, 0.33633482)
-bones/9/scale = Vector3(0.9999991, 0.99999905, 0.99999964)
+bones/9/position = Vector3(0.21192999, 0.13439493, -0.006953351)
+bones/9/rotation = Quaternion(-0.62692946, -0.20764796, -0.45217204, 0.59948504)
+bones/9/scale = Vector3(0.9999991, 0.9999986, 0.9999996)
 bones/10/name = "lowerarm.l"
 bones/10/parent = 9
 bones/10/rest = Transform3D(0.99388725, 0.11040192, -1.2453701e-07, -0.110401966, 0.9938869, 3.9025445e-09, 1.2420661e-07, 9.87044e-09, 0.99999994, -3.2196643e-09, 0.2418973, -1.1940561e-07)
 bones/10/enabled = true
 bones/10/position = Vector3(-3.2196643e-09, 0.2418973, -1.1940561e-07)
-bones/10/rotation = Quaternion(4.7995222e-08, -5.210764e-08, -0.2991361, 0.9542105)
-bones/10/scale = Vector3(1.0000004, 0.9999999, 1)
+bones/10/rotation = Quaternion(1.762264e-08, -3.1673565e-08, -0.6813619, 0.7319467)
+bones/10/scale = Vector3(1.0000002, 0.9999999, 0.99999994)
 bones/11/name = "wrist.l"
 bones/11/parent = 10
 bones/11/rest = Transform3D(0.99857867, -0.053297248, -6.125374e-10, 0.053297248, 0.99857867, -1.1874038e-10, 6.179954e-10, 8.5925066e-11, 0.99999994, 7.426282e-09, 0.26004383, 6.127964e-11)
 bones/11/enabled = true
 bones/11/position = Vector3(7.426282e-09, 0.26004383, 6.127964e-11)
-bones/11/rotation = Quaternion(2.6357031e-11, 6.232488e-10, 0.026658094, 0.99964464)
-bones/11/scale = Vector3(1.0000001, 1, 1)
+bones/11/rotation = Quaternion(7.250843e-09, 9.200791e-09, 0.026658095, 0.99964464)
+bones/11/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/12/name = "hand.l"
 bones/12/parent = 11
 bones/12/rest = Transform3D(1, 1.091039e-05, 2.7178578e-07, -1.0910391e-05, 0.99999994, -2.40181e-09, -2.7178584e-07, 2.398845e-09, 0.99999994, 9.054979e-13, 0.073825836, -2.220446e-16)
 bones/12/enabled = true
 bones/12/position = Vector3(9.054979e-13, 0.073825836, -2.220446e-16)
-bones/12/rotation = Quaternion(-0.22725627, -0.25134227, -0.14045878, 0.93029726)
-bones/12/scale = Vector3(0.99999994, 0.9999999, 1.0000002)
+bones/12/rotation = Quaternion(-0.07254455, -0.16520613, 0.14996916, 0.97208714)
+bones/12/scale = Vector3(1, 0.99999994, 0.99999994)
 bones/13/name = "handslot.l"
 bones/13/parent = 12
 bones/13/rest = Transform3D(-1.1920929e-07, 1, -3.4461551e-16, -0.99999994, -1.192093e-07, -4.753489e-09, -4.753489e-09, -2.2204463e-16, 0.99999994, 5.1389204e-10, 0.09612507, -0.057500124)
 bones/13/enabled = true
-bones/13/position = Vector3(5.138494e-10, 0.096125126, -0.057500064)
-bones/13/rotation = Quaternion(-0.025259208, -0.0006135409, -0.5007622, 0.86521614)
-bones/13/scale = Vector3(1.0000001, 1, 1)
+bones/13/position = Vector3(-6.936717e-09, 0.096125185, -0.057500005)
+bones/13/rotation = Quaternion(6.9489685e-09, -3.587743e-09, -0.7071068, 0.7071067)
+bones/13/scale = Vector3(0.99999994, 1, 0.99999994)
 bones/14/name = "head"
 bones/14/parent = 3
 bones/14/rest = Transform3D(1, 0, 8.4703295e-22, 0, 1, 0, -8.4703295e-22, 0, 1, 0, 0.26879656, 0)
 bones/14/enabled = true
 bones/14/position = Vector3(0, 0.26879656, 0)
-bones/14/rotation = Quaternion(0.067226626, -0.04391859, 0.04702597, 0.9956607)
-bones/14/scale = Vector3(1.0000001, 1, 0.99999994)
+bones/14/rotation = Quaternion(0.0042982535, 0.24178883, 0.057012312, 0.96864307)
+bones/14/scale = Vector3(1, 0.99999994, 1)
 bones/15/name = "upperleg.l"
 bones/15/parent = 1
 bones/15/rest = Transform3D(1, -1.4221489e-07, -2.6560253e-08, -1.4305179e-07, -0.9993962, -0.034741182, -2.1603478e-08, 0.034741133, -0.9993976, 0.17094506, 0.11358726, 1.3923272e-08)
 bones/15/enabled = true
-bones/15/position = Vector3(0.17094508, 0.1135872, 1.5994095e-08)
-bones/15/rotation = Quaternion(0.99371517, 0.08371457, 0.07350378, 0.0109185325)
-bones/15/scale = Vector3(0.99999994, 0.9999997, 1.0000008)
+bones/15/position = Vector3(0.16180167, 0.1135873, 0.04990003)
+bones/15/rotation = Quaternion(0.9753925, 0.009447682, 0.010069099, 0.22004262)
+bones/15/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
 bones/16/name = "lowerleg.l"
 bones/16/parent = 15
 bones/16/rest = Transform3D(1, 1.612898e-07, 1.2085522e-07, -1.3211937e-07, 0.9774329, -0.21124826, -1.5219996e-07, 0.21124834, 0.97743255, 3.5798609e-09, 0.2270775, -6.1393925e-09)
 bones/16/enabled = true
 bones/16/position = Vector3(3.5798609e-09, 0.2270775, -6.1393925e-09)
-bones/16/rotation = Quaternion(0.19560215, 6.2622235e-08, -1.3223872e-07, 0.9806833)
-bones/16/scale = Vector3(1.0000004, 0.9999999, 0.99999994)
+bones/16/rotation = Quaternion(0.48081207, 5.989817e-08, -3.3360246e-07, 0.87682366)
+bones/16/scale = Vector3(1, 1.0000005, 1.0000001)
 bones/17/name = "foot.l"
 bones/17/parent = 16
 bones/17/rest = Transform3D(1, 4.6432643e-08, 6.012488e-08, -7.5927986e-08, 0.5855154, 0.8106606, 2.4370657e-09, -0.81066227, 0.5855142, 1.8315821e-10, 0.14943703, 9.667923e-10)
 bones/17/enabled = true
 bones/17/position = Vector3(1.8315821e-10, 0.14943703, 9.667923e-10)
-bones/17/rotation = Quaternion(-0.517564, -0.2094967, 0.043654874, 0.82845217)
-bones/17/scale = Vector3(0.99999964, 1.0000006, 0.99999946)
+bones/17/rotation = Quaternion(-0.45592558, 0.003257864, 0.0124284355, 0.88992524)
+bones/17/scale = Vector3(1, 1.0000008, 0.99999875)
 bones/18/name = "toes.l"
 bones/18/parent = 17
 bones/18/rest = Transform3D(-1, 1.332896e-07, 6.943393e-08, 4.2534086e-08, 0.6941041, -0.7198751, -1.4414618e-07, -0.71987, -0.694109, -1.5114125e-08, 0.16565003, 5.1719273e-09)
 bones/18/enabled = true
 bones/18/position = Vector3(-1.5114125e-08, 0.16565003, 5.1719273e-09)
-bones/18/rotation = Quaternion(0.00011178441, 0.92025787, -0.39131266, -2.5241658e-05)
-bones/18/scale = Vector3(0.99999994, 0.99999774, 1.0000024)
+bones/18/rotation = Quaternion(-2.9926294e-05, 0.8406789, -0.541534, 9.80463e-06)
+bones/18/scale = Vector3(1, 0.9999977, 1.0000024)
 bones/19/name = "upperleg.r"
 bones/19/parent = 1
 bones/19/rest = Transform3D(1, 1.4961098e-07, -6.086259e-08, 1.4740625e-07, -0.9993962, -0.034741182, -6.6023425e-08, 0.034741133, -0.9993976, -0.17094506, 0.11358726, 1.3923272e-08)
 bones/19/enabled = true
-bones/19/position = Vector3(-0.17094508, 0.11358732, 1.557549e-08)
-bones/19/rotation = Quaternion(0.9973222, -0.029457364, 0.03152927, 0.05904832)
+bones/19/position = Vector3(-0.15708114, 0.11358726, -0.01545709)
+bones/19/rotation = Quaternion(0.99319184, -0.06008943, -0.0077115167, 0.099498205)
 bones/19/scale = Vector3(0.9999999, 0.99999976, 1.0000008)
 bones/20/name = "lowerleg.r"
 bones/20/parent = 19
 bones/20/rest = Transform3D(1, -1.612898e-07, -1.2085526e-07, 1.3211935e-07, 0.9774329, -0.21124826, 1.522e-07, 0.21124834, 0.97743255, -3.5798609e-09, 0.2270775, -6.1393925e-09)
 bones/20/enabled = true
 bones/20/position = Vector3(-3.5798609e-09, 0.2270775, -6.1393925e-09)
-bones/20/rotation = Quaternion(0.2740081, -6.3812955e-08, 1.927607e-07, 0.9617275)
-bones/20/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
+bones/20/rotation = Quaternion(0.6212825, -5.2328925e-08, 4.2706384e-07, 0.7835866)
+bones/20/scale = Vector3(1, 1.0000005, 1.0000001)
 bones/21/name = "foot.r"
 bones/21/parent = 20
 bones/21/rest = Transform3D(1, -1.5513098e-07, 2.9352051e-07, -1.471147e-07, 0.5855154, 0.8106606, -2.976195e-07, -0.81066227, 0.5855142, -1.8315699e-10, 0.14943703, 9.667975e-10)
 bones/21/enabled = true
 bones/21/position = Vector3(-1.8315699e-10, 0.14943703, 9.667975e-10)
-bones/21/rotation = Quaternion(-0.5590394, 0.11451276, -0.008627633, 0.82115)
-bones/21/scale = Vector3(0.99999976, 1.0000006, 0.9999992)
+bones/21/rotation = Quaternion(-0.6694408, 0.14529482, -0.048924953, 0.72687334)
+bones/21/scale = Vector3(1, 1.0000008, 0.99999875)
 bones/22/name = "toes.r"
 bones/22/parent = 21
 bones/22/rest = Transform3D(-1, 8.9513634e-08, 1.0213962e-07, -1.13950165e-08, 0.6941041, -0.7198751, -1.3533412e-07, -0.71987, -0.694109, 2.129614e-10, 0.16565003, 5.1719318e-09)
 bones/22/enabled = true
 bones/22/position = Vector3(2.129614e-10, 0.16565003, 5.1719318e-09)
-bones/22/rotation = Quaternion(-8.9348905e-05, 0.9202216, -0.39139763, 2.0290994e-05)
-bones/22/scale = Vector3(1.0000002, 0.9999979, 1.0000024)
+bones/22/rotation = Quaternion(2.8833412e-05, 0.92006177, -0.3917734, -5.852946e-06)
+bones/22/scale = Vector3(1, 0.9999966, 1.0000037)
 
 [node name="head" type="BoneAttachment3D" parent="Rig_Medium/Skeleton3D" index="0" unique_id=753845897]
-transform = Transform3D(0.99611235, -0.08798988, 0.0042921975, 0.08662243, 0.96943367, -0.22955328, 0.016037375, 0.22903265, 0.9732866, -3.9210004e-09, 1.2266599, 0.025009522)
+transform = Transform3D(0.9968449, -0.011868374, 0.07848257, 0.0053048804, 0.9965089, 0.08331491, -0.07919741, -0.08263574, 0.993428, 0.017517783, 1.224571, -0.044672385)
 bone_name = "head"
 bone_idx = 14
 
@@ -708,16 +710,24 @@ skin = SubResource("Skin_e3de8")
 skeleton = NodePath("..")
 
 [node name="Right_Hand" type="BoneAttachment3D" parent="Rig_Medium/Skeleton3D" index="10" unique_id=436575837]
-transform = Transform3D(-0.275081, -0.09422738, -0.9567923, -0.95866615, 0.102150016, 0.26556104, 0.07271298, 0.9902954, -0.118432276, -0.5227282, 0.5521242, 0.07118933)
+transform = Transform3D(-0.28628957, 0.46606037, -0.8371521, 0.8349776, 0.54989666, 0.020592503, 0.46994513, -0.69310945, -0.5465802, -0.64825726, 1.3749877, -0.11217284)
 bone_name = "handslot.r"
 bone_idx = 8
 
 [node name="Skeleton_Axe2" parent="Rig_Medium/Skeleton3D/Right_Hand" index="0" unique_id=1324317871 instance=ExtResource("5_kues2")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7" unique_id=98190989]
+[node name="LeftHand" type="BoneAttachment3D" parent="Rig_Medium/Skeleton3D" index="11" unique_id=2120563964]
+transform = Transform3D(-0.39178595, -0.65364826, 0.64749163, 0.4965523, 0.4422388, 0.7468994, -0.7745561, 0.6141389, 0.15130782, 0.48841053, 0.8290488, 0.38537896)
+bone_name = "handslot.l"
+bone_idx = 13
+
+[node name="Skeleton_Shield_Large_A2" parent="Rig_Medium/Skeleton3D/LeftHand" index="0" unique_id=1589080580 instance=ExtResource("6_kues2")]
+transform = Transform3D(1.5, -8.526513e-14, -7.433208e-14, 8.526513e-14, 1.5, -1.7053028e-13, 7.433208e-14, 1.7053028e-13, 1.5, -5.9604645e-08, -1.00443e-07, 0.16110861)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6" unique_id=98190989]
 libraries/Enemy = ExtResource("5_q5j4o")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="8" unique_id=230248228]
+[node name="AnimationTree" type="AnimationTree" parent="." index="7" unique_id=230248228]
 tree_root = SubResource("AnimationNodeStateMachine_30e5l")
 anim_player = NodePath("../AnimationPlayer")
 

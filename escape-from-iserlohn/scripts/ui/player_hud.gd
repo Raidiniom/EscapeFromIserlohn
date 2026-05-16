@@ -17,6 +17,11 @@ extends Control
 	$SeedBar/SeedBtn5,
 ]
 
+@onready var joystick = $MoveJoystick
+@onready var jumpbtn = $JumpButton
+@onready var sprintbt  = $SprintButton
+@onready var plantbtn = $PlantButton
+
 func _ready() -> void:
 	player.connect("stats_changed", update_hud)
 	
@@ -34,6 +39,10 @@ func _ready() -> void:
 
 func _on_scheme_changed(scheme) -> void:
 	var is_mobile = scheme == InputManager.ControlScheme.MOBILE
+	joystick.visible = is_mobile
+	jumpbtn.visible = is_mobile
+	sprintbt.visible = is_mobile
+	plantbtn.visible = is_mobile
 	
 
 func _process(_delta: float) -> void:

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BossData" format=3 uid="uid://dmch0nt1yd3e3"]
 
-[ext_resource type="Script" path="res://scripts/entites/resource/enemydata/boss_data.gd" id="1_qbend"]
+[ext_resource type="Script" uid="uid://c4gtvbjc4c5x1" path="res://scripts/entites/resource/enemydata/boss_data.gd" id="1_qbend"]
 
 [resource]
 script = ExtResource("1_qbend")

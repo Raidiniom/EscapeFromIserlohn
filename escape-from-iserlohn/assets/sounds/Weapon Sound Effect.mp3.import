@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d1ihmec6rullp"
+path="res://.godot/imported/Weapon Sound Effect.mp3-f0da4ad7834d2cde36dad215b194325e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Weapon Sound Effect.mp3"
+dest_files=["res://.godot/imported/Weapon Sound Effect.mp3-f0da4ad7834d2cde36dad215b194325e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

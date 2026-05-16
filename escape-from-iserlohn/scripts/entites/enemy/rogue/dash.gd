@@ -57,6 +57,7 @@ func dash(delta):
 	enemy.velocity.x = direction.x * enemy.speed * enemy.dash_speed_multiplier
 	enemy.velocity.z = direction.z * enemy.speed * enemy.dash_speed_multiplier
 	
+	enemy.dash_sound.play()
 	enemy.move_and_slide()
 
 

@@ -2,13 +2,13 @@
 extends CharacterBody3D
 # Player stats
 @export_category("Player Stats")
-@export var health : float = 200.0
+@export var health : float = 100.0
 @export var max_health : float = 100.0
-@export var base_damage : float = 250.0
+@export var base_damage : float = 25.0
 @export var armor : float = 10.0
-@export var attack_speed : float = 20.0
-@export var movement_speed : float = 16.0
-@export var sprint_speed : float = 20.0
+@export var attack_speed : float = 3.0
+@export var movement_speed : float = 6.0
+@export var sprint_speed : float = 10.0
 @export var luck_stat : float = 2.0
 var level : int = 1
 var exp : float = 0.0
@@ -49,12 +49,24 @@ var pitch_input: float = 0.0
 @onready var raycast_3d: RayCast3D = $SpringArm3D/Camera3D/RayCast3D
 @onready var state_machine = $StateMachine
 
+@onready var anim_tree = $AnimationTree
+@onready var anim_playback: AnimationNodeStateMachinePlayback
+
+@onready var attack_sound = $Attack
+@onready var plant_sound = $Plant
+@onready var death_sound = $Death
+
 func _ready():
+	anim_tree.active = true
+	anim_playback = anim_tree["parameters/playback"]
+	
 	update_stats_display()
 	InputManager.scheme_changed.connect(_on_scheme_changed)
 	
-	_on_scheme_changed(InputManager.current_scheme)
+	_on_scheme_changed(InputManager.current_scheme)  
 	state_machine.start()
+	play_anim("Idle")
+	
 
 func _on_scheme_changed(scheme) -> void:
 	if scheme == InputManager.ControlScheme.MOBILE:
@@ -105,6 +117,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func regen_health():
 	pass
 	
+
+func play_anim(anim_name: String) -> void:
+	anim_playback.travel(anim_name)
 
 func increase_max_health(amount):
 	max_health += amount
@@ -163,10 +178,13 @@ func die() -> void:
 		return
 	
 	is_dead = true
-	
+	death_sound.play()
+	await death_sound.finished
 	set_physics_process(false)
-	
+	state_machine.stop()
 	await get_tree().create_timer(1.0).timeout
+	
+	
 	DeathManager.show_death()
 	
 
@@ -215,6 +233,8 @@ func handle_auto_attack(delta: float) -> void:
 	attack_timer -= delta
 	
 	if attack_timer <= 0.0:
+		attack_sound.play()
+		play_anim("Attack")
 		fire_projectile()
 		attack_timer = 1.0 / attack_speed
 	
@@ -248,6 +268,7 @@ func fire_projectile() -> void:
 		return
 	
 	get_tree().current_scene.add_child(projectile)
+	
 
 func update_stats_display():
 	var display_text = "=== PLAYER STATS ===\n"

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b51redmucvxsy"]
+
+[ext_resource type="Texture2D" uid="uid://bikqdhaak17o4" path="res://assets/textures/Knight_knight_texture.png" id="1_b560w"]
+
+[resource]
+resource_name = "knight"
+cull_mode = 2
+albedo_texture = ExtResource("1_b560w")
+roughness = 0.5

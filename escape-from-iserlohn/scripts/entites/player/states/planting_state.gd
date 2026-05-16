@@ -8,7 +8,8 @@ var plant_model: PackedScene
 
 func enter():
 	timer = 0.0
-	
+	owner.plant_sound.play()
+	owner.play_anim("Plant")
 	spawn_plant()
 
 func spawn_plant():

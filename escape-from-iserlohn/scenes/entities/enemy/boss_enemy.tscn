@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bn7at12mxiq4l" path="res://scenes/entities/other/summoner_bullet.tscn" id="7_7sd62"]
 [ext_resource type="Script" uid="uid://bc37sfjxbumd0" path="res://scripts/entites/enemy/boss/phase_transition.gd" id="8_n43ye"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_h2g7i"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dwffc"]
 
 [node name="BossEnemy" type="CharacterBody3D" unique_id=626612808]
@@ -21,9 +19,6 @@ script = ExtResource("1_bayy0")
 [node name="Label3D" type="Label3D" parent="." unique_id=1833955019]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.5, 0)
 text = "Boss Name"
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1976656781]
-mesh = SubResource("CapsuleMesh_h2g7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=152918703]
 shape = SubResource("CapsuleShape3D_dwffc")

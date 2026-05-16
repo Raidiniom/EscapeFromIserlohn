@@ -31,6 +31,13 @@ func start():
 		current_state.enter()
 	else:
 		push_error("Initial state not set for StateMachine!")
+	
+
+func stop():
+	if current_state:
+		current_state.exit()
+		current_state = null
+
 func _process(delta):
 	if current_state:
 		current_state.process(delta)

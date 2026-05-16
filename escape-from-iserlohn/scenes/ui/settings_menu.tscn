@@ -1,32 +1,33 @@
 [gd_scene format=3 uid="uid://cytymy4hyp4vt"]
 
 [ext_resource type="Script" uid="uid://dw1xvmg7diu7u" path="res://scripts/ui/settings_menu.gd" id="1_qwcqe"]
+[ext_resource type="Texture2D" uid="uid://d1npeu6ewefe5" path="res://assets/pictures/menu_bg.png" id="2_mhswj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qwcqe"]
-font_color = Color(0, 0, 0, 1)
 font_size = 28
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+content_margin_left = 20.0
+content_margin_top = 14.0
+content_margin_right = 20.0
+content_margin_bottom = 14.0
 bg_color = Color(0.18431373, 0.2784314, 0.21176471, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
-corner_radius_bottom_left = 10
 corner_radius_bottom_right = 10
-content_margin_left = 20.0
-content_margin_right = 20.0
-content_margin_top = 14.0
-content_margin_bottom = 14.0
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_footer_btn"]
+content_margin_left = 28.0
+content_margin_top = 16.0
+content_margin_right = 28.0
+content_margin_bottom = 16.0
 bg_color = Color(0.18431373, 0.2784314, 0.21176471, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
-corner_radius_bottom_left = 10
 corner_radius_bottom_right = 10
-content_margin_left = 28.0
-content_margin_right = 28.0
-content_margin_top = 16.0
-content_margin_bottom = 16.0
+corner_radius_bottom_left = 10
 
 [node name="Settings_Menu" type="Control" unique_id=618800622]
 layout_mode = 3
@@ -37,22 +38,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qwcqe")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1479283948]
+[node name="ColorRect2" type="TextureRect" parent="." unique_id=607886003]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.27058825, 1, 1, 1)
+texture = ExtResource("2_mhswj")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Title" type="Label" parent="." unique_id=111111111]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.0
-anchor_top = 0.0
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.0
 offset_top = 48.0
 offset_bottom = 100.0
 grow_horizontal = 2
@@ -73,73 +73,73 @@ offset_right = 240.0
 offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 2
 theme_override_constants/h_separation = 24
 theme_override_constants/v_separation = 20
+columns = 2
 
 [node name="Forward" type="Label" parent="LabelContainer" unique_id=1145238630]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Forward"
 label_settings = SubResource("LabelSettings_qwcqe")
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="LabelContainer" unique_id=1276770336]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="Backward" type="Label" parent="LabelContainer" unique_id=765831262]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Backward"
 label_settings = SubResource("LabelSettings_qwcqe")
 vertical_alignment = 1
 
 [node name="Button2" type="Button" parent="LabelContainer" unique_id=926200699]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="LeftStrafe" type="Label" parent="LabelContainer" unique_id=36876413]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Left Strafe"
 label_settings = SubResource("LabelSettings_qwcqe")
 vertical_alignment = 1
 
 [node name="Button3" type="Button" parent="LabelContainer" unique_id=674942390]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="RightStrafe" type="Label" parent="LabelContainer" unique_id=1034706654]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Right Strafe"
 label_settings = SubResource("LabelSettings_qwcqe")
 vertical_alignment = 1
 
 [node name="Button4" type="Button" parent="LabelContainer" unique_id=638792885]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="Interact" type="Label" parent="LabelContainer" unique_id=857600361]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Interact"
 label_settings = SubResource("LabelSettings_qwcqe")
 vertical_alignment = 1
 
 [node name="Button5" type="Button" parent="LabelContainer" unique_id=388008169]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="Footer" type="HBoxContainer" parent="." unique_id=2067871002]
 layout_mode = 1
-anchor_left = 0.0
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -147,26 +147,26 @@ offset_top = -120.0
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
-alignment = 1
 theme_override_constants/separation = 24
+alignment = 1
 
 [node name="Back" type="Button" parent="Footer" unique_id=730481757]
-layout_mode = 2
 custom_minimum_size = Vector2(160, 72)
-text = "Back"
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_footer_btn")
+text = "Back"
 
 [node name="Reset" type="Button" parent="Footer" unique_id=1829043431]
-layout_mode = 2
 custom_minimum_size = Vector2(160, 72)
-text = "Reset"
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_footer_btn")
+text = "Reset"
 
 [node name="Confirm" type="Button" parent="Footer" unique_id=1103131485]
-layout_mode = 2
 custom_minimum_size = Vector2(160, 72)
-text = "Confirm"
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_footer_btn")
+text = "Confirm"
 
 [connection signal="pressed" from="LabelContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="LabelContainer/Button2" to="." method="_on_button_2_pressed"]

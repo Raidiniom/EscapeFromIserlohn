@@ -53,34 +53,43 @@ var exp_reward: float = 10
 
 # Animation Tree
 @onready var anim_tree: AnimationTree = $AnimationTree
-@onready var anim_playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
+@onready var anim_playback: AnimationNodeStateMachinePlayback
+
+@onready var blink_sound = $Blink
+@onready var dash_sound = $Dash
+@onready var summon_sound = $Summoning
+@onready var death_sound = $Death
+@onready var block_sound = $Block
 
 func _ready() -> void:
 	anim_tree.active = true
+	anim_playback = anim_tree["parameters/playback"]
+
 	if data != null:
 		apply_data()
 	else:
 		print("No Enemy Data Assigned")
+
 	health_display.text = str(floor(health))
-	
+
 	var radius = 2.0
 	target_offset = Vector3(
 		randf_range(-radius, radius),
 		0,
 		randf_range(-radius, radius)
 	)
-	
+
 	# Start FSM last, after all @onready vars are ready
 	state_machine.start()
 	play_anim("Spawn")
-	
+
 func play_anim(anim_name: String) -> void:
 	anim_playback.travel(anim_name)
 
 func apply_data():
 	var round = GameManager.current_round
 	exp_reward *= (1 + round * 0.2)
-	
+
 	health = data.health
 	speed = data.speed
 	armor = data.armor
@@ -89,19 +98,19 @@ func apply_data():
 	attack_range = data.attack_range
 	attack_type = data.attack_type
 	counts_for_round = data.counts_for_round
-	
+
 	# Dash Stats
 	can_dash = data.can_dash
 	dash_speed_multiplier = data.dash_speed_multiplier
 	dash_cooldown = data.dash_cooldown
 	dash_min_range = data.dash_min_range
 	dash_max_range = data.dash_max_range
-	
+
 	# Blink Stats
 	can_blink = data.can_blink
 	blink_distance = data.blink_distance
 	blink_cooldown = data.blink_cooldown
-	
+
 	# Summoning Stats
 	can_summon = data.can_summon
 	summon_count = data.summon_count
@@ -109,38 +118,37 @@ func apply_data():
 	summon_timer = data.summon_timer
 	summon_range = data.summon_range
 	summon_scene = data.summon_scene
-	
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
+		# Freeze all velocity so corpse doesn't slide
+		velocity = Vector3.ZERO
 		return
-	
+
 	if can_summon:
 		summon_timer -= delta
-	
 
 func move_to_target(delta):
 	if player_target == null:
 		return
-	
+
 	if is_dashing:
 		return
-	
+
 	var direction = Vector3.ZERO
-	
+
 	direction += get_seek_force()
 	direction += get_separation_force() * 1.5
 	direction += get_offset_force()
-	
+
 	direction.y = 0
-	
+
 	if direction.length() < 0.01:
 		return
-	
+
 	direction = direction.normalized()
-	
+
 	apply_movement(direction, delta)
-	
 
 func get_seek_force() -> Vector3:
 	var target_pos = player_target.global_position
@@ -152,66 +160,71 @@ func get_offset_force() -> Vector3:
 
 func apply_movement(direction: Vector3, delta: float):
 	var distance = global_position.distance_to(player_target.global_position)
-	
+
 	# Stop at attack range
 	if distance <= attack_range:
 		velocity.x = 0
 		velocity.z = 0
 		return
-	
+
 	# Smooth slow down
 	var slow_radius = attack_range + 1.5
 	var move_speed = speed
-	
+
 	if distance < slow_radius:
 		move_speed = speed * (distance / slow_radius)
-	
+
 	# Smooth rotation
 	var target_basis = Basis().looking_at(direction, Vector3.UP)
 	transform.basis = transform.basis.slerp(target_basis, 5 * delta).orthonormalized()
-	
+
 	velocity.x = direction.x * move_speed
 	velocity.z = direction.z * move_speed
-	
+
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	else:
 		velocity.y = 0
-	
+
 	move_and_slide()
 
 func get_separation_force() -> Vector3:
 	var separation_radius = 2.0
 	var force = Vector3.ZERO
-	
+
 	for other in get_tree().get_nodes_in_group("enemy"):
 		if other == self:
 			continue
-		
+
 		var diff = global_position - other.global_position
 		var dist = diff.length()
-		
+
 		if dist > 0 and dist < separation_radius:
 			force += diff.normalized() / dist
-	
+
 	return force
 
 func take_damage(amount: float):
+	# FIX: Single is_dead guard at the top; die() also guards itself
+	# so the only race-safe place to check is right here, immediately
+	# setting health before any yield/signal can re-enter.
 	if is_dead:
 		return
-	
+
 	var final_dmg = calculate_damage(amount, armor)
 	health -= final_dmg
-	play_anim("Hit")
 	health_display.text = str(floor(health))
-	if health <= 0 and !is_dead:
+
+	if health <= 0:
+		# FIX: Call die() first, skip the Hit animation entirely on a
+		# killing blow so it cannot override the Death animation travel.
 		die()
+	else:
+		play_anim("Hit")
 
 func calculate_damage(amount: float, armor: float) -> float:
 	var damage_reduction = armor / (armor + 100)
 	var final_damage = amount * (1 - damage_reduction)
-	
-	# Ensure minimum damage of 1
 	return max(1.0, final_damage)
 
 func drop_seed():
@@ -232,13 +245,10 @@ func drop_seed():
 
 	var total_weight := 0.0
 
-	# Apply luck (boost rare items more)
 	for item in loot_table:
 		var is_rare: bool = item["weight"] <= 10
-
 		if is_rare:
 			item["weight"] += luck * 2.5
-
 		total_weight += item["weight"]
 
 	var roll := randf() * total_weight
@@ -249,24 +259,36 @@ func drop_seed():
 		if roll <= current:
 			GameDataManager.add_seed(item["type"])
 			return
-	
+
 func _on_death_done(_anim_name):
 	queue_free()
-	
+
 func die():
+	# FIX: is_dead is set synchronously before anything else runs,
+	# so any re-entrant take_damage call will bail out immediately.
 	if is_dead:
 		return
-	
+
 	is_dead = true
+
+	# FIX: Stop the state machine so AI states cannot issue attacks
+	# or trigger movement while the death animation plays.
+	state_machine.stop()
+
+	# FIX: Kill velocity immediately so the corpse doesn't keep sliding.
+	velocity = Vector3.ZERO
+
+	death_sound.play()
 	play_anim("Death")
 	anim_tree.animation_finished.connect(_on_death_done, CONNECT_ONE_SHOT)
+
 	var player = get_tree().get_first_node_in_group("player")
 	if player != null:
 		player.gain_exp(exp_reward)
-	
+
 	if counts_for_round:
 		GameManager.enemies_alive -= 1
 		drop_seed()
-		
+
 		if GameManager.enemies_alive <= 0:
 			GameManager.next_round()

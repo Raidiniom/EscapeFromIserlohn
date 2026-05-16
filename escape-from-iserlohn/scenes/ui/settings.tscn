@@ -1,32 +1,33 @@
 [gd_scene format=3 uid="uid://bbkyb4dhdfacd"]
 
 [ext_resource type="Script" uid="uid://bojme8cugmal6" path="res://scripts/ui/settings.gd" id="1_5p8wc"]
+[ext_resource type="Texture2D" uid="uid://d1npeu6ewefe5" path="res://assets/pictures/menu_bg.png" id="2_7pacj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_shared"]
-font_color = Color(0, 0, 0, 1)
 font_size = 28
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+content_margin_left = 20.0
+content_margin_top = 14.0
+content_margin_right = 20.0
+content_margin_bottom = 14.0
 bg_color = Color(0.18431373, 0.2784314, 0.21176471, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
-corner_radius_bottom_left = 10
 corner_radius_bottom_right = 10
-content_margin_left = 20.0
-content_margin_right = 20.0
-content_margin_top = 14.0
-content_margin_bottom = 14.0
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_footer_btn"]
+content_margin_left = 28.0
+content_margin_top = 16.0
+content_margin_right = 28.0
+content_margin_bottom = 16.0
 bg_color = Color(0.18431373, 0.2784314, 0.21176471, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
-corner_radius_bottom_left = 10
 corner_radius_bottom_right = 10
-content_margin_left = 28.0
-content_margin_right = 28.0
-content_margin_top = 16.0
-content_margin_bottom = 16.0
+corner_radius_bottom_left = 10
 
 [node name="Settings" type="Control" unique_id=866935246]
 layout_mode = 3
@@ -37,22 +38,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p8wc")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1355542297]
+[node name="ColorRect" type="TextureRect" parent="." unique_id=926979176]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.27, 1, 1, 1)
+texture = ExtResource("2_7pacj")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Title" type="Label" parent="." unique_id=111111111]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.0
-anchor_top = 0.0
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.0
 offset_top = 48.0
 offset_bottom = 100.0
 grow_horizontal = 2
@@ -73,73 +73,73 @@ offset_right = 240.0
 offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 2
 theme_override_constants/h_separation = 24
 theme_override_constants/v_separation = 20
+columns = 2
 
 [node name="ForwardLabel" type="Label" parent="LabelContainer" unique_id=1438592036]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Forward"
 label_settings = SubResource("LabelSettings_shared")
 vertical_alignment = 1
 
 [node name="ForwardBtn" type="Button" parent="LabelContainer" unique_id=1076161075]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="BackwardLabel" type="Label" parent="LabelContainer" unique_id=562985013]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Backward"
 label_settings = SubResource("LabelSettings_shared")
 vertical_alignment = 1
 
 [node name="BackwardBtn" type="Button" parent="LabelContainer" unique_id=1210359206]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="LeftStrafeLabel" type="Label" parent="LabelContainer" unique_id=726005567]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Left Strafe"
 label_settings = SubResource("LabelSettings_shared")
 vertical_alignment = 1
 
 [node name="LeftStrafeBtn" type="Button" parent="LabelContainer" unique_id=168782734]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="RightStrafeLabel" type="Label" parent="LabelContainer" unique_id=156900881]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Right Strafe"
 label_settings = SubResource("LabelSettings_shared")
 vertical_alignment = 1
 
 [node name="RightStrafeBtn" type="Button" parent="LabelContainer" unique_id=184844410]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="InteractLabel" type="Label" parent="LabelContainer" unique_id=1674657846]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 text = "Interact"
 label_settings = SubResource("LabelSettings_shared")
 vertical_alignment = 1
 
 [node name="InteractBtn" type="Button" parent="LabelContainer" unique_id=321610446]
-layout_mode = 2
 custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 
 [node name="Footer" type="HBoxContainer" parent="." unique_id=1855717382]
 layout_mode = 1
-anchor_left = 0.0
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -147,26 +147,26 @@ offset_top = -120.0
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
-alignment = 1
 theme_override_constants/separation = 24
+alignment = 1
 
 [node name="Back" type="Button" parent="Footer" unique_id=2030766263]
-layout_mode = 2
 custom_minimum_size = Vector2(160, 72)
-text = "Back"
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_footer_btn")
+text = "Back"
 
 [node name="Reset" type="Button" parent="Footer" unique_id=682914976]
-layout_mode = 2
 custom_minimum_size = Vector2(160, 72)
-text = "Reset"
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_footer_btn")
+text = "Reset"
 
 [node name="Confirm" type="Button" parent="Footer" unique_id=2029391725]
-layout_mode = 2
 custom_minimum_size = Vector2(160, 72)
-text = "Confirm"
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_footer_btn")
+text = "Confirm"
 
 [connection signal="pressed" from="LabelContainer/ForwardBtn" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="LabelContainer/BackwardBtn" to="." method="_on_button_2_pressed"]

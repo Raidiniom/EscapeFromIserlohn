@@ -6,6 +6,8 @@ extends State
 func enter():
 	owner.is_sprinting = false
 	# play walk animation if needed
+	owner.play_anim("Walk")
+	
 
 func physics_process(delta: float) -> void:
 	# Gravity

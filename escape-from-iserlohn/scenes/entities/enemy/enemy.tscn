@@ -5,13 +5,13 @@
 [ext_resource type="Script" uid="uid://d1yq71iak6eqb" path="res://scripts/entites/enemy/states/attack_state.gd" id="4_7gxlw"]
 [ext_resource type="Script" uid="uid://dxc5244vaurjb" path="res://scripts/entites/enemy/states/ranged_attack_state.gd" id="5_dxsuy"]
 [ext_resource type="Script" uid="uid://cvc64ltqhd286" path="res://scripts/entites/enemy/states/chase_state.gd" id="5_ilesx"]
+[ext_resource type="AudioStream" uid="uid://byjjf7d0isatv" path="res://assets/sounds/Blink Dagger Effect.wav" id="6_ddkys"]
+[ext_resource type="AudioStream" uid="uid://bckxkpdy7edhs" path="res://assets/sounds/Dash Skill Effect.wav" id="7_h26p2"]
+[ext_resource type="AudioStream" uid="uid://cn8gccwxk1nxk" path="res://assets/sounds/Summoning sound effect.mp3" id="8_8ei1b"]
+[ext_resource type="AudioStream" uid="uid://b6mrrwuiinvup" path="res://assets/sounds/Skeleton Death Sound.wav" id="9_frkcr"]
+[ext_resource type="AudioStream" uid="uid://dqwa4bwixg2ud" path="res://assets/sounds/Block Sound Effect.mp3" id="10_h26p2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lw7nh"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxw06"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_lw7nh"]
 
 [node name="Enemy" type="CharacterBody3D" unique_id=851332793 groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -26,10 +26,6 @@ text = "Placeholder"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=160277451]
 shape = SubResource("CapsuleShape3D_lw7nh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=696542489]
-material_override = SubResource("StandardMaterial3D_dxw06")
-mesh = SubResource("CapsuleMesh_lw7nh")
-
 [node name="StateMachine" type="Node" parent="." unique_id=792892105]
 script = ExtResource("2_dxsuy")
 initial_state = NodePath("Chase")
@@ -42,3 +38,25 @@ script = ExtResource("4_7gxlw")
 
 [node name="RangeAttack" type="Node" parent="StateMachine" unique_id=701564019]
 script = ExtResource("5_dxsuy")
+
+[node name="Blink" type="AudioStreamPlayer" parent="." unique_id=1302451479]
+stream = ExtResource("6_ddkys")
+volume_db = -10.0
+
+[node name="Dash" type="AudioStreamPlayer" parent="." unique_id=1925741413]
+stream = ExtResource("7_h26p2")
+volume_db = -10.0
+
+[node name="Summoning" type="AudioStreamPlayer" parent="." unique_id=1512170339]
+stream = ExtResource("8_8ei1b")
+volume_db = -10.0
+
+[node name="Death" type="AudioStreamPlayer" parent="." unique_id=525138935]
+stream = ExtResource("9_frkcr")
+volume_db = -10.0
+
+[node name="Block" type="AudioStreamPlayer" parent="." unique_id=1236815713]
+stream = ExtResource("10_h26p2")
+volume_db = -10.0
+
+[node name="Attack" type="AudioStreamPlayer" parent="." unique_id=536719336]

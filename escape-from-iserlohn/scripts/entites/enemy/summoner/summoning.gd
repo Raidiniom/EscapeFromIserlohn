@@ -34,7 +34,7 @@ func summonning(enemy):
 	
 	for i in range(enemy.summon_count):
 		var summon_instance = scene.instantiate()
-		
+		enemy.summon_sound.play()
 		# Random spawn around summoner
 		var offset = Vector3(
 			randf_range(-enemy.summon_range, enemy.summon_range),

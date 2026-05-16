@@ -4,6 +4,8 @@ extends State
 func enter():
 	owner.is_sprinting = false
 	# Play idle animation here
+	owner.play_anim("Idle")
+	
 
 func physics_process(delta: float) -> void:
 	# Gravity

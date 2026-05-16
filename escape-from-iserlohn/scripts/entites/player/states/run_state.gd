@@ -7,6 +7,8 @@ extends State
 func enter():
 	owner.is_sprinting = true
 	# play run animation if needed
+	owner.play_anim("Run")
+	
 
 func physics_process(delta: float) -> void:
 	# Gravity

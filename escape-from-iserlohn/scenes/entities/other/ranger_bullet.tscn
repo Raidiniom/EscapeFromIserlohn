@@ -23,7 +23,7 @@ _surfaces = [{
 points = PackedVector3Array(-0.27093655, 1.5, -0.1922228, -0.14146198, -1.5, -0.14146198, -0.20001993, -1.5, -5.3048134e-05, -0.27093655, 1.5, 0.19216976, -0.1922228, 2.5, 0, -0.1922228, 1.5, -0.27093655, 0, -1.5, -0.20001993, -0.14146198, -1.5, 0.14140892, -0.1922228, 1.5, 0.27093655, 0, 2.5, 0.19216976, 0, 2.5, -0.1922228, 0.19216976, 1.5, -0.27093655, 0.14140892, -1.5, -0.14146198, 0, -1.5, 0.19996688, 0.19216976, 1.5, 0.27093655, 0.19216976, 2.5, 0, 0.27093655, 1.5, -0.1922228, 0.19996688, -1.5, 0, 0.14140892, -1.5, 0.14140892, 0.27093655, 1.5, 0.19216976)
 
 [node name="RangerBullet" type="Area3D" unique_id=1230328259]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(3.0491525e-09, -0.06975648, 0.9975641, -1, -4.371139e-08, 0, 4.360491e-08, -0.9975641, -0.06975648, 0, 0, 0)
 script = ExtResource("1_co5bk")
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." unique_id=1776007379]
@@ -33,6 +33,7 @@ mesh = SubResource("ArrayMesh_co5bk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1735798157]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_8wvfg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

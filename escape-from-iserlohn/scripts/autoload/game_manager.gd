@@ -117,22 +117,26 @@ func spawn_enemy(type):
 	var spawn = spawn_points.pick_random()
 	var enemy = scene.instantiate()
 	
-	get_tree().current_scene.add_child(enemy)
-	enemy.global_position = spawn.global_position
+	get_tree().current_scene.add_child.call_deferred(enemy)
+	await get_tree().process_frame
 	
+	enemy.global_position = spawn.global_position
 	var player = get_tree().get_nodes_in_group("player")[0]
 	enemy.player_target = player
+	
 
 func spawn_boss(type: String):
 	var scene = enemy_scenes[type]
 	var spawn = spawn_points[0]
 	var boss = scene.instantiate()
 	
-	get_tree().current_scene.add_child(boss)
-	boss.global_position = spawn.global_position
+	get_tree().current_scene.add_child.call_deferred(boss)
+	await get_tree().process_frame
 	
+	boss.global_position = spawn.global_position
 	var player = get_tree().get_nodes_in_group("player")[0]
 	boss.player_target = player
+	
 	boss.counts_for_round = false
 	
 
