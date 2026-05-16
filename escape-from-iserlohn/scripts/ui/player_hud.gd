@@ -23,6 +23,14 @@ extends Control
 @onready var plantbtn = $PlantButton
 
 func _ready() -> void:
+	var health_fill = StyleBoxFlat.new()
+	health_fill.bg_color = Color(0.85, 0.15, 0.15)  # red
+	$TopLeft/HealthBar.add_theme_stylebox_override("fill", health_fill)
+	
+	var exp_fill = StyleBoxFlat.new()
+	exp_fill.bg_color = Color(0.2, 0.6, 1.0)  # blue
+	$TopLeft/ProgressBar.add_theme_stylebox_override("fill", exp_fill)
+	
 	player.connect("stats_changed", update_hud)
 	
 	InputManager.scheme_changed.connect(_on_scheme_changed)

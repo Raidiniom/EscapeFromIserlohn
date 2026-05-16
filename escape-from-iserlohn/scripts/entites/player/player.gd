@@ -192,7 +192,6 @@ func respawn():
 	is_dead = false
 	
 	set_physics_process(true)
-	#health = 
 	
 	global_position = Vector3(0, 1, 0)
 	
@@ -219,9 +218,11 @@ func can_plant() -> bool:
 		var collider = raycast_3d.get_collider()
 		return collider.is_in_group("plantable_ground")
 	return false
+	
 
 func get_plant_position() -> Vector3:
 	return raycast_3d.get_collision_point()
+	
 
 func handle_auto_attack(delta: float) -> void:
 	if is_dead:
